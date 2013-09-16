@@ -127,6 +127,10 @@
     }
 }
 
+- (IBAction)resignFirst:(id)sender {
+    [_messageTextView resignFirstResponder];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 70.0f;
 }

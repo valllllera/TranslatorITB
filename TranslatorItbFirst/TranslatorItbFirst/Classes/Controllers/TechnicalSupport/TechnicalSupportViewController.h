@@ -13,5 +13,6 @@
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *textViewBackgroundImage;
 - (IBAction)sendButtonPressed:(id)sender;
+- (IBAction)resignFirst:(id)sender;
 
 @end
