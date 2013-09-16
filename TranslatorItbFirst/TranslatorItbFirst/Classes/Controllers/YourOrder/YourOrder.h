@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "OrderDataBase.h"
+#import "DataManager.h"
+#import "NSDate+VDExtensions.h"
 
 @interface YourOrder : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *orderStatusImage;
-@property Order *currentOrder;
+@property (assign, nonatomic) int currentOrderIndex;
+-(IBAction)goToPayment:(id)sender;
+@property (strong, nonatomic) UILabel *orderPriceAndTerm;
+@property (strong, nonatomic) UIButton *payButton;
 
 @end

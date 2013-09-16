@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Order.h"
+#import "OrderDataBase.h"
+#import "DataManager.h"
 
 @interface OrderCell : UITableViewCell
 
@@ -18,6 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLbl;
 
 -(IBAction)openOrder:(id)sender;
-//-(void)initSelfFromOrder:(Order*)order;
+-(void)initSelfFromOrder:(int)orderIndex;
 
 @end

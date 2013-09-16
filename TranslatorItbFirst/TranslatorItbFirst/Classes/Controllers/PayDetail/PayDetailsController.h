@@ -16,12 +16,18 @@
     YourOrder * yourOrder;
 }
 
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
 @property (assign, nonatomic) int pricePerPage;
 @property NSDate * termDate;
 @property NSArray *priceMultiplier;
 @property NSArray *termMultiplier;
 
-@property (strong, nonatomic) Order *order;
+@property (assign, nonatomic) int orderIndex;
+@property (assign, nonatomic) int orderId;
+@property (assign, nonatomic) int totalPrice;
 
 @property NSMutableArray *priceLabels;
 

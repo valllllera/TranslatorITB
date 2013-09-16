@@ -22,12 +22,7 @@
     PhotoViewController * photoViewController;
 }
 
-@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic,strong) NSManagedObjectContext *context;
-@property (nonatomic,strong) Order *theNewOrder;
-
+@property (weak, nonatomic) IBOutlet UIImageView *backgr;
 
 @property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
 @property (weak, nonatomic) IBOutlet UILabel *orLbl;
@@ -38,6 +33,9 @@
 
 @property(nonatomic,strong) IBOutlet UITextField *from;
 @property(nonatomic,strong) IBOutlet UITextField *to;
+
+@property (assign, nonatomic) int infoType;
+@property (assign, nonatomic) int orderIndex;
 
 
 @property(nonatomic,strong) IBOutlet UIButton *getPrice;

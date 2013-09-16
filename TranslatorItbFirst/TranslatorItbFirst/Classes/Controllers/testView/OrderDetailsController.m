@@ -20,10 +20,6 @@
 
 @implementation OrderDetailsController
 
-@synthesize managedObjectContext = _managedObjectContext;
-@synthesize managedObjectModel = _managedObjectModel;
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-
 bool textViewIsVeginEditin;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
@@ -58,14 +54,12 @@ bool textViewIsVeginEditin;
     [self.navigationItem setTitleView:title];
 
     _text.inputAccessoryView = _toolBar;
-    UIImage *langFieldBackground=[UIImage imageNamed:@"langPiker"];
-   /* UIImage *textViewBackground=[UIImage imageNamed:@"textView"];
-    UIImage *getPriceIcon=[UIImage imageNamed:@"photo"];
-    UIImage *getPhotoIcon=[UIImage imageNamed:@"graduationCap"];*/
-    
-    UIColor * background=[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
-    [self.view setBackgroundColor:background];
-    
+ 
+   
+   
+    UIImage *langFieldBackground = [[UIImage imageNamed:@"textFieldBackground"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,3, 0, 3)];
+    UIImage *b=[[UIImage imageNamed:@"textView"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,3, 0,3)];
+    [_backgr setImage:b];
     
     [_to setBackground:langFieldBackground];
     [_from setBackground:langFieldBackground];
@@ -110,14 +104,11 @@ bool textViewIsVeginEditin;
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu-button.png"] forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(pressedMenuBtn) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *menuButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    
+    //end of initialization of tab bar
+       
     
     self.navigationItem.leftBarButtonItem = menuButtonItem;
     self.navigationItem.rightBarButtonItem = cartNavigationItem;
-    
-    
-
-    //end of initialization of tab bar
 }
 
 -(void)pressedMenuBtn{
@@ -140,23 +131,50 @@ bool textViewIsVeginEditin;
 
 - (IBAction)touchGetPriceBtn:(id)sender {
    // if([self chekLanguageFrom:_from.text To:_to.text]!=NO && [_text.text isEqualToString:@""]!=YES)
+    
+    //new order addition
     DataManager *dataMngr = [[DataManager alloc] init];
+    NSManagedObjectContext *context = [dataMngr managedObjectContext];
+    
+    //[dataMngr deleteAllObjects:@"OrderDataBase"];
     
     Order *order = [NSEntityDescription
-                               insertNewObjectForEntityForName:@"FailedBankInfo"
-                               inManagedObjectContext:[dataMngr getObjectContext]];
-    order.order_id = [NSNumber numberWithInt:1];
+                    insertNewObjectForEntityForName:@"OrderDataBase"
+                    inManagedObjectContext:context];
+    NSError *error;
+    [context save:&error];
+    
+    NSArray *orders;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"OrderDataBase" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    orders = [context executeFetchRequest:fetchRequest error:&error];
+    _orderIndex = [orders count]-1;
+    int lastItem = 0;
+    if(_orderIndex != 0) {
+        Order * temp = [orders objectAtIndex:_orderIndex-1];
+        lastItem = [temp.order_id intValue];
+    }
+    
+    order.order_id = [NSNumber numberWithInt: lastItem+1];
     order.orderType = [NSNumber numberWithInt:1];
-    order.infoType = [NSNumber numberWithInt:1];
+        
+    order.infoType = [NSNumber numberWithInt:_infoType];
     float totalPrice = ([_text.text length]/1800.0 + 0.5*_photoCount) * [self getPricePerPage];
-    order.cost = [NSNumber numberWithFloat:totalPrice];
-    order.status = [NSNumber numberWithInt:1];
+    order.cost = [NSNumber numberWithInt:((int)roundf(totalPrice) + 1)];
+    order.status = [NSNumber numberWithInt:3];
     order.langTo = _to.text;
     order.langFrom = _from.text;
-    order.duration = [NSNumber numberWithInteger:([_text.text length]*0.025 + _photoCount*45)];
+    order.duration = [NSNumber numberWithFloat:(((int)roundf([_text.text length]*0.025) + _photoCount*45) + 1)];
+    NSLog(@"%d", (int)roundf([_text.text length]*0.025));
     
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
     
-    
+    payDetailController.orderIndex = _orderIndex;
     
     [self.navigationController pushViewController:payDetailController animated:YES];
 }
@@ -293,7 +311,7 @@ bool textViewIsVeginEditin;
         _pricePerPage = [[[DataManager languages] valueForKey:_from.text] intValue];
     }
     else {
-        _pricePerPage = [[[DataManager languages] valueForKey:NSLocalizedString(@"Etc", nil)] intValue];
+        _pricePerPage = [DataManager getEtc];
     }
     return _pricePerPage;
 }

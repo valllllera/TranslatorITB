@@ -15,6 +15,7 @@
 +(NSDictionary*)languages;
 +(NSArray*)sortedLanguagesWithString:(NSString*)string;
 +(NSArray*)getLanguages;
++(int) getEtc;
 @property (strong,nonatomic) NSArray *languages;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -25,6 +26,5 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
-- (NSManagedObjectContext*) getObjectContext;
-
+- (void) deleteAllObjects: (NSString *) entityDescription;
 @end

@@ -166,25 +166,35 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
-    /*for(int i = 0; i<3; i++)
-    {        
-        float totalPrice = (_textLength/1800.0 + 0.5*_pageCount) * _pricePerPage * [[_priceMultiplier objectAtIndex:i] floatValue];
-        _termDate = [NSDate alloc];
-        _termDate = [_termDate getTheStartOfTranslation];
-        _termDate = [_termDate getDeadLineOfTranslationFromStartAt:_termDate andTextLength:[[NSNumber numberWithFloat: _textLength*[[_termMultiplier objectAtIndex:i] floatValue]] intValue] andNumberOfPages:[[NSNumber numberWithFloat: _pageCount*[[_termMultiplier objectAtIndex:i] floatValue]] intValue]];
-
-        NSTimeInterval offsetTime = 15*60;
-        NSDate *deadLine = [[NSDate alloc] initWithTimeInterval:offsetTime sinceDate:_termDate];
+    for(int i = 0; i<3; i++)
+    {             
+        DataManager *dataMngr = [[DataManager alloc] init];
+        NSManagedObjectContext *context = [dataMngr managedObjectContext];
         
-        [[_priceLabels objectAtIndex:i] setText : [NSString stringWithFormat:@"%.2f руб. / Заказ будет готов %@ c %@ до %@", totalPrice, [_termDate dateTitleDayMonthShort], [_termDate dateTitleHourMinute], [deadLine dateTitleHourMinute]]];
-    }*/
+        NSArray *orders;
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription
+                                       entityForName:@"OrderDataBase" inManagedObjectContext:context];
+        [fetchRequest setEntity:entity];
+        NSError *error;
+        orders = [context executeFetchRequest:fetchRequest error:&error];
+        
+        Order *order = [orders objectAtIndex:_orderIndex];
+        
+        NSLog(@"%.2f %d", [order.cost floatValue], [order.duration intValue]);
+        
+        
+        
+        [[_priceLabels objectAtIndex:i] setText : [NSString stringWithFormat:@"%.2f руб. / %d мин", ([order.cost floatValue]*[[_priceMultiplier objectAtIndex:i] floatValue]),
+            (int)roundf([order.duration intValue]*[[_termMultiplier objectAtIndex:i] floatValue] )]];
+        _orderId = [order.order_id intValue];
+    }
 }
 
 #pragma mark - UIScrollView Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView
 {	
     _termDate = [_termDate getTheStartOfTranslation];
-    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -205,10 +215,32 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (IBAction)goToPayment:(id)sender{
+- (IBAction)goToPayment:(id)sender {
+    DataManager *dataMngr = [[DataManager alloc] init];
+    NSManagedObjectContext *context = [dataMngr managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"OrderDataBase" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    NSArray *orders;
+    orders = [context executeFetchRequest:fetchRequest error:&error];
+    Order *order = [orders objectAtIndex:_orderIndex];
+    
+    order.orderType = [NSNumber numberWithInteger:_pageController.currentPage];
+    float price = (int)roundf([order.cost floatValue]*[[_priceMultiplier objectAtIndex:_pageController.currentPage] floatValue]);
+    float duration = [order.duration floatValue]*[[_termMultiplier objectAtIndex:_pageController.currentPage] floatValue];
+    NSLog(@"%f", [order.duration floatValue]);
+                   
+    order.cost = [NSNumber numberWithFloat: price];
+    order.duration = [NSNumber numberWithFloat: duration];
+    
+    [context save:&error];
+    
+    yourOrder.currentOrderIndex = _orderIndex;
     [self.navigationController pushViewController:yourOrder animated:YES];
-  }
+}
 
 - (IBAction)pageControlDidClicked:(id)sender {
     DDPageControl *thePageControl = (DDPageControl *)sender ;

@@ -69,10 +69,22 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
-    /*if(_currentOrder.status == 1)
+    DataManager *dataMngr = [[DataManager alloc] init];
+    NSManagedObjectContext *context = [dataMngr managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"OrderDataBase" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    NSArray *orders;
+    orders = [context executeFetchRequest:fetchRequest error:&error];
+    
+    Order * currentOrder = [orders objectAtIndex:_currentOrderIndex];
+    
+    if([currentOrder.status intValue] == 1) {
         [_orderStatusImage setImage:[UIImage imageNamed:@"order-is-done.png"]];
-    else if(_currentOrder.status == 2) {
-        [_orderStatusImage setImage:[UIImage imageNamed:@"order-in-work.png"]];
+        
         UIImage *getTranslateButtonBg = [[UIImage imageNamed:@"do-order-button.png"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 3, 0, 3)];
         
         UIButton *getTranslateButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 38)];
@@ -86,37 +98,98 @@
         getTranslateButton.titleLabel.shadowOffset = CGSizeMake(1, 1);
         getTranslateButton.titleLabel.shadowColor = [UIColor grayColor];
         [getTranslateButton addTarget:self action:@selector(goToPayment:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:getTranslateButton];*/
+        [self.view addSubview:getTranslateButton];
+    }
+    else if([currentOrder.status intValue] == 2) {
+        [_orderStatusImage setImage:[UIImage imageNamed:@"order-in-work.png"]];
         
+        _orderPriceAndTerm = [[UILabel alloc] initWithFrame: CGRectMake(20, 300, 280, 50)];
+        [_orderPriceAndTerm setText: [[NSString alloc] initWithFormat: @"%d руб. / Заказ будет выполнен %@ в %@", [currentOrder.cost intValue], [currentOrder.finishDate dateTitleFull], [currentOrder.finishDate dateTitleHourMinute]]];
+        [_orderPriceAndTerm setTextAlignment: NSTextAlignmentCenter];
+        [_orderPriceAndTerm setBackgroundColor:[UIColor clearColor]];
+        [_orderPriceAndTerm setTextColor:[UIColor orangeColor]];
+        _orderPriceAndTerm.numberOfLines = 0;
+        [self.view addSubview:_orderPriceAndTerm];
+    }
+    else if([currentOrder.status intValue] == 3) {
+        [_orderStatusImage setImage:[UIImage imageNamed:@"order-not-payed.png"]];
+        
+        UIImage *ButtonBg = [[UIImage imageNamed:@"do-order-button.png"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 3, 0, 3)];
+        _payButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 38)];
+        [_payButton setBackgroundImage:ButtonBg forState:UIControlStateNormal];
+        [_payButton setTitle:@"Оплатить" forState:UIControlStateNormal];
+        [_payButton setImage:[UIImage imageNamed:@"cart.png"] forState:UIControlStateNormal];
+        [_payButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _payButton.titleLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size: 16.0f];
+        [_payButton setImageEdgeInsets:UIEdgeInsetsMake(0, -150, 0, 0)];
+        [_payButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+        _payButton.titleLabel.shadowOffset = CGSizeMake(1, 1);
+        _payButton.titleLabel.shadowColor = [UIColor grayColor];
+        [_payButton addTarget:self action:@selector(goToPayment:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_payButton];
+        
+        _orderPriceAndTerm = [[UILabel alloc] initWithFrame:CGRectMake(20, 300, 280, 50)];
+        [_orderPriceAndTerm setText: [[NSString alloc] initWithFormat: @"%d руб. / %d мин.", [currentOrder.cost intValue], [currentOrder.duration intValue]]];
+        [_orderPriceAndTerm setTextAlignment: NSTextAlignmentCenter];
+        [_orderPriceAndTerm setBackgroundColor:[UIColor clearColor]];
+        [_orderPriceAndTerm setTextColor:[UIColor orangeColor]];
+        [_orderPriceAndTerm setNumberOfLines:0];
+        [self.view addSubview:_orderPriceAndTerm];
     }
     
-    /*if(_currentOrder.status == 1 || (_currentOrder.status == 2 && _currentOrder.infoType == 1)) {
+    //if([currentOrder.infoType intValue]== 1) {
         UILabel *orderNumber = [[UILabel alloc] initWithFrame:CGRectMake(20, 220, 280, 25)];
-        [orderNumber setText: [[NSString alloc] initWithFormat: @"Заказ № %d", _currentOrder.id]];
+        [orderNumber setText: [[NSString alloc] initWithFormat: @"Заказ № %d", [currentOrder.order_id intValue]]];
         [orderNumber setTextAlignment: NSTextAlignmentCenter];
         [orderNumber setBackgroundColor:[UIColor clearColor]];
         [orderNumber setTextColor:[UIColor grayColor]];
         [self.view addSubview:orderNumber];
-    }
+    //}
     
-    if(_currentOrder.status == 2 && _currentOrder.infoType == 2) {
+    if([currentOrder.infoType intValue] == 2) {
         UIImageView *photoIcon = [[UIImageView alloc] initWithFrame:CGRectMake(139, 215, 42, 42)];
         [photoIcon setImage:[UIImage imageNamed:@"order-images.png"]];
         [self.view addSubview:photoIcon];
     }
-    
-    UILabel *orderPriceAndTerm = [[UILabel alloc] initWithFrame:CGRectMake(20, 270, 280, 25)];
-    [orderPriceAndTerm setText: [[NSString alloc] initWithFormat: @"%d руб. / %d мин.", _currentOrder.cost, 300]];
-    [orderPriceAndTerm setTextAlignment: NSTextAlignmentCenter];
-    [orderPriceAndTerm setBackgroundColor:[UIColor clearColor]];
-    [orderPriceAndTerm setTextColor:[UIColor orangeColor]];
-    [self.view addSubview:orderPriceAndTerm];
-}*/
+}
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)goToPayment:(id)sender {
+     
+    DataManager *dataMngr = [[DataManager alloc] init];
+    NSManagedObjectContext *context = [dataMngr managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"OrderDataBase" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    NSArray *orders;
+    orders = [context executeFetchRequest:fetchRequest error:&error];
+    
+    Order * currentOrder = [orders objectAtIndex:_currentOrderIndex];
+    
+    currentOrder.status = [NSNumber numberWithInt:2];
+    
+    NSDate *termDate = [NSDate alloc];
+    termDate = [termDate getTheStartOfTranslation];
+    termDate = [termDate getDeadLineOfTranslationFromStartAt:termDate andDuration: [currentOrder.duration intValue]];
+    
+    NSTimeInterval offsetTime = 15*60;
+    NSDate *deadLine = [[NSDate alloc] initWithTimeInterval:offsetTime sinceDate:termDate];
+    
+    currentOrder.startDate = termDate;
+    currentOrder.finishDate = deadLine;
+    
+    [context save:&error];
+    [_orderPriceAndTerm removeFromSuperview];
+    [_payButton removeFromSuperview];
+    [self viewWillAppear:YES];
 }
 
 @end

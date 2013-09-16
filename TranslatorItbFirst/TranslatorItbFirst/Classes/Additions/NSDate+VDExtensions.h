@@ -54,6 +54,6 @@
 - (NSComparisonResult) compareWeek:(NSDate*)dt;
 
 -(NSDate*) getTheStartOfTranslation;
--(NSDate*) getDeadLineOfTranslationFromStartAt:(NSDate*) startDate andTextLength:(int) textLength andNumberOfPages:(int)numberOfPages;
+-(NSDate*) getDeadLineOfTranslationFromStartAt:(NSDate*) startDate andDuration:(int) duration;
 
 @end

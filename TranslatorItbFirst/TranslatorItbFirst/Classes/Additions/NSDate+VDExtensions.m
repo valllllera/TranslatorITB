@@ -206,7 +206,7 @@
 - (NSString*) dateTitleFull{
     NSDateComponents* components = [self dateComponents];
     
-    return [NSString stringWithFormat:@"%d %@ %d", components.day, [self monthTitleShortWithIndex:components.month], components.year];
+    return [NSString stringWithFormat:@"%d.%@.%d", components.day, [self monthTitleShortWithIndex:components.month], components.year];
 }
 
 - (NSString*) dateTitleDayMonthShort{
@@ -512,28 +512,22 @@
     return nowDate;
 }
 
--(NSDate*) getDeadLineOfTranslationFromStartAt:(NSDate*) startDate andTextLength:(int) textLength andNumberOfPages: (int)numberOfPages
-{
-    float durationOfWorkInMinutes = textLength*0.025 + 22.5*numberOfPages;
-    //NSLog(@"%.2f", durationOfWorkInMinutes);
-    NSNumber *tempForRoundValue = [NSNumber numberWithDouble:(durationOfWorkInMinutes)];
-    int numberOfFullMinutes = [tempForRoundValue intValue]+1;
-    
-    if((startDate.dateComponents.minute + numberOfFullMinutes + 15) < 60) {
-        NSTimeInterval offsetInterval = numberOfFullMinutes*60;
+-(NSDate*) getDeadLineOfTranslationFromStartAt:(NSDate*) startDate andDuration:(int) duration {    
+    if((startDate.dateComponents.minute + duration + 15) < 60) {
+        NSTimeInterval offsetInterval = duration*60;
         startDate = [startDate dateByAddingTimeInterval: offsetInterval];
     }
-    else if ((startDate.dateComponents.hour + (startDate.dateComponents.minute + numberOfFullMinutes+ 15)/60 ) < 18)
+    else if ((startDate.dateComponents.hour + (startDate.dateComponents.minute + duration+ 15)/60 ) < 18)
     {
-        NSTimeInterval offsetInterval = numberOfFullMinutes*60;
+        NSTimeInterval offsetInterval = duration*60;
         startDate = [startDate dateByAddingTimeInterval: offsetInterval];
     }
     else
     {
         NSTimeInterval offsetInterval = 18*3600 - startDate.dateComponents.hour*3600 - startDate.dateComponents.minute*60;
-        numberOfFullMinutes -= (18*60 - startDate.dateComponents.hour*60 - startDate.dateComponents.minute);
+        duration -= (18*60 - startDate.dateComponents.hour*60 - startDate.dateComponents.minute);
         startDate = [startDate dateByAddingTimeInterval: offsetInterval];
-        offsetInterval = 15*3600 + numberOfFullMinutes*60;
+        offsetInterval = 15*3600 + duration*60;
         startDate = [startDate dateByAddingTimeInterval: offsetInterval];
         if(startDate.dateComponents.weekday == 7) {
             offsetInterval = 48*3600;
