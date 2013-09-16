@@ -69,6 +69,9 @@
     else {
         User *user = [users objectAtIndex:0];
         _userFioLbl.text = [NSString stringWithFormat:@"%@", user.username];
+        _fioTextField.text = [NSString stringWithFormat:@"%@", user.username];
+        _emailTExtField.text = [NSString stringWithFormat:@"%@", user.email];
+        _phoneTextField.text = [NSString stringWithFormat:@"%@", user.phone];
     }
 }
 - (BOOL) validateEmail: (NSString *) email {

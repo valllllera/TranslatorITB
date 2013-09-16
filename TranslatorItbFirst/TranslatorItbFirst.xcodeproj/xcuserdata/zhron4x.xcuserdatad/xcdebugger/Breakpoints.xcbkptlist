@@ -294,12 +294,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TranslatorItbFirst/Classes/Controllers/YourOrder/YourOrder.m"
-         timestampString = "400521762.483681"
+         timestampString = "401029726.362683"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "180"
-         endingLineNumber = "180"
+         startingLineNumber = "188"
+         endingLineNumber = "188"
          landmarkName = "-goToPayment:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TranslatorItbFirst/Classes/Views/OrderCell/OrderCell.m"
+         timestampString = "401029451.580933"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "57"
+         endingLineNumber = "57"
+         landmarkName = "-initSelfFromOrder:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

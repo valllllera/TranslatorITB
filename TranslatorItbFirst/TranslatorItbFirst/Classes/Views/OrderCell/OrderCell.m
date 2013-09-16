@@ -55,6 +55,14 @@
     [_orderIdLbl setText:[NSString stringWithFormat:@"%d",[order.order_id intValue]]];
     [_dateLbl setText:[NSString stringWithFormat:@"%d мин.", [order.duration intValue]]];
     
+    if([order.status intValue] == 2) {
+        //NSLog(@"%@", [order.finishDate compare:[NSDate date]]);
+        if([order.finishDate compare:[NSDate date]] == NSOrderedAscending) {
+            order.status = [NSNumber numberWithInt:1];
+        }
+    }
+    [context save:&error];
+    
     if([order.status intValue]==1)
         [_statusImg setImage:[UIImage imageNamed:@"check"]];
     
