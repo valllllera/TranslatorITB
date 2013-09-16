@@ -58,8 +58,10 @@
                                    entityForName:@"User" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     NSArray *users = [context executeFetchRequest:fetchRequest error:&error];
-    User *user = [users objectAtIndex:0];
-    _fioLbl.text = user.username;
+    if([users count]!=0) {
+        User *user = [users objectAtIndex:0];
+        _fioLbl.text = user.username;
+    }
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -73,8 +75,10 @@
               entityForName:@"User" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     NSArray *users = [context executeFetchRequest:fetchRequest error:&error];
-    User *user = [users objectAtIndex:0];
-    _fioLbl.text = user.username;
+    if([users count]!=0) {
+        User *user = [users objectAtIndex:0];
+        _fioLbl.text = user.username;
+    }
 
     [_table reloadData];
 }
