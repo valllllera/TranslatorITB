@@ -1,0 +1,80 @@
+/* 
+  LocalizedStrings.strings
+  TranslatorItbFirst
+
+  Created by Andrey Shag on 06.08.13.
+  Copyright (c) 2013 vexadev. All rights reserved.
+  ""="";
+*/
+
+
+
+//System Strings
+"AppName"="itbFirst";
+
+//Alerts
+"UnableInternetConnection"="Отсутствует интернет соединение!";
+
+//InitialMenuController
+"InitialMenuTitle"="";
+
+//UploadFileController
+"UploadFileTitle"="";
+
+//InsertTextController
+"InsertTextTitle"="";
+
+//OrderDetailsController
+"OrderDetailsTitle"="";
+
+//Languages
+"Rus"="Русский";
+"Eng"="Английский";
+"Ger"="Немецкий";
+"Fra"="Французский";
+"Aze"="Азербайджанский";
+"Ara"="Арабский";
+"Arm"="Армянский";
+"Bel"="Белорусский";
+"Bul"="Болгарский";
+"Hun"="Венгерский";
+"Vie"="Вьетнамский";
+"Nld"="Голландский";
+"Gre"="Греческий";
+"Gru"="Грузинский";
+"Dri"="Дари";
+"Dan"="Датский";
+"Heb"="Иврит";
+"Esl"="Испанский";
+"Ita"="Итальянский";
+"Kaz"="Казахский";
+"Kir"="Киргизский";
+"Chi"="Китайский";
+"Lat"="Латынь";
+"Lav"="Латышский";
+"Lit"="Литовский";
+"Mac"="Македонский";
+"Mol"="Молдавский";
+"Mon"="Монгольский";
+"Nor"="Норвежский";
+"Pol"="Польский";
+"Por"="Португальский";
+"Pus"="Пушту";
+"Rom"="Румынский";
+"Scc"="Сербский";
+"Slk"="Словацкий";
+"Slv"="Словенский";
+"Tur"="Турецкий";
+"Tuk"="Туркменский";
+"Uzb"="Узбекский";
+"Ukr"="Украинский";
+"Urd"="Урду";
+"Far"="Фарси";
+"Fin"="Финский";
+"Hin"="Хинди";
+"Hor"="Хорватский";
+"Chz"="Чешский";
+"Shv"="Шведский";
+"Est"="Эстонский";
+"Jpn"="Японский";
+"Etc"="Другие языки";

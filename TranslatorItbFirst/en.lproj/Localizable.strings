@@ -1,0 +1,82 @@
+/* 
+  LocalizedStrings.strings
+  TranslatorItbFirst
+
+  Created by Andrey Shag on 06.08.13.
+  Copyright (c) 2013 vexadev. All rights reserved.
+  ""="";
+*/
+
+
+//System Strings
+"AppName"="itbFirst";
+
+//Alerts
+"UnableInternetConnection"="Not internet connection";
+"EmptyLanguage"="Please, enter all field.";
+"EqualLanguage"="Please, enter different language.";
+"WrongLanguage"="Please, enter language from list.";
+
+//InitialMenuController
+"InitialMenuTitle"="";
+
+//UploadFileController
+"UploadFileTitle"="";
+
+//InsertTextController
+"InsertTextTitle"="";
+
+//OrderDetailsController
+"OrderDetailsTitle"="";
+
+//Languages
+"Rus"="Russian";
+"Eng"="English";
+"Ger"="German";
+"Fra"="French";
+"Aze"="Azerbaijan";
+"Ara"="Arabic";
+"Arm"="Armenian";
+"Bel"="Belarus";
+"Bul"="Bulgarian";
+"Hun"="Hungarian";
+"Vie"="Vietnam";
+"Nld"="Dutch";
+"Gre"="Greek";
+"Gru"="Georgian";
+"Dri"="Give";
+"Dan"="Danish";
+"Heb"="Hebrew";
+"Esl"="Spanish";
+"Ita"="Italian";
+"Kaz"="Kazakh";
+"Kir"="Kyrgyz";
+"Chi"="Chinese";
+"Lat"="Latin";
+"Lav"="Latvian";
+"Lit"="Lithuania";
+"Mac"="Great";
+"Mol"="Moldavian";
+"Mon"="Mongolian";
+"Nor"="Norwegian";
+"Pol"="Polish";
+"Por"="Portuguese";
+"Pus"="Pashto";
+"Rom"="Romanian";
+"Scc"="Serbian";
+"Slk"="Slovak";
+"Slv"="Slovak";
+"Tur"="Turkish";
+"Tuk"="Turkmen";
+"Uzb"="Uzbek";
+"Ukr"="Ukrainian";
+"Urd"="Urdu";
+"Far"="Farsi";
+"Fin"="Finnish";
+"Hin"="Hindi";
+"Hor"="Croatian";
+"Chz"="Czech";
+"Shv"="Swedish";
+"Est"="Estonian";
+"Jpn"="Japanese";
+"Etc"="Etc";
