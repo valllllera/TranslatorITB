@@ -58,6 +58,10 @@ bool textViewIsVeginEditin;
    
    
     UIImage *langFieldBackground = [[UIImage imageNamed:@"textFieldBackground"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,3, 0, 3)];
+    UIImage *orangeBtn=[[UIImage imageNamed:@"orangeBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,4,0,4)];
+    UIImage *blackBtn=[[UIImage imageNamed:@"blackBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,4,0,4)];
+    [_getPhoto setBackgroundImage:blackBtn forState:UIControlStateNormal];
+    [_getPrice setBackgroundImage:orangeBtn forState:UIControlStateNormal];
     UIImage *b=[[UIImage imageNamed:@"textView"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,3, 0,3)];
     [_backgr setImage:b];
     
