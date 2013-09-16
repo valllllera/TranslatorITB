@@ -133,50 +133,52 @@ bool textViewIsVeginEditin;
    // if([self chekLanguageFrom:_from.text To:_to.text]!=NO && [_text.text isEqualToString:@""]!=YES)
     
     //new order addition
-    DataManager *dataMngr = [[DataManager alloc] init];
-    NSManagedObjectContext *context = [dataMngr managedObjectContext];
-    
-    //[dataMngr deleteAllObjects:@"OrderDataBase"];
-    
-    Order *order = [NSEntityDescription
-                    insertNewObjectForEntityForName:@"OrderDataBase"
-                    inManagedObjectContext:context];
-    NSError *error;
-    [context save:&error];
-    
-    NSArray *orders;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"OrderDataBase" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    
-    orders = [context executeFetchRequest:fetchRequest error:&error];
-    _orderIndex = [orders count]-1;
-    int lastItem = 0;
-    if(_orderIndex != 0) {
-        Order * temp = [orders objectAtIndex:_orderIndex-1];
-        lastItem = [temp.order_id intValue];
-    }
-    
-    order.order_id = [NSNumber numberWithInt: lastItem+1];
-    order.orderType = [NSNumber numberWithInt:1];
+    if([_text.text length] != 0) {
+        DataManager *dataMngr = [[DataManager alloc] init];
+        NSManagedObjectContext *context = [dataMngr managedObjectContext];
         
-    order.infoType = [NSNumber numberWithInt:_infoType];
-    float totalPrice = ([_text.text length]/1800.0 + 0.5*_photoCount) * [self getPricePerPage];
-    order.cost = [NSNumber numberWithInt:((int)roundf(totalPrice) + 1)];
-    order.status = [NSNumber numberWithInt:3];
-    order.langTo = _to.text;
-    order.langFrom = _from.text;
-    order.duration = [NSNumber numberWithFloat:(((int)roundf([_text.text length]*0.025) + _photoCount*45) + 1)];
-    NSLog(@"%d", (int)roundf([_text.text length]*0.025));
-    
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        //[dataMngr deleteAllObjects:@"OrderDataBase"];
+        
+        Order *order = [NSEntityDescription
+                        insertNewObjectForEntityForName:@"OrderDataBase"
+                        inManagedObjectContext:context];
+        NSError *error;
+        [context save:&error];
+        
+        NSArray *orders;
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription
+                                       entityForName:@"OrderDataBase" inManagedObjectContext:context];
+        [fetchRequest setEntity:entity];
+        
+        orders = [context executeFetchRequest:fetchRequest error:&error];
+        _orderIndex = [orders count]-1;
+        int lastItem = 0;
+        if(_orderIndex != 0) {
+            Order * temp = [orders objectAtIndex:_orderIndex-1];
+            lastItem = [temp.order_id intValue];
+        }
+        
+        order.order_id = [NSNumber numberWithInt: lastItem+1];
+        order.orderType = [NSNumber numberWithInt:1];
+            
+        order.infoType = [NSNumber numberWithInt:_infoType];
+        float totalPrice = ([_text.text length]/1800.0 + 0.5*_photoCount) * [self getPricePerPage];
+        order.cost = [NSNumber numberWithInt:((int)roundf(totalPrice) + 1)];
+        order.status = [NSNumber numberWithInt:3];
+        order.langTo = _to.text;
+        order.langFrom = _from.text;
+        order.duration = [NSNumber numberWithFloat:(((int)roundf([_text.text length]*0.025) + _photoCount*45) + 1)];
+        NSLog(@"%d", (int)roundf([_text.text length]*0.025));
+        
+        if (![context save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
+        
+        payDetailController.orderIndex = _orderIndex;
+        
+        [self.navigationController pushViewController:payDetailController animated:YES];
     }
-    
-    payDetailController.orderIndex = _orderIndex;
-    
-    [self.navigationController pushViewController:payDetailController animated:YES];
 }
 
 - (IBAction)touchGetPhoto:(id)sender {
