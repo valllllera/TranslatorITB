@@ -36,6 +36,9 @@
     //Initialization of tab bar
     self.navigationItem.hidesBackButton = YES;
     
+    UIImage * orderBtnBackground=[[UIImage imageNamed:@"orangeBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,4,0,4)];
+    [_orderBtn setBackgroundImage:orderBtnBackground forState:UIControlStateNormal];
+    
     UIButton *basketButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 38, 29)];
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 38, 28)];
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu-button.png"] forState:UIControlStateNormal];

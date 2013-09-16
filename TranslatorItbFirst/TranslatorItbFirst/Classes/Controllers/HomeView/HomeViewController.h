@@ -14,5 +14,6 @@
     OrderDetailsController * orderDetailsController;
 }
 - (IBAction)goToOrder:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *orderBtn;
 
 @end

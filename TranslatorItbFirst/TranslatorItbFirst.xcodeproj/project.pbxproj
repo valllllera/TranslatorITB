@@ -15,10 +15,6 @@
 		9394D1DC17DF6942001477DC /* order-not-payed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9394D1DA17DF6942001477DC /* order-not-payed.png */; };
 		9394D1DD17DF6942001477DC /* order-not-payed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9394D1DB17DF6942001477DC /* order-not-payed@2x.png */; };
 		939AA65D17C4D0B800418FA3 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 939AA65C17C4D0B800418FA3 /* background.png */; };
-		939AA66617C4DEA500418FA3 /* order-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 939AA66317C4DEA500418FA3 /* order-button.png */; };
-		939AA66717C4DEA500418FA3 /* order-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 939AA66417C4DEA500418FA3 /* order-button@2x.png */; };
-		939AA68617C60C1200418FA3 /* do-order-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 939AA67A17C60C1200418FA3 /* do-order-button.png */; };
-		939AA68717C60C1200418FA3 /* do-order-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 939AA67B17C60C1200418FA3 /* do-order-button@2x.png */; };
 		939AA6A217CCB5AD00418FA3 /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 939AA6A117CCB5AD00418FA3 /* DDPageControl.m */; };
 		939AA6B017CF51D100418FA3 /* YourOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 939AA6AE17CF51D100418FA3 /* YourOrder.m */; };
 		939AA6B117CF51D100418FA3 /* YourOrder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 939AA6AF17CF51D100418FA3 /* YourOrder.xib */; };
@@ -34,6 +30,10 @@
 		939AA6D317D6145600418FA3 /* OrderDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 939AA6D217D6145600418FA3 /* OrderDataBase.m */; };
 		939C3DA017B26E6800BE615C /* OrderDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 939C3D9E17B26E6800BE615C /* OrderDetailsController.m */; };
 		939C3DA117B26E6800BE615C /* OrderDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 939C3D9F17B26E6800BE615C /* OrderDetailsController.xib */; };
+		B31DCC3317E7422C00A03119 /* blackBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B31DCC2F17E7422B00A03119 /* blackBtn.png */; };
+		B31DCC3417E7422C00A03119 /* blackBtn@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = B31DCC3017E7422B00A03119 /* blackBtn@2X.png */; };
+		B31DCC3517E7422C00A03119 /* orangeBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B31DCC3117E7422C00A03119 /* orangeBtn.png */; };
+		B31DCC3617E7422C00A03119 /* orangeBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B31DCC3217E7422C00A03119 /* orangeBtn@2x.png */; };
 		B36C40BA17CF615700AD58B9 /* addUser.png in Resources */ = {isa = PBXBuildFile; fileRef = B36C40A817CF615600AD58B9 /* addUser.png */; };
 		B36C40BB17CF615700AD58B9 /* addUser@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B36C40A917CF615600AD58B9 /* addUser@2x.png */; };
 		B36C40BC17CF615700AD58B9 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = B36C40AA17CF615600AD58B9 /* arrow.png */; };
@@ -80,8 +80,6 @@
 		B3EAA8A617DE3CBC00ADEF94 /* textView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3EAA8A417DE3CBA00ADEF94 /* textView@2x.png */; };
 		B3FBD85517D46FA4009A1A7C /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FBD85117D46FA4009A1A7C /* DataManager.m */; };
 		B3FBD85617D46FA4009A1A7C /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FBD85417D46FA4009A1A7C /* NetworkManager.m */; };
-		B3FBD8B817D48491009A1A7C /* orderBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FBD8B617D48491009A1A7C /* orderBtn.png */; };
-		B3FBD8B917D48491009A1A7C /* orderBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FBD8B717D48491009A1A7C /* orderBtn@2x.png */; };
 		B3FBD8D517D5E0A8009A1A7C /* back-button.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FBD8C717D5E0A7009A1A7C /* back-button.png */; };
 		B3FBD8D617D5E0A8009A1A7C /* back-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FBD8C817D5E0A7009A1A7C /* back-button@2x.png */; };
 		B3FBD8D717D5E0A8009A1A7C /* basic-type.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FBD8C917D5E0A7009A1A7C /* basic-type.png */; };
@@ -102,7 +100,6 @@
 		B3FBD8F317D5E0B2009A1A7C /* mainLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FBD8E617D5E0B2009A1A7C /* mainLogo@2x.png */; };
 		B3FBD8F417D5E0B2009A1A7C /* menu-button.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FBD8E717D5E0B2009A1A7C /* menu-button.png */; };
 		B3FBD8F517D5E0B2009A1A7C /* menu-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FBD8E817D5E0B2009A1A7C /* menu-button@2x.png */; };
-		B3FBD8F617D5E0B2009A1A7C /* nav-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FBD8E917D5E0B2009A1A7C /* nav-bar.png */; };
 		B3FBD8F717D5E0B2009A1A7C /* optionsBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FBD8EA17D5E0B2009A1A7C /* optionsBtn.png */; };
 		B3FBD8F817D5E0B2009A1A7C /* optionsBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FBD8EB17D5E0B2009A1A7C /* optionsBtn@2x.png */; };
 		B3FBD8F917D5E0B2009A1A7C /* order-cart.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FBD8EC17D5E0B2009A1A7C /* order-cart.png */; };
@@ -209,10 +206,6 @@
 		9394D1DA17DF6942001477DC /* order-not-payed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order-not-payed.png"; sourceTree = "<group>"; };
 		9394D1DB17DF6942001477DC /* order-not-payed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order-not-payed@2x.png"; sourceTree = "<group>"; };
 		939AA65C17C4D0B800418FA3 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
-		939AA66317C4DEA500418FA3 /* order-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order-button.png"; sourceTree = "<group>"; };
-		939AA66417C4DEA500418FA3 /* order-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order-button@2x.png"; sourceTree = "<group>"; };
-		939AA67A17C60C1200418FA3 /* do-order-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "do-order-button.png"; sourceTree = "<group>"; };
-		939AA67B17C60C1200418FA3 /* do-order-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "do-order-button@2x.png"; sourceTree = "<group>"; };
 		939AA6A017CCB5AD00418FA3 /* DDPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPageControl.h; sourceTree = "<group>"; };
 		939AA6A117CCB5AD00418FA3 /* DDPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDPageControl.m; sourceTree = "<group>"; };
 		939AA6AD17CF51D100418FA3 /* YourOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YourOrder.h; path = TranslatorItbFirst/Classes/Controllers/YourOrder/YourOrder.h; sourceTree = SOURCE_ROOT; };
@@ -232,6 +225,10 @@
 		939C3D9D17B26E6800BE615C /* OrderDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailsController.h; sourceTree = "<group>"; };
 		939C3D9E17B26E6800BE615C /* OrderDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailsController.m; sourceTree = "<group>"; };
 		939C3D9F17B26E6800BE615C /* OrderDetailsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailsController.xib; sourceTree = "<group>"; };
+		B31DCC2F17E7422B00A03119 /* blackBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackBtn.png; sourceTree = "<group>"; };
+		B31DCC3017E7422B00A03119 /* blackBtn@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackBtn@2X.png"; sourceTree = "<group>"; };
+		B31DCC3117E7422C00A03119 /* orangeBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orangeBtn.png; sourceTree = "<group>"; };
+		B31DCC3217E7422C00A03119 /* orangeBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orangeBtn@2x.png"; sourceTree = "<group>"; };
 		B36C40A817CF615600AD58B9 /* addUser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = addUser.png; path = Basket/addUser.png; sourceTree = "<group>"; };
 		B36C40A917CF615600AD58B9 /* addUser@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "addUser@2x.png"; path = "Basket/addUser@2x.png"; sourceTree = "<group>"; };
 		B36C40AA17CF615600AD58B9 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow.png; path = Basket/arrow.png; sourceTree = "<group>"; };
@@ -282,8 +279,6 @@
 		B3FBD85117D46FA4009A1A7C /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		B3FBD85317D46FA4009A1A7C /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		B3FBD85417D46FA4009A1A7C /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
-		B3FBD8B617D48491009A1A7C /* orderBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orderBtn.png; sourceTree = "<group>"; };
-		B3FBD8B717D48491009A1A7C /* orderBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orderBtn@2x.png"; sourceTree = "<group>"; };
 		B3FBD8C717D5E0A7009A1A7C /* back-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-button.png"; sourceTree = "<group>"; };
 		B3FBD8C817D5E0A7009A1A7C /* back-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-button@2x.png"; sourceTree = "<group>"; };
 		B3FBD8C917D5E0A7009A1A7C /* basic-type.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "basic-type.png"; sourceTree = "<group>"; };
@@ -304,7 +299,6 @@
 		B3FBD8E617D5E0B2009A1A7C /* mainLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mainLogo@2x.png"; sourceTree = "<group>"; };
 		B3FBD8E717D5E0B2009A1A7C /* menu-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-button.png"; sourceTree = "<group>"; };
 		B3FBD8E817D5E0B2009A1A7C /* menu-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-button@2x.png"; sourceTree = "<group>"; };
-		B3FBD8E917D5E0B2009A1A7C /* nav-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar.png"; sourceTree = "<group>"; };
 		B3FBD8EA17D5E0B2009A1A7C /* optionsBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = optionsBtn.png; sourceTree = "<group>"; };
 		B3FBD8EB17D5E0B2009A1A7C /* optionsBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "optionsBtn@2x.png"; sourceTree = "<group>"; };
 		B3FBD8EC17D5E0B2009A1A7C /* order-cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order-cart.png"; sourceTree = "<group>"; };
@@ -636,8 +630,6 @@
 		B3FBD8B517D48491009A1A7C /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				B3FBD8B617D48491009A1A7C /* orderBtn.png */,
-				B3FBD8B717D48491009A1A7C /* orderBtn@2x.png */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -823,10 +815,6 @@
 				D5A92E5517AB992E00DF504D /* Common */,
 				D5A92E5D17AB993100DF504D /* Default-568h@2x.png */,
 				D5A92E5E17AB993100DF504D /* Default.png */,
-				939AA66317C4DEA500418FA3 /* order-button.png */,
-				939AA66417C4DEA500418FA3 /* order-button@2x.png */,
-				939AA67A17C60C1200418FA3 /* do-order-button.png */,
-				939AA67B17C60C1200418FA3 /* do-order-button@2x.png */,
 				939AA65C17C4D0B800418FA3 /* background.png */,
 				D5A92E5F17AB993200DF504D /* Default@2x.png */,
 			);
@@ -836,6 +824,10 @@
 		D5A92E5517AB992E00DF504D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B31DCC2F17E7422B00A03119 /* blackBtn.png */,
+				B31DCC3017E7422B00A03119 /* blackBtn@2X.png */,
+				B31DCC3117E7422C00A03119 /* orangeBtn.png */,
+				B31DCC3217E7422C00A03119 /* orangeBtn@2x.png */,
 				B3A02E4817D8AA2F003BCB1F /* blackTextFieldBackground.png */,
 				B3A02E4917D8AA2F003BCB1F /* blackTextFieldBackground@2x.png */,
 				B3FBD90717D60BD9009A1A7C /* navigationBar@2x.png */,
@@ -848,7 +840,6 @@
 				B3FBD8E617D5E0B2009A1A7C /* mainLogo@2x.png */,
 				B3FBD8E717D5E0B2009A1A7C /* menu-button.png */,
 				B3FBD8E817D5E0B2009A1A7C /* menu-button@2x.png */,
-				B3FBD8E917D5E0B2009A1A7C /* nav-bar.png */,
 				B3FBD8EA17D5E0B2009A1A7C /* optionsBtn.png */,
 				B3FBD8EB17D5E0B2009A1A7C /* optionsBtn@2x.png */,
 				B3FBD8EC17D5E0B2009A1A7C /* order-cart.png */,
@@ -1144,10 +1135,6 @@
 				F69FB1C817B22BB100A50FC6 /* UploadFileView.xib in Resources */,
 				939C3DA117B26E6800BE615C /* OrderDetailsController.xib in Resources */,
 				939AA65D17C4D0B800418FA3 /* background.png in Resources */,
-				939AA66617C4DEA500418FA3 /* order-button.png in Resources */,
-				939AA66717C4DEA500418FA3 /* order-button@2x.png in Resources */,
-				939AA68617C60C1200418FA3 /* do-order-button.png in Resources */,
-				939AA68717C60C1200418FA3 /* do-order-button@2x.png in Resources */,
 				B3A91E2017C753E6003AC9E4 /* AboutCompany.xib in Resources */,
 				B3A91E2F17C7C384003AC9E4 /* HomeViewController.xib in Resources */,
 				F62D1ED817CB486E00955812 /* OrderPaymentController.xib in Resources */,
@@ -1214,8 +1201,6 @@
 				B36C40E817CF875400AD58B9 /* switch@2x.png in Resources */,
 				B36C40EB17CF875400AD58B9 /* triangle.png in Resources */,
 				B36C40EC17CF875400AD58B9 /* triangle@2x.png in Resources */,
-				B3FBD8B817D48491009A1A7C /* orderBtn.png in Resources */,
-				B3FBD8B917D48491009A1A7C /* orderBtn@2x.png in Resources */,
 				B3FBD8D517D5E0A8009A1A7C /* back-button.png in Resources */,
 				B3FBD8D617D5E0A8009A1A7C /* back-button@2x.png in Resources */,
 				B3FBD8D717D5E0A8009A1A7C /* basic-type.png in Resources */,
@@ -1236,7 +1221,6 @@
 				B3FBD8F317D5E0B2009A1A7C /* mainLogo@2x.png in Resources */,
 				B3FBD8F417D5E0B2009A1A7C /* menu-button.png in Resources */,
 				B3FBD8F517D5E0B2009A1A7C /* menu-button@2x.png in Resources */,
-				B3FBD8F617D5E0B2009A1A7C /* nav-bar.png in Resources */,
 				B3FBD8F717D5E0B2009A1A7C /* optionsBtn.png in Resources */,
 				B3FBD8F817D5E0B2009A1A7C /* optionsBtn@2x.png in Resources */,
 				B3FBD8F917D5E0B2009A1A7C /* order-cart.png in Resources */,
@@ -1285,6 +1269,10 @@
 				B3EAA8A617DE3CBC00ADEF94 /* textView@2x.png in Resources */,
 				9394D1DC17DF6942001477DC /* order-not-payed.png in Resources */,
 				9394D1DD17DF6942001477DC /* order-not-payed@2x.png in Resources */,
+				B31DCC3317E7422C00A03119 /* blackBtn.png in Resources */,
+				B31DCC3417E7422C00A03119 /* blackBtn@2X.png in Resources */,
+				B31DCC3517E7422C00A03119 /* orangeBtn.png in Resources */,
+				B31DCC3617E7422C00A03119 /* orangeBtn@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
