@@ -99,8 +99,8 @@
     users = [context executeFetchRequest:fetchRequest error:&error];
     
     if([users count]==0) {
-        settingdsViewController = [[SettingsViewController alloc] init];
-        [self.navigationController pushViewController: settingdsViewController animated:YES];
+        settingsViewController = [[SettingsViewController alloc] init];
+        [self.navigationController pushViewController: settingsViewController animated:YES];
     }
     else
         [self.navigationController pushViewController: orderDetailsController animated:YES];

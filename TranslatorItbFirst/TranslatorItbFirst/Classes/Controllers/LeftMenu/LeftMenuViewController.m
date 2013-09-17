@@ -12,6 +12,8 @@
 #import "OrderDetailsController.h"
 #import "TechnicalSupportViewController.h"
 #import "IIViewDeckController.h"
+#import "DataManager.h"
+#import "SettingsViewController.h"
 
 @implementation LeftMenuViewController
 
@@ -113,7 +115,25 @@
             menuNavigation = [[UINavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
             break;
         case 1:
-            menuNavigation = [[UINavigationController alloc] initWithRootViewController:[[OrderDetailsController alloc] init]];
+        {
+            DataManager *dataMngr = [[DataManager alloc] init];
+            NSManagedObjectContext *context = [dataMngr managedObjectContext];
+            //[dataMngr deleteAllObjects:@"User"];
+            NSError *error;
+            NSArray *users;
+            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+            NSEntityDescription *entity = [NSEntityDescription
+                                           entityForName:@"User" inManagedObjectContext:context];
+            [fetchRequest setEntity:entity];
+            
+            users = [context executeFetchRequest:fetchRequest error:&error];
+            
+            if([users count]==0) {
+                menuNavigation = [[UINavigationController alloc] initWithRootViewController:[[SettingsViewController alloc] init]];
+            }
+            else
+                menuNavigation = [[UINavigationController alloc] initWithRootViewController:[[OrderDetailsController alloc] init]];
+        }
             break;
         case 2:
             menuNavigation = [[UINavigationController alloc] initWithRootViewController:[[TechnicalSupportViewController alloc] init]];

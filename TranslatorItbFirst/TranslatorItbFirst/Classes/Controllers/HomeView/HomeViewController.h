@@ -14,7 +14,7 @@
 @interface HomeViewController : UIViewController
 {
     OrderDetailsController * orderDetailsController;
-    SettingsViewController * settingdsViewController;
+    SettingsViewController * settingsViewController;
 }
 - (IBAction)goToOrder:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *orderBtn;
