@@ -13,6 +13,7 @@
 
 
 @interface SettingsViewController : UIViewController<UITextFieldDelegate>
+@property (assign, nonatomic) int isFirstUser;
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
 @property (weak, nonatomic) IBOutlet UILabel *userFioLbl;
 @property (weak, nonatomic) IBOutlet UITextField *fioTextField;
@@ -21,6 +22,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *blinkLabel;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 - (IBAction)touchSaveBtn:(id)sender;
-
 
 @end

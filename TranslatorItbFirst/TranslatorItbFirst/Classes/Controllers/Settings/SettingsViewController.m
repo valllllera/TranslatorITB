@@ -35,18 +35,6 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    [self initNAvigationBar];
-    [self initTextFields];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
-    
     DataManager *dataMngr = [[DataManager alloc] init];
     NSManagedObjectContext *context = [dataMngr managedObjectContext];
     
@@ -60,11 +48,8 @@
     users = [context executeFetchRequest:fetchRequest error:&error];
     
     if([users count]==0) {
-        User *user = [NSEntityDescription
-                      insertNewObjectForEntityForName:@"User"
-                      inManagedObjectContext:context];
-        [context save:&error];
         _userFioLbl.text = @"Новый пользователь";
+        _isFirstUser = 1;
     }
     else {
         User *user = [users objectAtIndex:0];
@@ -73,6 +58,18 @@
         _emailTExtField.text = [NSString stringWithFormat:@"%@", user.email];
         _phoneTextField.text = [NSString stringWithFormat:@"%@", user.phone];
     }
+    
+    [self initNAvigationBar];
+    [self initTextFields];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 - (BOOL) validateEmail: (NSString *) email {
     NSString *regExp = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
@@ -82,7 +79,7 @@
 
 -(void)initNAvigationBar{
     //Set title font
-    [self setNavigationBarFont:@"Lobster 1.4" andTitle:@"Настройки"];
+    //[self setNavigationBarFont:@"Lobster 1.4" andTitle:@"gfsgdf"];
     [self roundedImage:_userImage];
     //Set background to view
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
@@ -90,21 +87,27 @@
     //Initialization of tab bar
     self.navigationItem.hidesBackButton = YES;
     
-    //Init basket button
-    UIButton *cartButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 38, 28)];
-    [cartButton setBackgroundImage: [UIImage imageNamed:@"cart-top-button.png"] forState:UIControlStateNormal];
-    [cartButton addTarget:self action:@selector(pressedBasketBtn) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *cartNavigationItem = [[UIBarButtonItem alloc] initWithCustomView:cartButton];
-    
-    //Init left meu button
-    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 38, 28)];
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu-button.png"] forState:UIControlStateNormal];
-    [menuButton addTarget:self action:@selector(pressedMenuBtn) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *menuButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    
-    
-    self.navigationItem.leftBarButtonItem = menuButtonItem;
-    self.navigationItem.rightBarButtonItem = cartNavigationItem;
+    if(_isFirstUser != 1)
+    {
+        [self setNavigationBarFont:@"Lobster 1.4" andTitle:@"Настройки"];
+        //Init basket button
+        UIButton *cartButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 38, 28)];
+        [cartButton setBackgroundImage: [UIImage imageNamed:@"cart-top-button.png"] forState:UIControlStateNormal];
+        [cartButton addTarget:self action:@selector(pressedBasketBtn) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *cartNavigationItem = [[UIBarButtonItem alloc] initWithCustomView:cartButton];
+        
+        //Init left meu button
+        UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 38, 28)];
+        [menuButton setBackgroundImage:[UIImage imageNamed:@"menu-button.png"] forState:UIControlStateNormal];
+        [menuButton addTarget:self action:@selector(pressedMenuBtn) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *menuButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+        
+        
+        self.navigationItem.leftBarButtonItem = menuButtonItem;
+        self.navigationItem.rightBarButtonItem = cartNavigationItem;
+    }
+    else
+        [self setNavigationBarFont:@"Lobster 1.4" andTitle:@"Введите ваши данные"];
 }
 
 -(void)initTextFields{
@@ -239,11 +242,24 @@
         [fetchRequest setEntity:entity];
         
         users = [context executeFetchRequest:fetchRequest error:&error];
-        [[users objectAtIndex:0] setUsername:_fioTextField.text];
-        [[users objectAtIndex:0] setPhone:_phoneTextField.text];
-        [[users objectAtIndex:0] setEmail:_emailTExtField.text];
-        [context save:&error];
-        _userFioLbl.text = [NSString stringWithFormat:@"%@", _fioTextField.text];
+        if([users count]==0) {
+            User *user = [NSEntityDescription
+                          insertNewObjectForEntityForName:@"User"
+                          inManagedObjectContext:context];
+            [user setUsername:_fioTextField.text];
+            [user setPhone:_phoneTextField.text];
+            [user setEmail:_emailTExtField.text];
+            [context save:&error];
+            _userFioLbl.text = [NSString stringWithFormat:@"%@", _fioTextField.text];
+        }
+        else {
+            [[users objectAtIndex:0] setUsername:_fioTextField.text];
+            [[users objectAtIndex:0] setPhone:_phoneTextField.text];
+            [[users objectAtIndex:0] setEmail:_emailTExtField.text];
+            [context save:&error];
+            _userFioLbl.text = [NSString stringWithFormat:@"%@", _fioTextField.text];
+        }
+        _isFirstUser = 0;
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"itbFirst" message:@"Ваши данные успешно сохранены" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }

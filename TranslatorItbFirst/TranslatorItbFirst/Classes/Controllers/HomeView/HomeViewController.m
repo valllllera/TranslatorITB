@@ -8,8 +8,6 @@
 
 #import "HomeViewController.h"
 #import "IIViewDeckController.h"
-#import "RightBasketViewController.h"
-#import "SettingsViewController.h"
 
 @interface HomeViewController ()
 
@@ -29,7 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     //Set background to view
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
     
@@ -75,7 +72,6 @@
     title.attributedText = attributetTitle;
     title.frame=CGRectMake(10, 10, 50, 50);
     [self.navigationItem setTitleView:title];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,12 +81,29 @@
 }
 
 - (void) openBasket{
-    RightBasketViewController * rightBasketController = [[RightBasketViewController alloc] init];
+    RightBasketViewController *rightBasketController = [[RightBasketViewController alloc] init];
     [self.navigationController pushViewController:rightBasketController animated:YES];
 }
 
 - (IBAction)goToOrder:(id)sender {
-    [self.navigationController pushViewController: orderDetailsController animated:YES];
+    DataManager *dataMngr = [[DataManager alloc] init];
+    NSManagedObjectContext *context = [dataMngr managedObjectContext];
+    //[dataMngr deleteAllObjects:@"User"];
+    NSError *error;
+    NSArray *users;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"User" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    users = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if([users count]==0) {
+        settingdsViewController = [[SettingsViewController alloc] init];
+        [self.navigationController pushViewController: settingdsViewController animated:YES];
+    }
+    else
+        [self.navigationController pushViewController: orderDetailsController animated:YES];
 }
 
 - (void)toSettings{

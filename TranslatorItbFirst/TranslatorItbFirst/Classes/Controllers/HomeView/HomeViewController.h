@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "OrderDetailsController.h"
+#import "RightBasketViewController.h"
+#import "SettingsViewController.h"
 
 @interface HomeViewController : UIViewController
 {
     OrderDetailsController * orderDetailsController;
+    SettingsViewController * settingdsViewController;
 }
 - (IBAction)goToOrder:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *orderBtn;
