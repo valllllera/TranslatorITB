@@ -46,7 +46,9 @@
 {
     return 4;
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 45.0;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
@@ -59,8 +61,8 @@
     
     UIImageView *background;
     UIImageView* backgroundHighlighted;
-    background=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu-cell.png"]];
-    backgroundHighlighted=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu-cell-pressed.png"]];
+    background=[[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"menu-cell.png"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,4,0,6)]];
+    backgroundHighlighted=[[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"menu-cell-pressed.png"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,2,0,6)]];
     [cell setBackgroundView:background];
     [cell setSelectedBackgroundView:backgroundHighlighted];
     cell.textLabel.backgroundColor = [UIColor clearColor];

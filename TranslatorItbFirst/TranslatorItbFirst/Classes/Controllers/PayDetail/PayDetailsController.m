@@ -83,9 +83,9 @@
     
     
     //Adding button to the view
-    UIImage *doOrderButtonBg = [[UIImage imageNamed:@"do-order-button.png"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 3, 0, 3)];
+    UIImage *doOrderButtonBg = [[UIImage imageNamed:@"orangeBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)];
 
-    UIButton *doOrderButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 38)];
+    UIButton *doOrderButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 41)];
     [doOrderButton setBackgroundImage:doOrderButtonBg forState:UIControlStateNormal];
     [doOrderButton setTitle:@"Перейти к оплате" forState:UIControlStateNormal];
     [doOrderButton setImage:[UIImage imageNamed:@"order-cart"] forState:UIControlStateNormal];

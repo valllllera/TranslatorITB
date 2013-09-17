@@ -54,9 +54,7 @@ bool textViewIsVeginEditin;
     [self.navigationItem setTitleView:title];
 
     _text.inputAccessoryView = _toolBar;
- 
-   
-   
+
     UIImage *langFieldBackground = [[UIImage imageNamed:@"textFieldBackground"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,3, 0, 3)];
     UIImage *orangeBtn=[[UIImage imageNamed:@"orangeBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,4,0,4)];
     UIImage *blackBtn=[[UIImage imageNamed:@"blackBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,5,0,5)];
@@ -135,9 +133,16 @@ bool textViewIsVeginEditin;
 
 - (IBAction)touchGetPriceBtn:(id)sender {
    // if([self chekLanguageFrom:_from.text To:_to.text]!=NO && [_text.text isEqualToString:@""]!=YES)
-    
+    if(textViewFlag==NO || [_text.text length] == 0){
+        UIAlertView *alert=[[UIAlertView alloc] init];
+        alert= [alert initWithTitle:NSLocalizedString(@"AppName", nil)
+                            message:@"Вставьте текст или сделайте фото!"
+                           delegate:nil cancelButtonTitle:@"OK"
+                  otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     //new order addition
-    if([_text.text length] != 0) {
         DataManager *dataMngr = [[DataManager alloc] init];
         NSManagedObjectContext *context = [dataMngr managedObjectContext];
         
@@ -183,8 +188,6 @@ bool textViewIsVeginEditin;
         
         [self.navigationController pushViewController:payDetailController animated:YES];
     }
-}
-
 - (IBAction)touchGetPhoto:(id)sender {
     photoViewController=[[PhotoViewController alloc]init];
     [self.navigationController pushViewController:photoViewController animated:YES];

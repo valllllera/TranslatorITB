@@ -85,9 +85,9 @@
     if([currentOrder.status intValue] == 1) {
         [_orderStatusImage setImage:[UIImage imageNamed:@"order-is-done.png"]];
         
-        UIImage *getTranslateButtonBg = [[UIImage imageNamed:@"do-order-button.png"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 3, 0, 3)];
+        UIImage *getTranslateButtonBg = [[UIImage imageNamed:@"orangeBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)];
         
-        UIButton *getTranslateButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 38)];
+        UIButton *getTranslateButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 41)];
         [getTranslateButton setBackgroundImage:getTranslateButtonBg forState:UIControlStateNormal];
         [getTranslateButton setTitle:@"Скачать перевод" forState:UIControlStateNormal];
         [getTranslateButton setImage:[UIImage imageNamed:@"send-image.png"] forState:UIControlStateNormal];
@@ -122,8 +122,8 @@
     else if([currentOrder.status intValue] == 3) {
         [_orderStatusImage setImage:[UIImage imageNamed:@"order-not-payed.png"]];
         
-        UIImage *ButtonBg = [[UIImage imageNamed:@"do-order-button.png"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 3, 0, 3)];
-        _payButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 38)];
+        UIImage *ButtonBg = [[UIImage imageNamed:@"orangeBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)];
+        _payButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 41)];
         [_payButton setBackgroundImage:ButtonBg forState:UIControlStateNormal];
         [_payButton setTitle:@"Оплатить" forState:UIControlStateNormal];
         [_payButton setImage:[UIImage imageNamed:@"cart.png"] forState:UIControlStateNormal];
