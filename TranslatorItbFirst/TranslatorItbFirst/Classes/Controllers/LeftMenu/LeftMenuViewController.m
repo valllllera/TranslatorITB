@@ -30,8 +30,8 @@
 {
     [super viewDidLoad];
      UIColor *background=[UIColor colorWithPatternImage: [UIImage imageNamed:@"background"]];
-    _table.separatorStyle ;
     [self.view setBackgroundColor:background];
+    [_table setBackgroundColor:background];
     [[self.navigationController navigationBar] setHidden:YES];
 
 }
