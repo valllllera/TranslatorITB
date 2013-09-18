@@ -118,17 +118,18 @@
     [_phoneTextField setDelegate:self];
     
     //init Fonts
-    UIFont *userFioLabelFont=[UIFont fontWithName:@"HelveticaNeueCyr-Light" size:16];
-    UIFont *blinkLabelFont=[UIFont fontWithName:@"HelveticaNeueCyr-Medium" size:11];
-    UIFont *btnFont=[UIFont fontWithName:@"HelveticaNeueCyr-Bold" size:17];
+    UIFont *light=[UIFont fontWithName:@"HelveticaNeueCyr-Light" size:16];
+    UIFont *bold=[UIFont fontWithName:@"HelveticaNeueCyr-Bold" size:17];
+    UIFont *medium=[UIFont fontWithName:@"HelveticaNeueCyr-Medium" size:11];
+   
     
     //set Fonts
-    [_userFioLbl setFont:userFioLabelFont];
-    [_fioTextField setFont:userFioLabelFont];
-    [_emailTExtField setFont:userFioLabelFont];
-    [_phoneTextField setFont:userFioLabelFont];
-    [_blinkLabel setFont:blinkLabelFont];
-    [_saveBtn setFont:btnFont];
+    [_userFioLbl setFont:light];
+    [_fioTextField setFont:light];
+    [_emailTExtField setFont:light];
+    [_phoneTextField setFont:light];
+    [_blinkLabel setFont:medium];
+    [_saveBtn setFont:bold];
     
     //Set left padding
     _fioTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 12, 20)];

@@ -115,7 +115,8 @@
         NSString *emailBody = @"Это пример отправки Email с сайта iMaladec";
         [picker setMessageBody:emailBody isHTML:NO];
         
-        [self.viewDeckController setCenterController:picker];
+        [self.viewDeckController presentModalViewController:picker animated:YES];
+        
     } else {
         NSString *ccRecipients = @"second@example.com,third@example.com";
         NSString *subject = @"Hello from iMaladec!";

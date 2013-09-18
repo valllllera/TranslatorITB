@@ -43,6 +43,10 @@ bool textViewIsVeginEditin;
     
     //Navigation bar custom title font
     UIFont *titleFont=[UIFont fontWithName:@"Lobster 1.4" size:25];
+    UIFont *light=[UIFont fontWithName:@"HelveticaNeueCyr-Light" size:14];
+    UIFont *bold=[UIFont fontWithName:@"HelveticaNeueCyr-Bold" size:18];
+
+    
     UILabel *title=[[UILabel alloc]init];
     [title setFont:titleFont];
     [title setBackgroundColor:[UIColor clearColor]];
@@ -54,7 +58,13 @@ bool textViewIsVeginEditin;
     [self.navigationItem setTitleView:title];
 
     _text.inputAccessoryView = _toolBar;
-
+    [_text setFont:light];
+    [_to setFont:light];
+    [_from setFont:light];
+    [_getPrice setFont:bold];
+    [_getPhoto setFont:bold];
+    
+    
     UIImage *langFieldBackground = [[UIImage imageNamed:@"textFieldBackground"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,3, 0, 3)];
     UIImage *orangeBtn=[[UIImage imageNamed:@"orangeBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,4,0,4)];
     UIImage *blackBtn=[[UIImage imageNamed:@"blackBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,5,0,5)];

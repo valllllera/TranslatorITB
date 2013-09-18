@@ -56,6 +56,12 @@
     
     //Navigation bar custom title font
     UIFont *titleFont=[UIFont fontWithName:@"Lobster 1.4" size:25];
+    UIFont *light=[UIFont fontWithName:@"HelveticaNeueCyr-Light" size:12];
+    UIFont *bold=[UIFont fontWithName:@"HelveticaNeueCyr-Bold" size:18];
+    [_orderBtn setFont:bold];
+    [_text setFont:light];
+    
+    
     UILabel *title=[[UILabel alloc]init];
     [title setFont:titleFont];
     [title setBackgroundColor:[UIColor clearColor]];
