@@ -119,7 +119,7 @@ bool textViewIsVeginEditin;
     //end of initialization of tab bar
     
     _doneButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 416, 290, 41)];
-    [_doneButton setTitle:@"Done" forState:UIControlStateNormal];
+    [_doneButton setTitle:@"Выбрать" forState:UIControlStateNormal];
     UIImage *doneBtnBg=[[UIImage imageNamed:@"blackBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,5,0,5)];
     [_doneButton setBackgroundImage:doneBtnBg forState:UIControlStateNormal];
     [_doneButton addTarget:self action:@selector(chooseLanguage:) forControlEvents:UIControlEventTouchUpInside];
