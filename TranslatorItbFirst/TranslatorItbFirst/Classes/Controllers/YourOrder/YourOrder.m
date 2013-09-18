@@ -97,7 +97,7 @@
         [getTranslateButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
         getTranslateButton.titleLabel.shadowOffset = CGSizeMake(1, 1);
         getTranslateButton.titleLabel.shadowColor = [UIColor grayColor];
-        [getTranslateButton addTarget:self action:@selector(goToPayment:) forControlEvents:UIControlEventTouchUpInside];
+        //[getTranslateButton addTarget:self action:@selector(goToPayment:) forControlEvents:UIControlEventTouchUpInside];
         _orderPriceAndTerm = [[UILabel alloc] initWithFrame: CGRectMake(20, 300, 280, 50)];
         [_orderPriceAndTerm setText: [[NSString alloc] initWithFormat: @"%d руб. / Заказ выполнен %@ в %@", [currentOrder.cost intValue], [currentOrder.finishDate dateTitleFull], [currentOrder.finishDate dateTitleHourMinute]]];
         [_orderPriceAndTerm setTextAlignment: NSTextAlignmentCenter];

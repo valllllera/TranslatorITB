@@ -37,10 +37,14 @@
 @property (assign, nonatomic) int infoType;
 @property (assign, nonatomic) int orderIndex;
 
+@property (strong, nonatomic) UIButton *doneButton;
+@property (assign, nonatomic) int fromToFlag;
 
 @property(nonatomic,strong) IBOutlet UIButton *getPrice;
 @property(nonatomic,strong) IBOutlet UIButton *changeLanguage;
 @property (weak, nonatomic) IBOutlet UIButton *getPhoto;
+
+@property(strong, nonatomic) NSString *chosenItem;
 
 @property (strong, nonatomic) NSArray * languages;
 
@@ -58,6 +62,7 @@
 -(IBAction)changeLanguage:(id)sender;
 - (IBAction)touchGetPriceBtn:(id)sender;
 - (IBAction)touchGetPhoto:(id)sender;
+- (IBAction)chooseLanguage:(id)sender;
 
 - (int) getPricePerPage;
 

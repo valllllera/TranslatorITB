@@ -260,7 +260,10 @@
             [context save:&error];
             _userFioLbl.text = [NSString stringWithFormat:@"%@", _fioTextField.text];
         }
-        _isFirstUser = 0;
+        if(_isFirstUser == 1) {
+            _isFirstUser = 0;
+            [self setNavigationBarFont:@"Lobster 1.4" andTitle:@"Настройки"];
+        }
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"itbFirst" message:@"Ваши данные успешно сохранены" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }

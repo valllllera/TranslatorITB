@@ -117,7 +117,15 @@ bool textViewIsVeginEditin;
     [menuButton addTarget:self action:@selector(pressedMenuBtn) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *menuButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     //end of initialization of tab bar
-       
+    
+    _doneButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 416, 290, 41)];
+    [_doneButton setTitle:@"Done" forState:UIControlStateNormal];
+    UIImage *doneBtnBg=[[UIImage imageNamed:@"blackBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,5,0,5)];
+    [_doneButton setBackgroundImage:doneBtnBg forState:UIControlStateNormal];
+    [_doneButton addTarget:self action:@selector(chooseLanguage:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_doneButton];
+    
+    _languages = [_languages sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     self.navigationItem.leftBarButtonItem = menuButtonItem;
     self.navigationItem.rightBarButtonItem = cartNavigationItem;
@@ -217,7 +225,7 @@ bool textViewIsVeginEditin;
          [_text resignFirstResponder];
     }
     else if ([_to isFirstResponder] && [touch view]!=_to){
-            [_to   resignFirstResponder];
+         [_to   resignFirstResponder];
     }
     [super touchesBegan:touches withEvent:event];
 }
@@ -258,32 +266,42 @@ bool textViewIsVeginEditin;
 
 -(IBAction)ShowListFrom:(id)sender{
     if(_languagePicker.frame.origin.y >400){
-        [self scrollViewToPosition:-30];
+        [self scrollViewToPosition:-60];
     }
     else{
         [self scrollViewToPosition:0];
     }
+    if(_fromToFlag == 0)
+        _fromToFlag = 1;
+    else _fromToFlag = 0;
 }
 
 -(IBAction)ShowListTo:(id)sender{
     if(_languagePicker.frame.origin.y >400){
-        [self scrollViewToPosition:-30];
+        [self scrollViewToPosition:-60];
     }
     else{
         [self scrollViewToPosition:0];
     }
+    if(_fromToFlag == 0)
+        _fromToFlag = 2;
+    else _fromToFlag = 0;
 }
 
-- (void) scrollViewToPosition:(float)position{
-    
+- (void) scrollViewToPosition:(float)position {
     [UIView animateWithDuration:0.25f animations:^{
         CGRect pickerFrame = self.languagePicker.frame;
-        
-        if(position < 0)
+        CGRect buttonFrame = _doneButton.frame;
+        if(position < 0) {
             pickerFrame.origin.y = 200-position;
-        else
+            buttonFrame.origin.y = 226;
+        }
+        else {
             pickerFrame.origin.y = 416;
+            buttonFrame.origin.y = 416;
+        }
         [self.languagePicker setFrame:pickerFrame];
+        [_doneButton setFrame:buttonFrame];
         [self.languagePickerOverlayView setFrame:pickerFrame];
     }];
     [UIView animateWithDuration:0.25f animations:^{
@@ -291,6 +309,7 @@ bool textViewIsVeginEditin;
         frame.origin.y = position;
         [self.view setFrame:frame];
     }];
+    
 }
 
 #pragma mark - UIPickerView DataSource
@@ -317,6 +336,7 @@ bool textViewIsVeginEditin;
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     //Let's print in the console what the user had chosen;
+    _chosenItem = [_languages objectAtIndex:row];
     NSLog(@"Chosen item: %@", [_languages objectAtIndex:row]);
 }
 
@@ -333,6 +353,19 @@ bool textViewIsVeginEditin;
         _pricePerPage = [DataManager getEtc];
     }
     return _pricePerPage;
+}
+
+- (IBAction) chooseLanguage:(id)sender {
+    if(_fromToFlag == 1) {
+        _from.text = _chosenItem;
+        [self scrollViewToPosition:0];
+        _fromToFlag = 0;
+    }
+    if(_fromToFlag == 2) {
+        _to.text = _chosenItem;
+        [self scrollViewToPosition:0];
+        _fromToFlag = 0;
+    }
 }
 
 
