@@ -294,11 +294,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TranslatorItbFirst/Classes/Controllers/YourOrder/YourOrder.m"
-         timestampString = "401029726.362683"
+         timestampString = "401290875.093967"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "188"
-         endingLineNumber = "188"
+         startingLineNumber = "196"
+         endingLineNumber = "196"
          landmarkName = "-goToPayment:"
          landmarkType = "5">
       </FileBreakpoint>

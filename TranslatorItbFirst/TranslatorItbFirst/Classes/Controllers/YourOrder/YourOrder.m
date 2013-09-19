@@ -8,6 +8,8 @@
 
 #import "YourOrder.h"
 #import "IIViewDeckController.h"
+#define IS_WIDESCREEN (fabs ((double) [[UIScreen mainScreen] bounds].size.height - (double)568 ) < DBL_EPSILON)
+
 
 @interface YourOrder ()
 
@@ -86,8 +88,11 @@
         [_orderStatusImage setImage:[UIImage imageNamed:@"order-is-done.png"]];
         
         UIImage *getTranslateButtonBg = [[UIImage imageNamed:@"orangeBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)];
-        
-        UIButton *getTranslateButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 41)];
+        UIButton *getTranslateButton;
+        if(IS_WIDESCREEN == false)
+            getTranslateButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 41)];
+        else
+            getTranslateButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 448, 280, 41)];
         [getTranslateButton setBackgroundImage:getTranslateButtonBg forState:UIControlStateNormal];
         [getTranslateButton setTitle:@"Скачать перевод" forState:UIControlStateNormal];
         [getTranslateButton setImage:[UIImage imageNamed:@"send-image.png"] forState:UIControlStateNormal];
@@ -123,7 +128,10 @@
         [_orderStatusImage setImage:[UIImage imageNamed:@"order-not-payed.png"]];
         
         UIImage *ButtonBg = [[UIImage imageNamed:@"orangeBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)];
-        _payButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 41)];
+        if(IS_WIDESCREEN == false)
+            _payButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 41)];
+        else
+            _payButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 448, 280, 41)];
         [_payButton setBackgroundImage:ButtonBg forState:UIControlStateNormal];
         [_payButton setTitle:@"Оплатить" forState:UIControlStateNormal];
         [_payButton setImage:[UIImage imageNamed:@"cart.png"] forState:UIControlStateNormal];
