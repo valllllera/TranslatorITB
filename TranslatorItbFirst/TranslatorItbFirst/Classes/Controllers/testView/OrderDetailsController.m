@@ -9,6 +9,7 @@
 #import "OrderDetailsController.h"
 #import "DataManager.h"
 #import "IIViewDeckController.h"
+#define IS_WIDESCREEN (fabs ((double) [[UIScreen mainScreen] bounds].size.height - (double)568 ) < DBL_EPSILON)
 
 
 @interface OrderDetailsController (){
@@ -70,7 +71,11 @@ bool textViewIsVeginEditin;
     UIImage *blackBtn=[[UIImage imageNamed:@"blackBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,5,0,5)];
     [_getPhoto setBackgroundImage:blackBtn forState:UIControlStateNormal];
     [_getPrice setBackgroundImage:orangeBtn forState:UIControlStateNormal];
-    UIImage *b=[[UIImage imageNamed:@"textView"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,3, 0,3)];
+    UIImage *b;
+    if(IS_WIDESCREEN == false)
+        b=[[UIImage imageNamed:@"textView.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,3, 0,3)];
+    else
+        b=[[UIImage imageNamed:@"textView-4.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,3, 0,3)];
     [_backgr setImage:b];
     
     [_to setBackground:langFieldBackground];
@@ -118,12 +123,12 @@ bool textViewIsVeginEditin;
     UIBarButtonItem *menuButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     //end of initialization of tab bar
     
-    _doneButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 416, 290, 41)];
+    /*_doneButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 416, 290, 41)];
     [_doneButton setTitle:@"Выбрать" forState:UIControlStateNormal];
     UIImage *doneBtnBg=[[UIImage imageNamed:@"blackBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,5,0,5)];
     [_doneButton setBackgroundImage:doneBtnBg forState:UIControlStateNormal];
     [_doneButton addTarget:self action:@selector(chooseLanguage:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_doneButton];
+    [self.view addSubview:_doneButton];*/
     
     _languages = [_languages sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
@@ -265,43 +270,57 @@ bool textViewIsVeginEditin;
 #pragma mark - textFieldActions
 
 -(IBAction)ShowListFrom:(id)sender{
-    if(_languagePicker.frame.origin.y >400){
-        [self scrollViewToPosition:-60];
+    if(_fromToFlag != 2) {
+        if(_languagePicker.frame.origin.y >400){
+            [self scrollViewToPosition:-30];
+        }
+        else{
+            [self scrollViewToPosition:0];
+        }
+        if(_fromToFlag == 0)
+            _fromToFlag = 1;
+        else _fromToFlag = 0;
     }
-    else{
-        [self scrollViewToPosition:0];
-    }
-    if(_fromToFlag == 0)
-        _fromToFlag = 1;
-    else _fromToFlag = 0;
 }
 
 -(IBAction)ShowListTo:(id)sender{
-    if(_languagePicker.frame.origin.y >400){
-        [self scrollViewToPosition:-60];
+    if(_fromToFlag != 1) {
+        if(_languagePicker.frame.origin.y >400){
+            [self scrollViewToPosition:-30];
+        }
+        else{
+            [self scrollViewToPosition:0];
+        }
+        if(_fromToFlag == 0)
+            _fromToFlag = 2;
+        else _fromToFlag = 0;
     }
-    else{
-        [self scrollViewToPosition:0];
-    }
-    if(_fromToFlag == 0)
-        _fromToFlag = 2;
-    else _fromToFlag = 0;
 }
 
 - (void) scrollViewToPosition:(float)position {
+    int show, hide;
+    if(IS_WIDESCREEN == FALSE) {
+        show = 200;
+        hide = 416;
+    }
+    else {
+        show = 288;
+        hide = 504;
+    }
+    
     [UIView animateWithDuration:0.25f animations:^{
         CGRect pickerFrame = self.languagePicker.frame;
-        CGRect buttonFrame = _doneButton.frame;
+        //CGRect buttonFrame = _doneButton.frame;
         if(position < 0) {
-            pickerFrame.origin.y = 200-position;
-            buttonFrame.origin.y = 226;
+            pickerFrame.origin.y = show-position;
+            //buttonFrame.origin.y = 226;
         }
         else {
-            pickerFrame.origin.y = 416;
-            buttonFrame.origin.y = 416;
+            pickerFrame.origin.y = hide;
+            //buttonFrame.origin.y = 416;
         }
         [self.languagePicker setFrame:pickerFrame];
-        [_doneButton setFrame:buttonFrame];
+        //[_doneButton setFrame:buttonFrame];
         [self.languagePickerOverlayView setFrame:pickerFrame];
     }];
     [UIView animateWithDuration:0.25f animations:^{
@@ -309,7 +328,6 @@ bool textViewIsVeginEditin;
         frame.origin.y = position;
         [self.view setFrame:frame];
     }];
-    
 }
 
 #pragma mark - UIPickerView DataSource
@@ -336,8 +354,14 @@ bool textViewIsVeginEditin;
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     //Let's print in the console what the user had chosen;
-    _chosenItem = [_languages objectAtIndex:row];
-    NSLog(@"Chosen item: %@", [_languages objectAtIndex:row]);
+    //_chosenItem = [_languages objectAtIndex:row];
+    if(_fromToFlag == 1) {
+        _from.text = [_languages objectAtIndex:row];
+    }
+    if(_fromToFlag == 2) {
+        _to.text = [_languages objectAtIndex:row];
+    }
+
 }
 
 - (int) getPricePerPage {
@@ -355,7 +379,7 @@ bool textViewIsVeginEditin;
     return _pricePerPage;
 }
 
-- (IBAction) chooseLanguage:(id)sender {
+/*- (IBAction) chooseLanguage:(id)sender {
     if(_fromToFlag == 1) {
         _from.text = _chosenItem;
         [self scrollViewToPosition:0];
@@ -366,7 +390,7 @@ bool textViewIsVeginEditin;
         [self scrollViewToPosition:0];
         _fromToFlag = 0;
     }
-}
+}*/
 
 
 @end

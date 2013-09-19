@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TranslatorItbFirst/Classes/Controllers/testView/OrderDetailsController.m"
-         timestampString = "400166475.177298"
+         timestampString = "401288402.851009"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
+         startingLineNumber = "67"
+         endingLineNumber = "67"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -255,11 +255,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TranslatorItbFirst/Classes/Controllers/PayDetail/PayDetailsController.m"
-         timestampString = "400520773.358819"
+         timestampString = "401290230.669486"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "187"
-         endingLineNumber = "187"
+         startingLineNumber = "202"
+         endingLineNumber = "202"
          landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>

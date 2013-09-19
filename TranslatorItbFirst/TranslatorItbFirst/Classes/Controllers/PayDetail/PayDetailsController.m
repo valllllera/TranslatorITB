@@ -8,6 +8,7 @@
 
 #import "PayDetailsController.h"
 #import "DataManager.h"
+#define IS_WIDESCREEN (fabs ((double) [[UIScreen mainScreen] bounds].size.height - (double)568 ) < DBL_EPSILON)
 
 
 @interface PayDetailsController () <UIScrollViewDelegate>{
@@ -85,7 +86,12 @@
     //Adding button to the view
     UIImage *doOrderButtonBg = [[UIImage imageNamed:@"orangeBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)];
 
-    UIButton *doOrderButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 41)];
+    
+    UIButton *doOrderButton;
+    if(IS_WIDESCREEN == false)
+        doOrderButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 41)];
+    else
+        doOrderButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 448, 280, 41)];
     [doOrderButton setBackgroundImage:doOrderButtonBg forState:UIControlStateNormal];
     [doOrderButton setTitle:@"Перейти к оплате" forState:UIControlStateNormal];
     [doOrderButton setImage:[UIImage imageNamed:@"order-cart"] forState:UIControlStateNormal];
@@ -101,7 +107,10 @@
     
     //customize page control
     _pageController = [[DDPageControl alloc] initWithType:DDPageControlTypeOnFullOffFull];
-    _pageController.frame = CGRectMake(145, 300, 100, 20);
+    if(IS_WIDESCREEN == false)
+        _pageController.frame = CGRectMake(145, 300, 100, 20);
+    else
+        _pageController.frame = CGRectMake(145, 388, 100, 20);
     _pageController.indicatorDiameter = 10;
     _pageController.indicatorSpace = 20;
     _pageController.numberOfPages = 3;
@@ -130,7 +139,10 @@
         
         CGRect typeDescriptionLabelFrame;
         typeDescriptionLabelFrame.origin.x = _payTypeScrollView.frame.size.width * i + 20;
-        typeDescriptionLabelFrame.origin.y = 200;
+        if(IS_WIDESCREEN == false)
+            typeDescriptionLabelFrame.origin.y = 200;
+        else
+            typeDescriptionLabelFrame.origin.y = 240;
         typeDescriptionLabelFrame.size.height = 60;
         typeDescriptionLabelFrame.size.width = 280;
         
@@ -145,7 +157,10 @@
         
         CGRect termAndPriceLabelFrame;
         termAndPriceLabelFrame.origin.x = _payTypeScrollView.frame.size.width * i + 40;
-        termAndPriceLabelFrame.origin.y = 240;
+        if(IS_WIDESCREEN == false)
+            termAndPriceLabelFrame.origin.y = 240;
+        else
+            termAndPriceLabelFrame.origin.y = 280;
         termAndPriceLabelFrame.size.height = 80;
         termAndPriceLabelFrame.size.width = 240;
         

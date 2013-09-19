@@ -37,7 +37,7 @@
 @property (assign, nonatomic) int infoType;
 @property (assign, nonatomic) int orderIndex;
 
-@property (strong, nonatomic) UIButton *doneButton;
+//@property (strong, nonatomic) UIButton *doneButton;
 @property (assign, nonatomic) int fromToFlag;
 
 @property(nonatomic,strong) IBOutlet UIButton *getPrice;
@@ -62,7 +62,7 @@
 -(IBAction)changeLanguage:(id)sender;
 - (IBAction)touchGetPriceBtn:(id)sender;
 - (IBAction)touchGetPhoto:(id)sender;
-- (IBAction)chooseLanguage:(id)sender;
+//- (IBAction)chooseLanguage:(id)sender;
 
 - (int) getPricePerPage;
 
