@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IIViewDeckController.h"
 
-@interface PhotoViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@interface PhotoView : UIViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)selectPhoto:(id)sender;
+- (IBAction)back:(id)sender;
+
+
 
 
 @end

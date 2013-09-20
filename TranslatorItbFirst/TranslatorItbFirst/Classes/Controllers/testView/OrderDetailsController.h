@@ -10,16 +10,15 @@
 #import "NSDate+VDExtensions.h"
 #import "UploadFileController.h"
 #import "PayDetailsController.h"
-#import "PhotoViewController.h"
+#import "PhotoView.h"
 #import "IXPickerOverlayView.h"
 #import "OrderDataBase.h"
 #import "DataManager.h"
 
-@interface OrderDetailsController : UIViewController<UITextFieldDelegate,UITextViewDelegate, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource> {
+@interface OrderDetailsController : UIViewController<UIImagePickerControllerDelegate,UITextFieldDelegate,UITextViewDelegate, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource> {
     
     UploadFileViewController * uploadFileController;
     PayDetailsController * payDetailController;
-    PhotoViewController * photoViewController;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgr;
