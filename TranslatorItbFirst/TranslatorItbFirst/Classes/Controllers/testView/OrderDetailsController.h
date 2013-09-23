@@ -10,7 +10,6 @@
 #import "NSDate+VDExtensions.h"
 #import "UploadFileController.h"
 #import "PayDetailsController.h"
-#import "PhotoView.h"
 #import "IXPickerOverlayView.h"
 #import "OrderDataBase.h"
 #import "DataManager.h"

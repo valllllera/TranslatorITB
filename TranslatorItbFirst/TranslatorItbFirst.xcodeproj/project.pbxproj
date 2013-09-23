@@ -75,6 +75,8 @@
 		B39CBAF217ECB2C200954F18 /* backgroundPhotoView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B39CBAEC17ECB2C200954F18 /* backgroundPhotoView@2x.png */; };
 		B39CBAF317ECB2C200954F18 /* makePhotoBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B39CBAED17ECB2C200954F18 /* makePhotoBtn.png */; };
 		B39CBAF417ECB2C200954F18 /* makePhotoBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B39CBAEE17ECB2C200954F18 /* makePhotoBtn@2x.png */; };
+		B39CBAFE17F0610D00954F18 /* CustomCameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = B39CBAFC17F0610D00954F18 /* CustomCameraController.m */; };
+		B39CBAFF17F0610D00954F18 /* CustomCameraController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B39CBAFD17F0610D00954F18 /* CustomCameraController.xib */; };
 		B3A02E4A17D8AA2F003BCB1F /* blackTextFieldBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = B3A02E4817D8AA2F003BCB1F /* blackTextFieldBackground.png */; };
 		B3A02E4B17D8AA2F003BCB1F /* blackTextFieldBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3A02E4917D8AA2F003BCB1F /* blackTextFieldBackground@2x.png */; };
 		B3A91E1F17C753E6003AC9E4 /* AboutCompany.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A91E1D17C753E6003AC9E4 /* AboutCompany.m */; };
@@ -132,8 +134,6 @@
 		F62D1ED717CB486E00955812 /* OrderPaymentController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62D1ED517CB486E00955812 /* OrderPaymentController.m */; };
 		F62D1ED817CB486E00955812 /* OrderPaymentController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62D1ED617CB486E00955812 /* OrderPaymentController.xib */; };
 		F640D8EC17CB6FCE0034FD2D /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = F640D8EB17CB6FCE0034FD2D /* Order.m */; };
-		F640D8F617CC92600034FD2D /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = F640D8F417CC92600034FD2D /* PhotoView.m */; };
-		F640D8F717CC92600034FD2D /* PhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F640D8F517CC92600034FD2D /* PhotoView.xib */; };
 		F640D8FB17CC9BF90034FD2D /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F640D8F917CC9BF90034FD2D /* LeftMenuViewController.m */; };
 		F640D8FC17CC9BF90034FD2D /* LeftMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F640D8FA17CC9BF90034FD2D /* LeftMenuViewController.xib */; };
 		F650318117CF54530060B22D /* about-company-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F650317717CF54530060B22D /* about-company-button.png */; };
@@ -278,6 +278,9 @@
 		B39CBAEC17ECB2C200954F18 /* backgroundPhotoView@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundPhotoView@2x.png"; sourceTree = "<group>"; };
 		B39CBAED17ECB2C200954F18 /* makePhotoBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = makePhotoBtn.png; sourceTree = "<group>"; };
 		B39CBAEE17ECB2C200954F18 /* makePhotoBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "makePhotoBtn@2x.png"; sourceTree = "<group>"; };
+		B39CBAFB17F0610D00954F18 /* CustomCameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCameraController.h; path = TranslatorItbFirst/Classes/Controllers/CustomCamera/CustomCameraController.h; sourceTree = SOURCE_ROOT; };
+		B39CBAFC17F0610D00954F18 /* CustomCameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCameraController.m; path = TranslatorItbFirst/Classes/Controllers/CustomCamera/CustomCameraController.m; sourceTree = SOURCE_ROOT; };
+		B39CBAFD17F0610D00954F18 /* CustomCameraController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomCameraController.xib; path = TranslatorItbFirst/Classes/Controllers/CustomCamera/CustomCameraController.xib; sourceTree = SOURCE_ROOT; };
 		B3A02E4817D8AA2F003BCB1F /* blackTextFieldBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackTextFieldBackground.png; sourceTree = "<group>"; };
 		B3A02E4917D8AA2F003BCB1F /* blackTextFieldBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackTextFieldBackground@2x.png"; sourceTree = "<group>"; };
 		B3A91E1C17C753E6003AC9E4 /* AboutCompany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutCompany.h; path = TranslatorItbFirst/Classes/Controllers/AboutCompany/AboutCompany.h; sourceTree = SOURCE_ROOT; };
@@ -346,9 +349,6 @@
 		F62D1ED617CB486E00955812 /* OrderPaymentController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OrderPaymentController.xib; path = TranslatorItbFirst/Classes/Controllers/OrderPayment/OrderPaymentController.xib; sourceTree = SOURCE_ROOT; };
 		F640D8EA17CB6FCE0034FD2D /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Order.h; path = Order/Order.h; sourceTree = "<group>"; };
 		F640D8EB17CB6FCE0034FD2D /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Order.m; path = Order/Order.m; sourceTree = "<group>"; };
-		F640D8F317CC925F0034FD2D /* PhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoView.h; path = TranslatorItbFirst/Classes/Controllers/Photo/PhotoView.h; sourceTree = SOURCE_ROOT; };
-		F640D8F417CC92600034FD2D /* PhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoView.m; path = TranslatorItbFirst/Classes/Controllers/Photo/PhotoView.m; sourceTree = SOURCE_ROOT; };
-		F640D8F517CC92600034FD2D /* PhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoView.xib; path = TranslatorItbFirst/Classes/Controllers/Photo/PhotoView.xib; sourceTree = SOURCE_ROOT; };
 		F640D8F817CC9BF90034FD2D /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeftMenuViewController.h; path = TranslatorItbFirst/Classes/Controllers/LeftMenu/LeftMenuViewController.h; sourceTree = SOURCE_ROOT; };
 		F640D8F917CC9BF90034FD2D /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeftMenuViewController.m; path = TranslatorItbFirst/Classes/Controllers/LeftMenu/LeftMenuViewController.m; sourceTree = SOURCE_ROOT; };
 		F640D8FA17CC9BF90034FD2D /* LeftMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LeftMenuViewController.xib; path = TranslatorItbFirst/Classes/Controllers/LeftMenu/LeftMenuViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -600,6 +600,16 @@
 			path = Photo;
 			sourceTree = "<group>";
 		};
+		B39CBAFA17F060C200954F18 /* CustomCamera */ = {
+			isa = PBXGroup;
+			children = (
+				B39CBAFB17F0610D00954F18 /* CustomCameraController.h */,
+				B39CBAFC17F0610D00954F18 /* CustomCameraController.m */,
+				B39CBAFD17F0610D00954F18 /* CustomCameraController.xib */,
+			);
+			name = CustomCamera;
+			sourceTree = "<group>";
+		};
 		B3A91E1B17C75358003AC9E4 /* AboutCompany */ = {
 			isa = PBXGroup;
 			children = (
@@ -795,10 +805,10 @@
 		D5A92E5117AB992E00DF504D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B39CBAFA17F060C200954F18 /* CustomCamera */,
 				F6A2A72F17D889E200E48E48 /* Settings */,
 				F6FD0FF617D5FADF00689531 /* TechnicalSupport */,
 				939AA6B217CF51D900418FA3 /* YourOrder */,
-				F640D8F117CC92350034FD2D /* Photo */,
 				939AA65117C4CA8A00418FA3 /* HomelView */,
 				939C3D9C17B26E5100BE615C /* OrderDetails */,
 				939AA69017C60D6D00418FA3 /* PayDetails */,
@@ -921,16 +931,6 @@
 				F640D8EB17CB6FCE0034FD2D /* Order.m */,
 			);
 			name = Order;
-			sourceTree = "<group>";
-		};
-		F640D8F117CC92350034FD2D /* Photo */ = {
-			isa = PBXGroup;
-			children = (
-				F640D8F317CC925F0034FD2D /* PhotoView.h */,
-				F640D8F417CC92600034FD2D /* PhotoView.m */,
-				F640D8F517CC92600034FD2D /* PhotoView.xib */,
-			);
-			name = Photo;
 			sourceTree = "<group>";
 		};
 		F650317617CF54530060B22D /* Menu */ = {
@@ -1170,7 +1170,6 @@
 				B3A91E2017C753E6003AC9E4 /* AboutCompany.xib in Resources */,
 				B3A91E2F17C7C384003AC9E4 /* HomeViewController.xib in Resources */,
 				F62D1ED817CB486E00955812 /* OrderPaymentController.xib in Resources */,
-				F640D8F717CC92600034FD2D /* PhotoView.xib in Resources */,
 				F640D8FC17CC9BF90034FD2D /* LeftMenuViewController.xib in Resources */,
 				F6B7FF3E17CCC862005B9D3F /* RightBasketViewController.xib in Resources */,
 				F6B7FF4417CCCD7A005B9D3F /* OrderCell.xib in Resources */,
@@ -1313,6 +1312,7 @@
 				B39CBAF217ECB2C200954F18 /* backgroundPhotoView@2x.png in Resources */,
 				B39CBAF317ECB2C200954F18 /* makePhotoBtn.png in Resources */,
 				B39CBAF417ECB2C200954F18 /* makePhotoBtn@2x.png in Resources */,
+				B39CBAFF17F0610D00954F18 /* CustomCameraController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1334,7 +1334,6 @@
 				B3A91E2E17C7C384003AC9E4 /* HomeViewController.m in Sources */,
 				F62D1ED717CB486E00955812 /* OrderPaymentController.m in Sources */,
 				F640D8EC17CB6FCE0034FD2D /* Order.m in Sources */,
-				F640D8F617CC92600034FD2D /* PhotoView.m in Sources */,
 				F640D8FB17CC9BF90034FD2D /* LeftMenuViewController.m in Sources */,
 				939AA6A217CCB5AD00418FA3 /* DDPageControl.m in Sources */,
 				F6B7FF3D17CCC862005B9D3F /* RightBasketViewController.m in Sources */,
@@ -1354,6 +1353,7 @@
 				F6A5F88F17D750FF007F5B76 /* IXPickerOverlayView.m in Sources */,
 				F6A2A73317D88A1300E48E48 /* SettingsViewController.m in Sources */,
 				9394D1D917DF57D8001477DC /* User.m in Sources */,
+				B39CBAFE17F0610D00954F18 /* CustomCameraController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 #import "OrderDetailsController.h"
 #import "DataManager.h"
 #import "IIViewDeckController.h"
+#import "CustomCameraController.h"
 #define IS_WIDESCREEN (fabs ((double) [[UIScreen mainScreen] bounds].size.height - (double)568 ) < DBL_EPSILON)
 
 
@@ -212,17 +213,7 @@ bool textViewIsVeginEditin;
         [self.navigationController pushViewController:payDetailController animated:YES];
     }
 - (IBAction)touchGetPhoto:(id)sender {
-    PhotoView *photoViewController=[[PhotoView alloc] initWithNibName:@"PhotoView" bundle:nil];
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    picker.showsCameraControls = NO;
-    picker.navigationBarHidden = NO;
-    picker.cameraOverlayView=photoViewController.view;
-    [picker setDelegate:photoViewController];
-    
-    // if([UIImagePickerController isFlashAvailableForCameraDevice:UIImagePickerControllerSourceTypeCamera]==YES){
-    //     picker.cameraFlashMode=UIImagePickerControllerCameraFlashModeOn;
-    //}
+    CustomCameraController *picker=[[CustomCameraController alloc]init];
     [self presentModalViewController:picker animated:YES];
 }
 
