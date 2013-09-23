@@ -10,6 +10,8 @@
 		2997271B17AFF1760000DDB4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2997271A17AFF1760000DDB4 /* QuartzCore.framework */; };
 		2997272D17B102C40000DDB4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2997272C17B102C40000DDB4 /* SystemConfiguration.framework */; };
 		2997273B17B131B00000DDB4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2997273D17B131B00000DDB4 /* Localizable.strings */; };
+		930D9A0017F06D1E009DE6AD /* PhotoThumbView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 930D99FF17F06D1E009DE6AD /* PhotoThumbView.xib */; };
+		930D9A0317F06D50009DE6AD /* PhotoThumbController.m in Sources */ = {isa = PBXBuildFile; fileRef = 930D9A0217F06D50009DE6AD /* PhotoThumbController.m */; };
 		932675D617BB772F00053B84 /* NSDate+VDExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 932675D517BB772F00053B84 /* NSDate+VDExtensions.m */; };
 		9394D1D917DF57D8001477DC /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 9394D1D817DF57D8001477DC /* User.m */; };
 		9394D1DC17DF6942001477DC /* order-not-payed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9394D1DA17DF6942001477DC /* order-not-payed.png */; };
@@ -207,6 +209,9 @@
 		2997272C17B102C40000DDB4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2997273C17B131B00000DDB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2997273E17B132300000DDB4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		930D99FF17F06D1E009DE6AD /* PhotoThumbView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoThumbView.xib; path = PhotoThumb/PhotoThumbView.xib; sourceTree = "<group>"; };
+		930D9A0117F06D50009DE6AD /* PhotoThumbController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoThumbController.h; path = PhotoThumb/PhotoThumbController.h; sourceTree = "<group>"; };
+		930D9A0217F06D50009DE6AD /* PhotoThumbController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoThumbController.m; path = PhotoThumb/PhotoThumbController.m; sourceTree = "<group>"; };
 		932675D417BB772F00053B84 /* NSDate+VDExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+VDExtensions.h"; sourceTree = "<group>"; };
 		932675D517BB772F00053B84 /* NSDate+VDExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+VDExtensions.m"; sourceTree = "<group>"; };
 		9394D1D717DF57D8001477DC /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -449,6 +454,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		930D99FE17F06CC8009DE6AD /* PhotoThumb */ = {
+			isa = PBXGroup;
+			children = (
+				930D99FF17F06D1E009DE6AD /* PhotoThumbView.xib */,
+				930D9A0117F06D50009DE6AD /* PhotoThumbController.h */,
+				930D9A0217F06D50009DE6AD /* PhotoThumbController.m */,
+			);
+			name = PhotoThumb;
+			sourceTree = "<group>";
+		};
 		939AA65117C4CA8A00418FA3 /* HomelView */ = {
 			isa = PBXGroup;
 			children = (
@@ -825,6 +840,7 @@
 		D5A92E5217AB992E00DF504D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				930D99FE17F06CC8009DE6AD /* PhotoThumb */,
 				F6FD102817D62E7000689531 /* TechnicalSupport */,
 				F6B7FF3F17CCCCD7005B9D3F /* OrderCell */,
 			);
@@ -1313,6 +1329,7 @@
 				B39CBAF317ECB2C200954F18 /* makePhotoBtn.png in Resources */,
 				B39CBAF417ECB2C200954F18 /* makePhotoBtn@2x.png in Resources */,
 				B39CBAFF17F0610D00954F18 /* CustomCameraController.xib in Resources */,
+				930D9A0017F06D1E009DE6AD /* PhotoThumbView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1354,6 +1371,7 @@
 				F6A2A73317D88A1300E48E48 /* SettingsViewController.m in Sources */,
 				9394D1D917DF57D8001477DC /* User.m in Sources */,
 				B39CBAFE17F0610D00954F18 /* CustomCameraController.m in Sources */,
+				930D9A0317F06D50009DE6AD /* PhotoThumbController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
