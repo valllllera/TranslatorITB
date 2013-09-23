@@ -7,6 +7,7 @@
 //
 
 #import "CustomCameraController.h"
+#import "OverlayCameraView.h"
 
 @interface CustomCameraController ()
 
@@ -28,7 +29,20 @@
     [super viewDidLoad];
     self.sourceType = UIImagePickerControllerSourceTypeCamera;
     
-    self.cameraOverlayView = self.overlayView;
+    self.overlayView = [[NSBundle mainBundle] loadNibNamed:@"OverlayCameraView" owner:nil options:nil][0];
+    
+    __weak CustomCameraController *selfWeak = self;
+    [self.overlayView setBackButtonPressedBlock:^{
+      
+        if(selfWeak.dissmisBlock)
+        {
+            selfWeak.dissmisBlock();
+        }
+        
+    }];
+    
+    NSLog(@"%@", self.view.subviews);
+    [self.view addSubview:self.overlayView];
     
    // self.cameraOverlayView=self.view;
     // Do any additional setup after loading the view from its nib.

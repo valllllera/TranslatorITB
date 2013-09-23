@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    PhotoThumb * photoIcon = [[PhotoThumb alloc] initWithFrame: CGRectMake(100, 100, 100, 100)];
+    PhotoThumb * photoIcon = [[NSBundle mainBundle] loadNibNamed:@"PhotoThumb" owner:nil options:nil][0];
     UIView * rtVIew = [[UIView alloc] initWithFrame: CGRectMake(100,100,100,100)];
     [rtVIew setBackgroundColor:[UIColor redColor]];
     NSLog(@"%@", photoIcon);

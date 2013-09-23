@@ -214,6 +214,11 @@ bool textViewIsVeginEditin;
     }
 - (IBAction)touchGetPhoto:(id)sender {
     CustomCameraController *picker=[[CustomCameraController alloc]init];
+    [picker setDissmisBlock:^{
+       
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+    }];
     [self presentModalViewController:picker animated:YES];
 }
 

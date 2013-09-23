@@ -210,11 +210,8 @@
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView
 {	
     _termDate = [_termDate getTheStartOfTranslation];
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-	CGFloat pageWidth = _payTypeScrollView.bounds.size.width ;
+    
+    CGFloat pageWidth = _payTypeScrollView.bounds.size.width ;
     float fractionalPage = _payTypeScrollView.contentOffset.x / pageWidth ;
 	NSInteger nearestNumber = lround(fractionalPage) ;
 	

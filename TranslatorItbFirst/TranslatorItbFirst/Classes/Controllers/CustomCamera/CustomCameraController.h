@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class OverlayCameraView;
+
 @interface CustomCameraController : UIImagePickerController
 
-@property (strong, nonatomic) IBOutlet UIView *overlayView;
+@property (copy, nonatomic) void (^dissmisBlock)();
+
+@property (strong, nonatomic) OverlayCameraView *overlayView;
 
 @end

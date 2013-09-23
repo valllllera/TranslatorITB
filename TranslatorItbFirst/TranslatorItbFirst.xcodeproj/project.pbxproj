@@ -86,6 +86,8 @@
 		B39CBAFE17F0610D00954F18 /* CustomCameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = B39CBAFC17F0610D00954F18 /* CustomCameraController.m */; };
 		B39CBAFF17F0610D00954F18 /* CustomCameraController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B39CBAFD17F0610D00954F18 /* CustomCameraController.xib */; };
 		B39CBB0117F06CFC00954F18 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39CBB0017F06CFC00954F18 /* AVFoundation.framework */; };
+		B39CBB0517F0897200954F18 /* OverlayCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = B39CBB0417F0897200954F18 /* OverlayCameraView.m */; };
+		B39CBB0717F0899700954F18 /* OverlayCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B39CBB0617F0899700954F18 /* OverlayCameraView.xib */; };
 		B3A02E4A17D8AA2F003BCB1F /* blackTextFieldBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = B3A02E4817D8AA2F003BCB1F /* blackTextFieldBackground.png */; };
 		B3A02E4B17D8AA2F003BCB1F /* blackTextFieldBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3A02E4917D8AA2F003BCB1F /* blackTextFieldBackground@2x.png */; };
 		B3A91E1F17C753E6003AC9E4 /* AboutCompany.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A91E1D17C753E6003AC9E4 /* AboutCompany.m */; };
@@ -299,6 +301,9 @@
 		B39CBAFC17F0610D00954F18 /* CustomCameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCameraController.m; path = TranslatorItbFirst/Classes/Controllers/CustomCamera/CustomCameraController.m; sourceTree = SOURCE_ROOT; };
 		B39CBAFD17F0610D00954F18 /* CustomCameraController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomCameraController.xib; path = TranslatorItbFirst/Classes/Controllers/CustomCamera/CustomCameraController.xib; sourceTree = SOURCE_ROOT; };
 		B39CBB0017F06CFC00954F18 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B39CBB0317F0897200954F18 /* OverlayCameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OverlayCameraView.h; path = TranslatorItbFirst/Classes/Controllers/OverlayCameraView/OverlayCameraView.h; sourceTree = SOURCE_ROOT; };
+		B39CBB0417F0897200954F18 /* OverlayCameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OverlayCameraView.m; path = TranslatorItbFirst/Classes/Controllers/OverlayCameraView/OverlayCameraView.m; sourceTree = SOURCE_ROOT; };
+		B39CBB0617F0899700954F18 /* OverlayCameraView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OverlayCameraView.xib; path = TranslatorItbFirst/Classes/Controllers/OverlayCameraView/OverlayCameraView.xib; sourceTree = SOURCE_ROOT; };
 		B3A02E4817D8AA2F003BCB1F /* blackTextFieldBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackTextFieldBackground.png; sourceTree = "<group>"; };
 		B3A02E4917D8AA2F003BCB1F /* blackTextFieldBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackTextFieldBackground@2x.png"; sourceTree = "<group>"; };
 		B3A91E1C17C753E6003AC9E4 /* AboutCompany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutCompany.h; path = TranslatorItbFirst/Classes/Controllers/AboutCompany/AboutCompany.h; sourceTree = SOURCE_ROOT; };
@@ -650,6 +655,16 @@
 			name = CustomCamera;
 			sourceTree = "<group>";
 		};
+		B39CBB0217F0895300954F18 /* OverlayCameraView */ = {
+			isa = PBXGroup;
+			children = (
+				B39CBB0317F0897200954F18 /* OverlayCameraView.h */,
+				B39CBB0417F0897200954F18 /* OverlayCameraView.m */,
+				B39CBB0617F0899700954F18 /* OverlayCameraView.xib */,
+			);
+			name = OverlayCameraView;
+			sourceTree = "<group>";
+		};
 		B3A91E1B17C75358003AC9E4 /* AboutCompany */ = {
 			isa = PBXGroup;
 			children = (
@@ -846,6 +861,7 @@
 		D5A92E5117AB992E00DF504D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B39CBB0217F0895300954F18 /* OverlayCameraView */,
 				930D9A0C17F07CC6009DE6AD /* PhotoTest */,
 				B39CBAFA17F060C200954F18 /* CustomCamera */,
 				F6A2A72F17D889E200E48E48 /* Settings */,
@@ -1349,6 +1365,7 @@
 				930D9A0A17F07711009DE6AD /* photo-sample.png in Resources */,
 				930D9A0B17F07711009DE6AD /* photo-sample@2x.png in Resources */,
 				930D9A1117F07D37009DE6AD /* PhotoTest.xib in Resources */,
+				B39CBB0717F0899700954F18 /* OverlayCameraView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1391,6 +1408,7 @@
 				B39CBAFE17F0610D00954F18 /* CustomCameraController.m in Sources */,
 				930D9A0317F06D50009DE6AD /* PhotoThumb.m in Sources */,
 				930D9A1017F07D37009DE6AD /* PhotoTest.m in Sources */,
+				B39CBB0517F0897200954F18 /* OverlayCameraView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
