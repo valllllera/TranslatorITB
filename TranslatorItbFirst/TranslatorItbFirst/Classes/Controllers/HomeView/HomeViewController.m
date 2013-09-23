@@ -117,4 +117,8 @@
    // [self.viewDeckController setCenterController:[[UINavigationController alloc] initWithRootViewController:[[SettingsViewController alloc] init]]];
 }
 
+- (IBAction)showPhotoView:(id)sender {
+    PhotoTest * test = [[PhotoTest alloc] init];
+    [self.navigationController pushViewController: test animated:YES];
+}
 @end

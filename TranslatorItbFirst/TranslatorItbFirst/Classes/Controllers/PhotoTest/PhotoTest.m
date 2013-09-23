@@ -1,18 +1,18 @@
 //
-//  ViewController.m
+//  PhotoTest.m
 //  TranslatorItbFirst
 //
-//  Created by Андрей on 23.09.13.
+//  Created by Konstantin Paschenko on 23.09.13.
 //  Copyright (c) 2013 vexadev. All rights reserved.
 //
 
-#import "CustomCameraController.h"
+#import "PhotoTest.h"
 
-@interface CustomCameraController ()
+@interface PhotoTest ()
 
 @end
 
-@implementation CustomCameraController
+@implementation PhotoTest
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,12 +26,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    self.cameraOverlayView = self.overlayView;
-    
-   // self.cameraOverlayView=self.view;
     // Do any additional setup after loading the view from its nib.
+    PhotoThumb * photoIcon = [[PhotoThumb alloc] initWithFrame: CGRectMake(100, 100, 100, 100)];
+    UIView * rtVIew = [[UIView alloc] initWithFrame: CGRectMake(100,100,100,100)];
+    [rtVIew setBackgroundColor:[UIColor redColor]];
+    NSLog(@"%@", photoIcon);
+    [self.view addSubview:rtVIew];
+    [self.view addSubview:photoIcon];
 }
 
 - (void)didReceiveMemoryWarning

@@ -10,6 +10,7 @@
 #import "OrderDetailsController.h"
 #import "RightBasketViewController.h"
 #import "SettingsViewController.h"
+#import "PhotoTest.h"
 
 @interface HomeViewController : UIViewController
 {
@@ -19,5 +20,6 @@
 - (IBAction)goToOrder:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *orderBtn;
 @property (weak, nonatomic) IBOutlet UILabel *text;
+- (IBAction)showPhotoView:(id)sender;
 
 @end

@@ -10,4 +10,6 @@
 
 @interface CustomCameraController : UIImagePickerController
 
+@property (strong, nonatomic) IBOutlet UIView *overlayView;
+
 @end

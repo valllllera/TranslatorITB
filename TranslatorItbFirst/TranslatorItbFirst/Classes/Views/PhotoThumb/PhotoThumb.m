@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 vexadev. All rights reserved.
 //
 
-#import "PhotoThumbController.h"
+#import "PhotoThumb.h"
 
-@implementation PhotoThumbController
+@implementation PhotoThumb
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -28,4 +28,9 @@
 }
 */
 
+- (IBAction)viewFullPhoto:(id)sender {
+}
+
+- (IBAction)removePhoto:(id)sender {
+}
 @end

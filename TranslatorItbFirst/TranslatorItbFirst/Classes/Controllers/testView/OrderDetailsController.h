@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "NSDate+VDExtensions.h"
-#import "UploadFileController.h"
 #import "PayDetailsController.h"
 #import "IXPickerOverlayView.h"
 #import "OrderDataBase.h"
@@ -16,7 +15,6 @@
 
 @interface OrderDetailsController : UIViewController<UIImagePickerControllerDelegate,UITextFieldDelegate,UITextViewDelegate, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource> {
     
-    UploadFileViewController * uploadFileController;
     PayDetailsController * payDetailController;
 }
 

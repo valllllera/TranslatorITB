@@ -1,5 +1,5 @@
 //
-//  PhotoThumbController.h
+//  PhotoTest.h
 //  TranslatorItbFirst
 //
 //  Created by Konstantin Paschenko on 23.09.13.
@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhotoTHumb.h"
 
-@interface PhotoThumbController : UIView
+
+@interface PhotoTest : UIViewController
 
 @end
