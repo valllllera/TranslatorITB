@@ -258,6 +258,11 @@ bool textViewIsVeginEditin;
     [_photoScrollView addSubview:[_photoIcons objectAtIndex:[_photoIcons count]-1]];*/
 }
 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSLog(@"%@", info[UIImagePickerControllerEditedImage]);
+}
+
 -(void) showPhotoThumbs {
     NSArray *viewsToRemove = [_photoScrollView subviews];
     for (UIView *v in viewsToRemove) [v removeFromSuperview];

@@ -68,10 +68,7 @@
 
 - (void)takePhoto {
     [self takePicture];
-    if(self.dissmisBlock)
-    {
-        self.dissmisBlock();
-    }
+    [_overlayView removeFromSuperview];
 }
 
 - (void)selectPhoto {
@@ -89,6 +86,7 @@
     
     [self dismissViewControllerAnimated:YES completion:^{
         
+        [self.delegate imagePickerController:self didFinishPickingMediaWithInfo:info];
         if(self.dissmisBlock)
         {
             self.dissmisBlock();
