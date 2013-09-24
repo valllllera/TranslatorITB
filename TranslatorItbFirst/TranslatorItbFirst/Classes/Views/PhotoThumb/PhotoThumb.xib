@@ -121,19 +121,19 @@
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">removePhoto:</string>
 						<reference key="source" ref="329929071"/>
-						<reference key="destination" ref="372490531"/>
+						<reference key="destination" ref="490580036"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">36</int>
+					<int key="connectionID">43</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">viewFullPhoto:</string>
 						<reference key="source" ref="809003851"/>
-						<reference key="destination" ref="372490531"/>
+						<reference key="destination" ref="490580036"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">35</int>
+					<int key="connectionID">44</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -159,8 +159,8 @@
 						<int key="objectID">3</int>
 						<reference key="object" ref="490580036"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="329929071"/>
 							<reference ref="809003851"/>
+							<reference ref="329929071"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -179,7 +179,6 @@
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
-				<string key="-1.CustomClassName">PhotoThumb</string>
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -193,7 +192,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">39</int>
+			<int key="maxID">44</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
