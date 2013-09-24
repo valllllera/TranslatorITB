@@ -37,6 +37,8 @@
 }
 
 -(void) showPhotoThumbs {
+    NSArray *viewsToRemove = [_scrollViewOutlet subviews];
+    for (UIView *v in viewsToRemove) [v removeFromSuperview];
     for (int i = 0; i < [_photoIcons count] ; i++) {
         [[_photoIcons objectAtIndex:i] setFrame: CGRectMake(20 + 70*(i%4), 60*(i/4), 70, 60)];
         [[_photoIcons objectAtIndex:i] setIndex: i];
