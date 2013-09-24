@@ -36,4 +36,20 @@
     }
 }
 
+- (IBAction)getPhotoButtonPressed:(id)sender
+{
+    if(_getPhotoButtonPressedBlock)
+    {
+        _getPhotoButtonPressedBlock();
+    }
+}
+
+- (IBAction)showGalleryButtonPressed:(id)sender
+{
+    if(_showGalleryButtonPressedBlock)
+    {
+        _showGalleryButtonPressedBlock();
+    }
+}
+
 @end

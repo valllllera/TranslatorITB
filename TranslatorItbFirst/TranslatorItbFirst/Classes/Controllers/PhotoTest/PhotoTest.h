@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PhotoTHumb.h"
+#import "PhotoThumb.h"
 
 
 @interface PhotoTest : UIViewController
 
+@property (strong, nonatomic) NSMutableArray * photoIcons;
+- (void) showPhotoThumbs;
+- (IBAction)addPhoto:(id)sender;
+- (void) removeImage: (int) index;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollViewOutlet;
 @end

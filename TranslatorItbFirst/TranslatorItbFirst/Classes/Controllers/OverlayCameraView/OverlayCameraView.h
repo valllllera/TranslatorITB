@@ -11,7 +11,11 @@
 @interface OverlayCameraView : UIView
 
 @property (copy, nonatomic) void (^backButtonPressedBlock)();
+@property (copy, nonatomic) void (^getPhotoButtonPressedBlock)();
+@property (copy, nonatomic) void (^showGalleryButtonPressedBlock)();
 
 - (IBAction)backButtonPressed:(id)sender;
+- (IBAction)getPhotoButtonPressed:(id)sender;
+- (IBAction)showGalleryButtonPressed:(id)sender;
 
 @end

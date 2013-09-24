@@ -132,6 +132,10 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="567693446"/>
+						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">photo-sample.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="900325947"/>
 						<reference key="IBUIFont" ref="720653724"/>
 					</object>
@@ -157,6 +161,24 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">8</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">getPhotoButtonPressed:</string>
+						<reference key="source" ref="622959441"/>
+						<reference key="destination" ref="34149759"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">9</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">showGalleryButtonPressed:</string>
+						<reference key="source" ref="396576641"/>
+						<reference key="destination" ref="34149759"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">10</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -229,7 +251,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">8</int>
+			<int key="maxID">10</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
@@ -240,6 +262,7 @@
 			<string key="backArrow.png">{45, 33}</string>
 			<string key="backgroundPhotoView.png">{320, 97}</string>
 			<string key="makePhotoBtn.png">{75, 75}</string>
+			<string key="photo-sample.png">{47, 47}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

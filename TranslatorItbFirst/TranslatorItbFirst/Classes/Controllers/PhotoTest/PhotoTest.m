@@ -27,18 +27,35 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    PhotoThumb * photoIcon = [[NSBundle mainBundle] loadNibNamed:@"PhotoThumb" owner:nil options:nil][0];
-    UIView * rtVIew = [[UIView alloc] initWithFrame: CGRectMake(100,100,100,100)];
-    [rtVIew setBackgroundColor:[UIColor redColor]];
-    NSLog(@"%@", photoIcon);
-    [self.view addSubview:rtVIew];
-    [self.view addSubview:photoIcon];
+    _photoIcons = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) showPhotoThumbs {
+    for (int i = 0; i < [_photoIcons count] ; i++) {
+        [[_photoIcons objectAtIndex:i] setFrame: CGRectMake(20 + 70*(i%4), 60*(i/4), 70, 60)];
+        [[_photoIcons objectAtIndex:i] setIndex: i];
+        [self.scrollViewOutlet addSubview:[_photoIcons objectAtIndex:i]];
+    }
+}
+
+- (IBAction)addPhoto:(id)sender {
+    PhotoThumb * photoThumb = [[NSBundle mainBundle] loadNibNamed:@"PhotoThumb" owner:nil options:nil][0];
+    photoThumb.frame = CGRectMake(20 + 70*([_photoIcons count]%4), 60*([_photoIcons count]/4), 70, 60);
+    photoThumb.index = [_photoIcons count];
+    photoThumb.photoTest = self;
+    [_photoIcons addObject: photoThumb];
+    [self.scrollViewOutlet addSubview:[_photoIcons objectAtIndex:[_photoIcons count]-1]];
+}
+
+- (void) removeImage: (int)index {
+    [_photoIcons removeObjectAtIndex:index];
+    [self showPhotoThumbs];
 }
 
 @end

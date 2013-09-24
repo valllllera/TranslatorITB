@@ -8,6 +8,7 @@
 
 #import "PhotoThumb.h"
 
+
 @implementation PhotoThumb
 
 - (id)initWithFrame:(CGRect)frame
@@ -32,5 +33,6 @@
 }
 
 - (IBAction)removePhoto:(id)sender {
+    [_photoTest removeImage: _index];
 }
 @end
