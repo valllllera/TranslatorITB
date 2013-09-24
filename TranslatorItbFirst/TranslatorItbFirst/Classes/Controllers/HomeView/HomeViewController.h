@@ -20,6 +20,5 @@
 - (IBAction)goToOrder:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *orderBtn;
 @property (weak, nonatomic) IBOutlet UILabel *text;
-- (IBAction)showPhotoView:(id)sender;
 
 @end

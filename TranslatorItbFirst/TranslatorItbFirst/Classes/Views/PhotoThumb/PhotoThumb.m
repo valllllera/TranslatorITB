@@ -7,7 +7,7 @@
 //
 
 #import "PhotoThumb.h"
-#import "PhotoTest.h"
+#import "OrderDetailsController.h"
 
 @implementation PhotoThumb
 
@@ -30,9 +30,10 @@
 */
 
 - (IBAction)viewFullPhoto:(id)sender {
+    UIImageView * bigPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
 }
 
 - (IBAction)removePhoto:(id)sender {
-    [_photoTest removeImage: _index];
+    [_photoView removeImage: _index];
 }
 @end

@@ -43,6 +43,8 @@ bool textViewIsVeginEditin;
     _languagePicker.delegate = self;
     _languagePicker.dataSource = self;
     
+    _photoIcons = [[NSMutableArray alloc] init];
+    
     //Navigation bar custom title font
     UIFont *titleFont=[UIFont fontWithName:@"Lobster 1.4" size:25];
     UIFont *light=[UIFont fontWithName:@"HelveticaNeueCyr-Light" size:14];
@@ -72,12 +74,20 @@ bool textViewIsVeginEditin;
     UIImage *blackBtn=[[UIImage imageNamed:@"blackBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,5,0,5)];
     [_getPhoto setBackgroundImage:blackBtn forState:UIControlStateNormal];
     [_getPrice setBackgroundImage:orangeBtn forState:UIControlStateNormal];
+    
+    if(IS_WIDESCREEN == false)
+        _backgr = [[UIImageView alloc] initWithFrame:CGRectMake(17, 13, 287, 160)];
+    else
+        _backgr = [[UIImageView alloc] initWithFrame:CGRectMake(17, 13, 287, 248)];
     UIImage *b;
     if(IS_WIDESCREEN == false)
         b=[[UIImage imageNamed:@"textView.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,3, 0,3)];
     else
         b=[[UIImage imageNamed:@"textView-4.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,3, 0,3)];
     [_backgr setImage:b];
+    [self.view addSubview:_backgr];
+    [_text removeFromSuperview];
+    [self.view addSubview:_text];
     
     [_to setBackground:langFieldBackground];
     [_from setBackground:langFieldBackground];
@@ -157,7 +167,7 @@ bool textViewIsVeginEditin;
 
 - (IBAction)touchGetPriceBtn:(id)sender {
    // if([self chekLanguageFrom:_from.text To:_to.text]!=NO && [_text.text isEqualToString:@""]!=YES)
-    if(textViewFlag==NO || [_text.text length] == 0){
+    if((textViewFlag==NO || [_text.text length] == 0) && _photoCount == 0){
         UIAlertView *alert=[[UIAlertView alloc] init];
         alert= [alert initWithTitle:NSLocalizedString(@"AppName", nil)
                             message:@"Вставьте текст или сделайте фото!"
@@ -194,8 +204,11 @@ bool textViewIsVeginEditin;
         
         order.order_id = [NSNumber numberWithInt: lastItem+1];
         order.orderType = [NSNumber numberWithInt:1];
-            
-        order.infoType = [NSNumber numberWithInt:_infoType];
+    
+        if(_photoCount == 0)
+            order.infoType = [NSNumber numberWithInt:1];
+        else
+            order.infoType = [NSNumber numberWithInt:2];
         float totalPrice = ([_text.text length]/1800.0 + 0.5*_photoCount) * [self getPricePerPage];
         order.cost = [NSNumber numberWithInt:((int)roundf(totalPrice) + 1)];
         order.status = [NSNumber numberWithInt:3];
@@ -213,13 +226,57 @@ bool textViewIsVeginEditin;
         [self.navigationController pushViewController:payDetailController animated:YES];
     }
 - (IBAction)touchGetPhoto:(id)sender {
+    
     CustomCameraController *picker=[[CustomCameraController alloc]init];
+    picker.delegate = self;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
     [picker setDissmisBlock:^{
        
         [self dismissViewControllerAnimated:YES completion:nil];
         
     }];
     [self presentModalViewController:picker animated:YES];
+    
+    /*if(_photoCount == 0) {
+        [_text removeFromSuperview];
+        [_backgr removeFromSuperview];
+        if(IS_WIDESCREEN == false)
+            _photoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, 20, 300, 150)];
+        else
+            _photoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, 20, 300, 238)];
+        [self.view addSubview:_photoScrollView];
+    }
+    _photoCount++;
+    PhotoThumb * photoThumb = [[NSBundle mainBundle] loadNibNamed:@"PhotoThumb" owner:nil options:nil][0];
+    photoThumb.frame = CGRectMake(70*([_photoIcons count]%4), 60*([_photoIcons count]/4), 70, 60);
+    [photoThumb setIndex:[_photoIcons count]];
+    NSLog(@"%d", photoThumb.index);
+    photoThumb.photoView = self;
+    NSLog(@"%@", self);
+    [_photoIcons addObject: photoThumb];
+    [_photoScrollView addSubview:[_photoIcons objectAtIndex:[_photoIcons count]-1]];*/
+}
+
+-(void) showPhotoThumbs {
+    NSArray *viewsToRemove = [_photoScrollView subviews];
+    for (UIView *v in viewsToRemove) [v removeFromSuperview];
+    for (int i = 0; i < [_photoIcons count] ; i++) {
+        [[_photoIcons objectAtIndex:i] setFrame: CGRectMake(70*(i%4), 60*(i/4), 70, 60)];
+        [[_photoIcons objectAtIndex:i] setIndex: i];
+        [_photoScrollView addSubview:[_photoIcons objectAtIndex:i]];
+    }
+}
+
+- (void) removeImage: (int)index {
+    [_photoIcons removeObjectAtIndex:index];
+    [self showPhotoThumbs];
+    _photoCount--;
+    if(_photoCount == 0) {
+        [_photoScrollView removeFromSuperview];
+        [self.view addSubview:_backgr];
+        [self.view addSubview:_text];
+    }
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
@@ -241,6 +298,10 @@ bool textViewIsVeginEditin;
     [super touchesBegan:touches withEvent:event];
 }
 - (IBAction)done:(id)sender {
+    if([_text.text length] != 0)
+       [_getPhoto setEnabled:NO];
+    else
+        [_getPhoto setEnabled:YES];
     [_text resignFirstResponder];
 }
 

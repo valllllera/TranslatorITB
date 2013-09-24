@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 
 
-@class PhotoTest;
+@class OrderDetailsController;
 
 @interface PhotoThumb : UIView
 - (IBAction)viewFullPhoto:(id)sender;
 - (IBAction)removePhoto:(id)sender;
 
 @property (assign, nonatomic) int index;
-@property (strong, nonatomic) PhotoTest *photoTest;
+@property (strong, nonatomic) OrderDetailsController *photoView;
 
 @end

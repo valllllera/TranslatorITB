@@ -163,7 +163,7 @@
     //}
     
     if([currentOrder.infoType intValue] == 2) {
-        UIImageView *photoIcon = [[UIImageView alloc] initWithFrame:CGRectMake(139, 215, 42, 42)];
+        UIImageView *photoIcon = [[UIImageView alloc] initWithFrame:CGRectMake(139, 255, 42, 42)];
         [photoIcon setImage:[UIImage imageNamed:@"order-images.png"]];
         [self.view addSubview:photoIcon];
     }

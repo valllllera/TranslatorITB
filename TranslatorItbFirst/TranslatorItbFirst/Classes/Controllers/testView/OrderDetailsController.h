@@ -12,13 +12,15 @@
 #import "IXPickerOverlayView.h"
 #import "OrderDataBase.h"
 #import "DataManager.h"
+#import "PhotoThumb.h"
+
 
 @interface OrderDetailsController : UIViewController<UIImagePickerControllerDelegate,UITextFieldDelegate,UITextViewDelegate, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource> {
     
     PayDetailsController * payDetailController;
 }
 
-@property (weak, nonatomic) IBOutlet UIImageView *backgr;
+@property (strong, nonatomic) UIImageView *backgr;
 
 @property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
 @property (weak, nonatomic) IBOutlet UILabel *orLbl;
@@ -30,7 +32,6 @@
 @property(nonatomic,strong) IBOutlet UITextField *from;
 @property(nonatomic,strong) IBOutlet UITextField *to;
 
-@property (assign, nonatomic) int infoType;
 @property (assign, nonatomic) int orderIndex;
 
 //@property (strong, nonatomic) UIButton *doneButton;
@@ -49,6 +50,10 @@
 
 @property (assign, nonatomic) int photoCount;
 
+@property (strong, nonatomic) NSMutableArray * photoIcons;
+
+@property (strong, nonatomic) UIScrollView * photoScrollView;
+
 - (IBAction)done:(id)sender;
 
 - (BOOL)chekLanguageFrom:(NSString*)from To:(NSString*)to;
@@ -62,5 +67,7 @@
 
 - (int) getPricePerPage;
 
+- (void) showPhotoThumbs;
+- (void) removeImage: (int) index;
 
 @end
