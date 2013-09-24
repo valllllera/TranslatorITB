@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PhotoTest.h"
+
 
 @class PhotoTest;
 
@@ -16,6 +16,6 @@
 - (IBAction)removePhoto:(id)sender;
 
 @property (assign, nonatomic) int index;
-@property (retain, nonatomic) PhotoTest *photoTest;
+@property (strong, nonatomic) PhotoTest *photoTest;
 
 @end

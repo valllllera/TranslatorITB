@@ -7,7 +7,7 @@
 //
 
 #import "PhotoThumb.h"
-
+#import "PhotoTest.h"
 
 @implementation PhotoThumb
 
