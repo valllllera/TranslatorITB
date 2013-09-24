@@ -44,11 +44,12 @@
     }];
     [self.overlayView setGetPhotoButtonPressedBlock:^{
         
-        [self takePhoto];
+        [selfWeak takePhoto];
+        
     }];
     [self.overlayView setShowGalleryButtonPressedBlock:^{
         
-        [self selectPhoto];
+        [selfWeak selectPhoto];
         
     }];
     
@@ -67,7 +68,10 @@
 
 - (void)takePhoto {
     [self takePicture];
-    [self.overlayView removeFromSuperview];
+    if(self.dissmisBlock)
+    {
+        self.dissmisBlock();
+    }
 }
 
 - (void)selectPhoto {
@@ -77,20 +81,30 @@
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
     [self presentViewController:picker animated:YES completion:NULL];
-    
-    
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     
-    [picker dismissViewControllerAnimated:YES completion:NULL];
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+        if(self.dissmisBlock)
+        {
+            self.dissmisBlock();
+        }
+        
+    }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
-    [picker dismissViewControllerAnimated:YES completion:NULL];
+    [self dismissViewControllerAnimated:YES completion:^{
+        if(self.dissmisBlock)
+        {
+            self.dissmisBlock();
+        }
+    }];
     
 }
 
