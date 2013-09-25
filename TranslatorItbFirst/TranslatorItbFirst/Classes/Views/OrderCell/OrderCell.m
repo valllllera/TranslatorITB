@@ -74,4 +74,21 @@
     
 }
 
+- (void)willTransitionToState:(UITableViewCellStateMask)state
+{
+    [super willTransitionToState:state];
+    if ((state & UITableViewCellStateShowingDeleteConfirmationMask) == UITableViewCellStateShowingDeleteConfirmationMask)
+    {
+        for (UIView *subview in self.subviews)
+        {
+            if ([NSStringFromClass([subview class]) isEqualToString:@"UITableViewCellDeleteConfirmationControl"])
+            {
+                UIImageView *deleteBtn = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 78, 34)];
+                [deleteBtn setImage:[UIImage imageNamed:@"delete-button.png"]];
+                [[subview.subviews objectAtIndex:0] addSubview:deleteBtn];
+            }
+        }
+    }
+}
+
 @end

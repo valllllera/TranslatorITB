@@ -42,6 +42,8 @@
 		93A1F47317EB2D1F00364FC8 /* textView-4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93A1F47117EB2D1F00364FC8 /* textView-4@2x.png */; };
 		93AA36B417F31B13008F270A /* changeCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 93AA36B217F31B13008F270A /* changeCamera.png */; };
 		93AA36B517F31B13008F270A /* changeCamera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93AA36B317F31B13008F270A /* changeCamera@2x.png */; };
+		93AA36B817F341FE008F270A /* delete-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 93AA36B617F341FE008F270A /* delete-button.png */; };
+		93AA36B917F341FE008F270A /* delete-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93AA36B717F341FE008F270A /* delete-button@2x.png */; };
 		B31DCC3317E7422C00A03119 /* blackBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B31DCC2F17E7422B00A03119 /* blackBtn.png */; };
 		B31DCC3417E7422C00A03119 /* blackBtn@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = B31DCC3017E7422B00A03119 /* blackBtn@2X.png */; };
 		B31DCC3517E7422C00A03119 /* orangeBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B31DCC3117E7422C00A03119 /* orangeBtn.png */; };
@@ -258,6 +260,8 @@
 		93A1F47117EB2D1F00364FC8 /* textView-4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "textView-4@2x.png"; sourceTree = "<group>"; };
 		93AA36B217F31B13008F270A /* changeCamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = changeCamera.png; sourceTree = "<group>"; };
 		93AA36B317F31B13008F270A /* changeCamera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "changeCamera@2x.png"; sourceTree = "<group>"; };
+		93AA36B617F341FE008F270A /* delete-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "delete-button.png"; path = "Basket/delete-button.png"; sourceTree = "<group>"; };
+		93AA36B717F341FE008F270A /* delete-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "delete-button@2x.png"; path = "Basket/delete-button@2x.png"; sourceTree = "<group>"; };
 		B31DCC2F17E7422B00A03119 /* blackBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackBtn.png; sourceTree = "<group>"; };
 		B31DCC3017E7422B00A03119 /* blackBtn@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackBtn@2X.png"; sourceTree = "<group>"; };
 		B31DCC3117E7422C00A03119 /* orangeBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orangeBtn.png; sourceTree = "<group>"; };
@@ -587,6 +591,8 @@
 				B36C40B217CF615700AD58B9 /* check.png */,
 				B36C40B317CF615700AD58B9 /* check@2x.png */,
 				B36C40B417CF615700AD58B9 /* clock.png */,
+				93AA36B617F341FE008F270A /* delete-button.png */,
+				93AA36B717F341FE008F270A /* delete-button@2x.png */,
 				B36C40B517CF615700AD58B9 /* clock@2x.png */,
 				B36C40B617CF615700AD58B9 /* config.png */,
 				B36C40B717CF615700AD58B9 /* config@2x.png */,
@@ -1374,6 +1380,8 @@
 				B39CBB0717F0899700954F18 /* OverlayCameraView.xib in Resources */,
 				93AA36B417F31B13008F270A /* changeCamera.png in Resources */,
 				93AA36B517F31B13008F270A /* changeCamera@2x.png in Resources */,
+				93AA36B817F341FE008F270A /* delete-button.png in Resources */,
+				93AA36B917F341FE008F270A /* delete-button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

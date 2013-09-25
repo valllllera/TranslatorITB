@@ -236,4 +236,29 @@
     [self.viewDeckController closeRightView];
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        
+        //[categoryArray objectAtIndex:indexPath.row];
+        DataManager *dataMngr = [[DataManager alloc] init];
+        NSManagedObjectContext *context = [dataMngr managedObjectContext];
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription
+                                       entityForName:@"OrderDataBase" inManagedObjectContext:context];
+        [fetchRequest setEntity:entity];
+        NSError *error;
+        self.orders = [context executeFetchRequest:fetchRequest error:&error];
+        [context deleteObject:[_orders objectAtIndex:indexPath.row]];
+        [context save:&error];
+        
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+        [tableView reloadData];
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }   
+}
 @end
