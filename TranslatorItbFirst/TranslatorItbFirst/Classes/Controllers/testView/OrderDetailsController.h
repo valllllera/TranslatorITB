@@ -54,6 +54,8 @@
 
 @property (strong, nonatomic) UIScrollView * photoScrollView;
 
+@property (strong, nonatomic) UIButton * fullScreenPhoto;
+
 - (IBAction)done:(id)sender;
 
 - (BOOL)chekLanguageFrom:(NSString*)from To:(NSString*)to;
@@ -69,5 +71,7 @@
 
 - (void) showPhotoThumbs;
 - (void) removeImage: (int) index;
+
+- (void) closePhoto;
 
 @end

@@ -32,8 +32,8 @@
     self.overlayView = [[NSBundle mainBundle] loadNibNamed:@"OverlayCameraView" owner:nil options:nil][0];
     self.overlayView.frame = CGRectMake(0, 383, 320, 97);
     
-    UIButton *sourceTypeChangeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    sourceTypeChangeButton.frame = CGRectMake(10, 10, 100, 50);
+    UIButton *sourceTypeChangeButton = [[UIButton alloc] initWithFrame:CGRectMake(240, 10, 70, 35)];
+    [sourceTypeChangeButton setBackgroundImage:[UIImage imageNamed:@"changeCamera.png"] forState:UIControlStateNormal];
     [self.view addSubview:sourceTypeChangeButton];
     [sourceTypeChangeButton addTarget:self action:@selector(sourceTypeChangeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -58,10 +58,8 @@
         
     }];
     
-    NSLog(@"%@", self.view.subviews);
     [self.view addSubview:self.overlayView];
     
-   // self.cameraOverlayView=self.view;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -81,7 +79,7 @@
     picker.delegate = self;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
-    [self presentViewController:picker animated:YES completion:NULL];
+    [self presentViewController:self animated:YES completion:NULL];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {

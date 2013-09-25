@@ -14,8 +14,10 @@
 @interface PhotoThumb : UIView
 - (IBAction)viewFullPhoto:(id)sender;
 - (IBAction)removePhoto:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *thumbButton;
 
 @property (assign, nonatomic) int index;
 @property (strong, nonatomic) OrderDetailsController *photoView;
+@property (strong, nonatomic) UIImage * image;
 
 @end

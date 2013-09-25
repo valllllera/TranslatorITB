@@ -30,7 +30,11 @@
 */
 
 - (IBAction)viewFullPhoto:(id)sender {
-    UIImageView * bigPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    UIButton * bigPhoto = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    [bigPhoto setBackgroundImage:_image forState:UIControlStateNormal];
+    [bigPhoto addTarget:_photoView action:@selector(closePhoto) forControlEvents:UIControlEventTouchUpInside];
+    _photoView.fullScreenPhoto = bigPhoto;
+    [_photoView.view addSubview: _photoView.fullScreenPhoto];
 }
 
 - (IBAction)removePhoto:(id)sender {

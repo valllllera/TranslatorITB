@@ -57,7 +57,7 @@ bool textViewIsVeginEditin;
     [title setTextColor:[UIColor colorWithRed:234.0/255.0 green:234.0/255.0 blue:234.0/255.0 alpha:1]];
     [title setShadowColor:[UIColor blackColor]];
     [title setShadowOffset:CGSizeMake(1, 1)];
-    title.text=@"Ваш заказ";
+    title.text=@"Сделать заказ";
     title.frame=CGRectMake(10, 10, 20, 50);
     [self.navigationItem setTitleView:title];
 
@@ -166,7 +166,15 @@ bool textViewIsVeginEditin;
 }
 
 - (IBAction)touchGetPriceBtn:(id)sender {
-   // if([self chekLanguageFrom:_from.text To:_to.text]!=NO && [_text.text isEqualToString:@""]!=YES)
+    if([self chekLanguageFrom:_from.text To:_to.text]==NO) {
+        UIAlertView *alert=[[UIAlertView alloc] init];
+        alert= [alert initWithTitle:NSLocalizedString(@"AppName", nil)
+                            message:@"Выберите языки для перевода!"
+                           delegate:nil cancelButtonTitle:@"OK"
+                  otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     if((textViewFlag==NO || [_text.text length] == 0) && _photoCount == 0){
         UIAlertView *alert=[[UIAlertView alloc] init];
         alert= [alert initWithTitle:NSLocalizedString(@"AppName", nil)
@@ -238,30 +246,41 @@ bool textViewIsVeginEditin;
         
     }];
     [self presentModalViewController:picker animated:YES];
-    
-    /*if(_photoCount == 0) {
-        [_text removeFromSuperview];
-        [_backgr removeFromSuperview];
-        if(IS_WIDESCREEN == false)
-            _photoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, 20, 300, 150)];
-        else
-            _photoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, 20, 300, 238)];
-        [self.view addSubview:_photoScrollView];
-    }
-    _photoCount++;
-    PhotoThumb * photoThumb = [[NSBundle mainBundle] loadNibNamed:@"PhotoThumb" owner:nil options:nil][0];
-    photoThumb.frame = CGRectMake(70*([_photoIcons count]%4), 60*([_photoIcons count]/4), 70, 60);
-    [photoThumb setIndex:[_photoIcons count]];
-    NSLog(@"%d", photoThumb.index);
-    photoThumb.photoView = self;
-    NSLog(@"%@", self);
-    [_photoIcons addObject: photoThumb];
-    [_photoScrollView addSubview:[_photoIcons objectAtIndex:[_photoIcons count]-1]];*/
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    NSLog(@"%@", info);
+    if(_photoCount == 0) {
+        [_text removeFromSuperview];
+        [_backgr removeFromSuperview];
+        if(IS_WIDESCREEN == false) {
+            _photoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, 20, 300, 150)];
+            [_photoScrollView setContentSize:CGSizeMake(300, 150)];
+        }
+        else {
+            _photoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, 20, 300, 238)];
+            [_photoScrollView setContentSize:CGSizeMake(300, 238)];
+        }
+        [_photoScrollView setScrollEnabled:YES];
+        
+        [self.view addSubview:_photoScrollView];
+    }
+    
+    _photoCount++;
+    PhotoThumb * photoThumb = [[NSBundle mainBundle] loadNibNamed:@"PhotoThumb" owner:nil options:nil][0];
+    photoThumb.frame = CGRectMake(70*([_photoIcons count]%4), 60*([_photoIcons count]/4), 70, 60);
+    [photoThumb setIndex:[_photoIcons count]];
+    
+    photoThumb.photoView = self;
+    photoThumb.image = info[UIImagePickerControllerOriginalImage];
+    [photoThumb.thumbButton setBackgroundImage:photoThumb.image forState:UIControlStateNormal];
+    
+    [_photoIcons addObject: photoThumb];
+    if([_photoIcons count] > 8 && [_photoIcons count]%4 == 1)
+        [_photoScrollView setContentSize:CGSizeMake(300, (_photoScrollView.contentSize.height + 70))];
+    [_photoScrollView addSubview:[_photoIcons objectAtIndex:[_photoIcons count]-1]];
+    
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -313,14 +332,7 @@ bool textViewIsVeginEditin;
 }
 
 - (BOOL)chekLanguageFrom:(NSString*)from To:(NSString*)to{
-    UIAlertView *alert=[[UIAlertView alloc] init];
-    
     if([from isEqual:@""] || [to isEqual:@""]){
-        alert= [alert initWithTitle:NSLocalizedString(@"AppName", nil)
-                            message:NSLocalizedString(@"EmptyLanguage", nil)
-                           delegate:nil cancelButtonTitle:@"OK"
-                  otherButtonTitles:nil];
-        [alert show];
         return NO;
     }
     return YES;
@@ -384,6 +396,8 @@ bool textViewIsVeginEditin;
     
     [UIView animateWithDuration:0.25f animations:^{
         CGRect pickerFrame = self.languagePicker.frame;
+        NSLog(@"%f %f %f %f", _languagePicker.frame.origin.x, _languagePicker.frame.origin.y, _languagePicker.frame.size.width, _languagePicker.frame.size.height);
+        
         //CGRect buttonFrame = _doneButton.frame;
         if(position < 0) {
             pickerFrame.origin.y = show-position;
@@ -428,7 +442,6 @@ bool textViewIsVeginEditin;
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     //Let's print in the console what the user had chosen;
-    //_chosenItem = [_languages objectAtIndex:row];
     if(_fromToFlag == 1) {
         _from.text = [_languages objectAtIndex:row];
     }
@@ -453,18 +466,8 @@ bool textViewIsVeginEditin;
     return _pricePerPage;
 }
 
-/*- (IBAction) chooseLanguage:(id)sender {
-    if(_fromToFlag == 1) {
-        _from.text = _chosenItem;
-        [self scrollViewToPosition:0];
-        _fromToFlag = 0;
-    }
-    if(_fromToFlag == 2) {
-        _to.text = _chosenItem;
-        [self scrollViewToPosition:0];
-        _fromToFlag = 0;
-    }
-}*/
-
+- (void) closePhoto {
+    [_fullScreenPhoto removeFromSuperview];
+}
 
 @end
