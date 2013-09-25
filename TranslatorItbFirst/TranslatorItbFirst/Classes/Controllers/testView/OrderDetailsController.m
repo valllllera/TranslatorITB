@@ -147,6 +147,10 @@ bool textViewIsVeginEditin;
     self.navigationItem.rightBarButtonItem = cartNavigationItem;
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+}
+
 -(void)pressedMenuBtn{
     [_text resignFirstResponder];
     [self.viewDeckController toggleLeftView];
