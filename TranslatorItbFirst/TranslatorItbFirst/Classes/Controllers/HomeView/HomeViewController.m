@@ -59,7 +59,7 @@
     UIFont *light=[UIFont fontWithName:@"HelveticaNeueCyr-Light" size:12];
     UIFont *bold=[UIFont fontWithName:@"HelveticaNeueCyr-Bold" size:18];
     [_orderBtn setFont:bold];
-    [_text setFont:light];
+    //[_text setFont:light];
     
     
     UILabel *title=[[UILabel alloc]init];

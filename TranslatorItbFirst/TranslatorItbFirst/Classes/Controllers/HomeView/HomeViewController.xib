@@ -42,6 +42,7 @@
 						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{7, 197}, {307, 148}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="36795234"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -53,35 +54,38 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSMutableString" key="IBUIText">
-							<bytes key="NS.bytes">0JDQs9C10L3RgtGB0YLQstC+IGl0YkZpcnN0INC/0YDQtdC00L7RgdGC0LDQstC70Y/QtdGCINGD0YHQ
+						<bool key="IBUIUsesAttributedText">YES</bool>
+						<object class="NSAttributedString" key="IBUIAttributedText">
+							<object class="NSMutableString" key="NSString">
+								<bytes key="NS.bytes">0JDQs9C10L3RgtGB0YLQstC+IGl0YkZpcnN0INC/0YDQtdC00L7RgdGC0LDQstC70Y/QtdGCINGD0YHQ
 u9GD0LPQuCDQv9C40YHRjNC80LXQvdC90L7Qs9C+INC/0LXRgNC10LLQvtC00LAg0YLQtdC60YHRgtC+
 0LIg0YLQtdGF0L3QuNGH0LXRgdC60L7QuSwg0LzQtdC00LjRhtC40L3RgdC60LjRhSwg0Y7RgNC40LTQ
 uNGH0LXRgdC60LjRhSwg0Y3QutC+0L3QvtC80LjRh9C10YHQutC+0LksINC90LXRhNGC0LXQs9Cw0LfQ
 vtCy0L7QuSwg0Y7RgNC40LTQuNGH0LXRgdC60L7QuSDRgtC10LzQsNGC0LjQuiwg0LvQuNGH0L3Ri9GF
-INC00L7QutGD0LzQtdC90YLQvtCyLCDQvNGLINGC0LDQuiAgICAgICAgICAgICDigKjQttC1INC/0YDQ
-tdC00LvQsNCz0LDQtdC8INGD0YHQu9GD0LPQuCDRg9GB0YLQvdC+0LPQviDQv9C10YDQtdCy0L7QtNCw
-LCDRg9GB0LvRg9Cz0Lgg0LvQvtC60LDQu9C40LfQsNGG0LjQuCDQuCDQtNC+0L/QvtC70L3QuNGC0LXQ
-u9GM0L3Ri9C1INGD0YHQu9GD0LPQuCDigKggICAgICAgICAgICAgICAgKNC/0LXRh9Cw0YLRjCDQuCDQ
-v9C+0LvQuNCz0YDQsNGE0LjRjykuA</bytes>
-						</object>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC41NTE3MTc5NTI4IDAuNTUxNzE3OTUyOCAwLjU1MTcxNzk1MjgAA</bytes>
+INC00L7QutGD0LzQtdC90YLQvtCyLCDQvNGLINGC0LDQuiDQttC1INC/0YDQtdC00LvQsNCz0LDQtdC8
+INGD0YHQu9GD0LPQuCDRg9GB0YLQvdC+0LPQviDQv9C10YDQtdCy0L7QtNCwLCDRg9GB0LvRg9Cz0Lgg
+0LvQvtC60LDQu9C40LfQsNGG0LjQuCDQuCDQtNC+0L/QvtC70L3QuNGC0LXQu9GM0L3Ri9C1INGD0YHQ
+u9GD0LPQuCDigKgo0L/QtdGH0LDRgtGMINC4INC/0L7Qu9C40LPRgNCw0YTQuNGPKS4</bytes>
+							</object>
+							<dictionary key="NSAttributes">
+								<object class="NSColor" key="NSColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC43NzM1MzcxNDkyIDAuNzczNTM3MTQ5MiAwLjc3MzUzNzE0OTIAA</bytes>
+								</object>
+								<object class="NSFont" key="NSFont">
+									<string key="NSName">Tahoma</string>
+									<double key="NSSize">13</double>
+									<int key="NSfFlags">16</int>
+								</object>
+								<object class="NSMutableParagraphStyle" key="NSParagraphStyle">
+									<int key="NSAlignment">2</int>
+									<nil key="NSTabStops"/>
+								</object>
+							</dictionary>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
 						<int key="IBUINumberOfLines">0</int>
-						<int key="IBUITextAlignment">1</int>
-						<object class="IBUIFontDescription" key="IBUIFontDescription">
-							<int key="type">1</int>
-							<double key="pointSize">12</double>
-						</object>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">12</double>
-							<int key="NSfFlags">16</int>
-						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 						<double key="preferredMaxLayoutWidth">307</double>
 					</object>
@@ -90,6 +94,7 @@ v9C+0LvQuNCz0YDQsNGE0LjRjykuA</bytes>
 						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{15, 361.5}, {290, 41}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="390350791"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -127,6 +132,7 @@ v9C+0LvQuNCz0YDQsNGE0LjRjykuA</bytes>
 						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{75, 24.5}, {170, 171}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="394854941"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -141,6 +147,8 @@ v9C+0LvQuNCz0YDQsNGE0LjRjykuA</bytes>
 						<int key="NSvFlags">264</int>
 						<string key="NSFrame">{{27, 372}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -152,6 +160,7 @@ v9C+0LvQuNCz0YDQsNGE0LjRjykuA</bytes>
 				</array>
 				<string key="NSFrame">{{0, 64}, {320, 416}}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="379609677"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -293,7 +302,43 @@ v9C+0LvQuNCz0YDQsNGE0LjRjykuA</bytes>
 			<nil key="sourceID"/>
 			<int key="maxID">64</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">HomeViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">goToOrder:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">goToOrder:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">goToOrder:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="orderBtn">UIButton</string>
+						<string key="text">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="orderBtn">
+							<string key="name">orderBtn</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="text">
+							<string key="name">text</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/HomeViewController.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
