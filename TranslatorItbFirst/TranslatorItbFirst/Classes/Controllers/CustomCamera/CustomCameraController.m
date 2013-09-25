@@ -32,6 +32,11 @@
     self.overlayView = [[NSBundle mainBundle] loadNibNamed:@"OverlayCameraView" owner:nil options:nil][0];
     self.overlayView.frame = CGRectMake(0, 383, 320, 97);
     
+    UIButton *sourceTypeChangeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    sourceTypeChangeButton.frame = CGRectMake(10, 10, 100, 50);
+    [self.view addSubview:sourceTypeChangeButton];
+    [sourceTypeChangeButton addTarget:self action:@selector(sourceTypeChangeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
     __weak CustomCameraController *selfWeak = self;
     
     [self.overlayView setBackButtonPressedBlock:^{
@@ -68,7 +73,6 @@
 
 - (void)takePhoto {
     [self takePicture];
-    [_overlayView removeFromSuperview];
 }
 
 - (void)selectPhoto {
@@ -82,8 +86,6 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    
     [self dismissViewControllerAnimated:YES completion:^{
         
         [self.delegate imagePickerController:self didFinishPickingMediaWithInfo:info];
@@ -95,15 +97,18 @@
     }];
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+- (void)sourceTypeChangeButtonPressed:(id)sender
+{
+    self.sourceType = UIImagePickerControllerSourceTypeCamera;
     
-    [self dismissViewControllerAnimated:YES completion:^{
-        if(self.dissmisBlock)
-        {
-            self.dissmisBlock();
-        }
-    }];
-    
+    if (self.cameraDevice != UIImagePickerControllerCameraDeviceFront)
+    {
+        self.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+        
+    }
+    else {
+        self.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+    }
 }
 
 @end

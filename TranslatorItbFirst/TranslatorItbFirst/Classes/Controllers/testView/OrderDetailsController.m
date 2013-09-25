@@ -230,6 +230,7 @@ bool textViewIsVeginEditin;
     CustomCameraController *picker=[[CustomCameraController alloc]init];
     picker.delegate = self;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    picker.showsCameraControls = NO;
     
     [picker setDissmisBlock:^{
        
@@ -260,7 +261,8 @@ bool textViewIsVeginEditin;
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    NSLog(@"%@", info[UIImagePickerControllerEditedImage]);
+    NSLog(@"%@", info);
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void) showPhotoThumbs {
