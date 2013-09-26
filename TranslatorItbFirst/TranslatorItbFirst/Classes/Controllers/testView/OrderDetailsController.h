@@ -30,7 +30,9 @@
 @property(nonatomic,strong) IBOutlet UITextView *text;
 
 @property(nonatomic,strong) IBOutlet UITextField *from;
+@property (weak, nonatomic) IBOutlet UIButton *fromBigButton;
 @property(nonatomic,strong) IBOutlet UITextField *to;
+@property (weak, nonatomic) IBOutlet UIButton *toBigButton;
 
 @property (assign, nonatomic) int orderIndex;
 
