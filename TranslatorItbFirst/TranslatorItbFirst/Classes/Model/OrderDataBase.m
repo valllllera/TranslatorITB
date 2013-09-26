@@ -2,7 +2,7 @@
 //  Order.m
 //  TranslatorItbFirst
 //
-//  Created by Konstantin Paschenko on 03.09.13.
+//  Created by Konstantin Paschenko on 26.09.13.
 //  Copyright (c) 2013 vexadev. All rights reserved.
 //
 
@@ -11,16 +11,17 @@
 
 @implementation Order
 
-@dynamic order_id;
-@dynamic startDate;
-@dynamic finishDate;
 @dynamic cost;
-@dynamic status;
-@dynamic infoType;
-@dynamic orderType;
-@dynamic langTo;
-@dynamic langFrom;
 @dynamic duration;
-@dynamic pricePerPage;
+@dynamic finishDate;
+@dynamic infoType;
+@dynamic langFrom;
+@dynamic langTo;
+@dynamic order_id;
+@dynamic orderType;
+@dynamic startDate;
+@dynamic status;
+@dynamic text;
+@dynamic images;
 
 @end

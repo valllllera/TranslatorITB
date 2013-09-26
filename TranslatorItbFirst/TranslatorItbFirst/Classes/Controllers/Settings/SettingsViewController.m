@@ -262,6 +262,8 @@
         }
         if(_isFirstUser == 1) {
             _isFirstUser = 0;
+            HomeViewController * home = [[HomeViewController alloc] init];
+            [self.navigationController pushViewController:home animated:YES];
             [self setNavigationBarFont:@"Lobster 1.4" andTitle:@"Настройки"];
         }
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"itbFirst" message:@"Ваши данные успешно сохранены" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];

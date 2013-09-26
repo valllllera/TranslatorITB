@@ -179,6 +179,15 @@ bool textViewIsVeginEditin;
         [alert show];
         return;
     }
+    if([_from.text isEqualToString:_to.text]==YES) {
+        UIAlertView *alert=[[UIAlertView alloc] init];
+        alert= [alert initWithTitle:NSLocalizedString(@"AppName", nil)
+                            message:@"Выберите различные языки для перевода!"
+                           delegate:nil cancelButtonTitle:@"OK"
+                  otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     if((textViewFlag==NO || [_text.text length] == 0) && _photoCount == 0){
         UIAlertView *alert=[[UIAlertView alloc] init];
         alert= [alert initWithTitle:NSLocalizedString(@"AppName", nil)
@@ -227,7 +236,18 @@ bool textViewIsVeginEditin;
         order.langTo = _to.text;
         order.langFrom = _from.text;
         order.duration = [NSNumber numberWithFloat:(((int)roundf([_text.text length]*0.025) + _photoCount*45) + 1)];
-        NSLog(@"%d", (int)roundf([_text.text length]*0.025));
+    
+        if([order.infoType intValue] == 1)
+            order.text = _text.text;
+        else {
+            NSData *arrayData = [NSKeyedArchiver archivedDataWithRootObject:_photoIcons];
+            order.images = arrayData;
+            [context save:&error]; //Self if we are in the model class
+        }
+    
+        //To retrieve data
+        _photoIcons = [NSKeyedUnarchiver unarchiveObjectWithData:order.images];
+    
         
         if (![context save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
