@@ -148,7 +148,6 @@
 		F60EA2C617CF6DE8003AC0FA /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60EA2C317CF6DE8003AC0FA /* IIWrapController.m */; };
 		F62D1ED717CB486E00955812 /* OrderPaymentController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62D1ED517CB486E00955812 /* OrderPaymentController.m */; };
 		F62D1ED817CB486E00955812 /* OrderPaymentController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62D1ED617CB486E00955812 /* OrderPaymentController.xib */; };
-		F640D8EC17CB6FCE0034FD2D /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = F640D8EB17CB6FCE0034FD2D /* Order.m */; };
 		F640D8FB17CC9BF90034FD2D /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F640D8F917CC9BF90034FD2D /* LeftMenuViewController.m */; };
 		F640D8FC17CC9BF90034FD2D /* LeftMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F640D8FA17CC9BF90034FD2D /* LeftMenuViewController.xib */; };
 		F650318117CF54530060B22D /* about-company-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F650317717CF54530060B22D /* about-company-button.png */; };
@@ -378,8 +377,6 @@
 		F62D1ED417CB486E00955812 /* OrderPaymentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderPaymentController.h; path = TranslatorItbFirst/Classes/Controllers/OrderPayment/OrderPaymentController.h; sourceTree = SOURCE_ROOT; };
 		F62D1ED517CB486E00955812 /* OrderPaymentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderPaymentController.m; path = TranslatorItbFirst/Classes/Controllers/OrderPayment/OrderPaymentController.m; sourceTree = SOURCE_ROOT; };
 		F62D1ED617CB486E00955812 /* OrderPaymentController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OrderPaymentController.xib; path = TranslatorItbFirst/Classes/Controllers/OrderPayment/OrderPaymentController.xib; sourceTree = SOURCE_ROOT; };
-		F640D8EA17CB6FCE0034FD2D /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Order.h; path = Order/Order.h; sourceTree = "<group>"; };
-		F640D8EB17CB6FCE0034FD2D /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Order.m; path = Order/Order.m; sourceTree = "<group>"; };
 		F640D8F817CC9BF90034FD2D /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeftMenuViewController.h; path = TranslatorItbFirst/Classes/Controllers/LeftMenu/LeftMenuViewController.h; sourceTree = SOURCE_ROOT; };
 		F640D8F917CC9BF90034FD2D /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeftMenuViewController.m; path = TranslatorItbFirst/Classes/Controllers/LeftMenu/LeftMenuViewController.m; sourceTree = SOURCE_ROOT; };
 		F640D8FA17CC9BF90034FD2D /* LeftMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LeftMenuViewController.xib; path = TranslatorItbFirst/Classes/Controllers/LeftMenu/LeftMenuViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -846,7 +843,6 @@
 				939AA6CD17D6100100418FA3 /* DataBase */,
 				B3FBD84E17D46FA4009A1A7C /* Managers */,
 				D5A92E4D17AB992D00DF504D /* Common */,
-				D5A92E4F17AB992D00DF504D /* Models */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -858,14 +854,6 @@
 				F69FB1CD17B22D2400A50FC6 /* AppDelegate.m */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		D5A92E4F17AB992D00DF504D /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				F62D1EEB17CB6E1D00955812 /* Order */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		D5A92E5117AB992E00DF504D /* Controllers */ = {
@@ -990,15 +978,6 @@
 				F62D1ED617CB486E00955812 /* OrderPaymentController.xib */,
 			);
 			name = OrderPayment;
-			sourceTree = "<group>";
-		};
-		F62D1EEB17CB6E1D00955812 /* Order */ = {
-			isa = PBXGroup;
-			children = (
-				F640D8EA17CB6FCE0034FD2D /* Order.h */,
-				F640D8EB17CB6FCE0034FD2D /* Order.m */,
-			);
-			name = Order;
 			sourceTree = "<group>";
 		};
 		F650317617CF54530060B22D /* Menu */ = {
@@ -1401,7 +1380,6 @@
 				B3A91E1F17C753E6003AC9E4 /* AboutCompany.m in Sources */,
 				B3A91E2E17C7C384003AC9E4 /* HomeViewController.m in Sources */,
 				F62D1ED717CB486E00955812 /* OrderPaymentController.m in Sources */,
-				F640D8EC17CB6FCE0034FD2D /* Order.m in Sources */,
 				F640D8FB17CC9BF90034FD2D /* LeftMenuViewController.m in Sources */,
 				939AA6A217CCB5AD00418FA3 /* DDPageControl.m in Sources */,
 				F6B7FF3D17CCC862005B9D3F /* RightBasketViewController.m in Sources */,

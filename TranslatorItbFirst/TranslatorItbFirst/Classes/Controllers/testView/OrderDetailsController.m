@@ -492,6 +492,7 @@ bool textViewIsVeginEditin;
 
 - (void) closePhoto {
     [_fullScreenPhoto removeFromSuperview];
+    [_fullScreenPhotoButton removeFromSuperview];
 }
 
 @end

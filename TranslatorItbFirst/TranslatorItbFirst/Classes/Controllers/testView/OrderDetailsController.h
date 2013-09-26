@@ -56,7 +56,8 @@
 
 @property (strong, nonatomic) UIScrollView * photoScrollView;
 
-@property (strong, nonatomic) UIButton * fullScreenPhoto;
+@property (strong, nonatomic) UIButton * fullScreenPhotoButton;
+@property (strong, nonatomic) UIImageView * fullScreenPhoto;
 
 - (IBAction)done:(id)sender;
 
