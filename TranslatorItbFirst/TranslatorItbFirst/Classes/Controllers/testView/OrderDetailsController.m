@@ -495,4 +495,9 @@ bool textViewIsVeginEditin;
     [_fullScreenPhotoButton removeFromSuperview];
 }
 
+- (IBAction)sendMail:(id)sender {
+    VDSendMailViewController * mail = [[VDSendMailViewController alloc] init];
+    [mail EmailAction];
+}
+
 @end

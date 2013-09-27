@@ -13,7 +13,7 @@
 #import "OrderDataBase.h"
 #import "DataManager.h"
 #import "PhotoThumb.h"
-
+#import "VDSendMailViewController.h"
 
 @interface OrderDetailsController : UIViewController<UIImagePickerControllerDelegate,UITextFieldDelegate,UITextViewDelegate, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate> {
     
@@ -68,6 +68,7 @@
 -(IBAction)changeLanguage:(id)sender;
 - (IBAction)touchGetPriceBtn:(id)sender;
 - (IBAction)touchGetPhoto:(id)sender;
+- (IBAction)sendMail:(id)sender;
 //- (IBAction)chooseLanguage:(id)sender;
 
 - (int) getPricePerPage;
