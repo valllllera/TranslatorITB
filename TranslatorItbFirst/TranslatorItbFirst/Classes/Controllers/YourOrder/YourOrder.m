@@ -205,6 +205,7 @@
     [context save:&error];
     [_orderPriceAndTerm removeFromSuperview];
     [_payButton removeFromSuperview];
+    
     [self viewWillAppear:YES];
 }
 

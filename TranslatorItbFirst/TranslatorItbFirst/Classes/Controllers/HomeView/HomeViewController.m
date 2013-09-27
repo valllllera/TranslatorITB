@@ -116,4 +116,5 @@
     [self.viewDeckController rightViewPushViewControllerOverCenterController:[[SettingsViewController alloc] init]];
    // [self.viewDeckController setCenterController:[[UINavigationController alloc] initWithRootViewController:[[SettingsViewController alloc] init]]];
 }
+
 @end

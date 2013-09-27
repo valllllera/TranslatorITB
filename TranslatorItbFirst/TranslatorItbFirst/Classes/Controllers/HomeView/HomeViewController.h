@@ -11,6 +11,7 @@
 #import "RightBasketViewController.h"
 #import "SettingsViewController.h"
 #import "PhotoTest.h"
+
 @class SettingsViewController;
 @interface HomeViewController : UIViewController
 {

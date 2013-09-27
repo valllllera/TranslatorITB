@@ -38,6 +38,8 @@
 		939AA6D317D6145600418FA3 /* OrderDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 939AA6D217D6145600418FA3 /* OrderDataBase.m */; };
 		939C3DA017B26E6800BE615C /* OrderDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 939C3D9E17B26E6800BE615C /* OrderDetailsController.m */; };
 		939C3DA117B26E6800BE615C /* OrderDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 939C3D9F17B26E6800BE615C /* OrderDetailsController.xib */; };
+		939CA81B17F5B213001CC0C9 /* VDSendMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 939CA81917F5B213001CC0C9 /* VDSendMailViewController.m */; };
+		939CA81C17F5B213001CC0C9 /* VDSendMailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 939CA81A17F5B213001CC0C9 /* VDSendMailViewController.xib */; };
 		93A1F47217EB2D1F00364FC8 /* textView-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 93A1F47017EB2D1F00364FC8 /* textView-4.png */; };
 		93A1F47317EB2D1F00364FC8 /* textView-4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93A1F47117EB2D1F00364FC8 /* textView-4@2x.png */; };
 		93AA36B417F31B13008F270A /* changeCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 93AA36B217F31B13008F270A /* changeCamera.png */; };
@@ -255,6 +257,9 @@
 		939C3D9D17B26E6800BE615C /* OrderDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailsController.h; sourceTree = "<group>"; };
 		939C3D9E17B26E6800BE615C /* OrderDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailsController.m; sourceTree = "<group>"; };
 		939C3D9F17B26E6800BE615C /* OrderDetailsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailsController.xib; sourceTree = "<group>"; };
+		939CA81817F5B213001CC0C9 /* VDSendMailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VDSendMailViewController.h; path = SendMail/VDSendMailViewController.h; sourceTree = "<group>"; };
+		939CA81917F5B213001CC0C9 /* VDSendMailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VDSendMailViewController.m; path = SendMail/VDSendMailViewController.m; sourceTree = "<group>"; };
+		939CA81A17F5B213001CC0C9 /* VDSendMailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VDSendMailViewController.xib; path = SendMail/VDSendMailViewController.xib; sourceTree = "<group>"; };
 		93A1F47017EB2D1F00364FC8 /* textView-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "textView-4.png"; sourceTree = "<group>"; };
 		93A1F47117EB2D1F00364FC8 /* textView-4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "textView-4@2x.png"; sourceTree = "<group>"; };
 		93AA36B217F31B13008F270A /* changeCamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = changeCamera.png; sourceTree = "<group>"; };
@@ -574,6 +579,16 @@
 			path = TranslatorItbFirst/Classes/Controllers/testView;
 			sourceTree = SOURCE_ROOT;
 		};
+		939CA81717F5B1A5001CC0C9 /* SendMailView */ = {
+			isa = PBXGroup;
+			children = (
+				939CA81817F5B213001CC0C9 /* VDSendMailViewController.h */,
+				939CA81917F5B213001CC0C9 /* VDSendMailViewController.m */,
+				939CA81A17F5B213001CC0C9 /* VDSendMailViewController.xib */,
+			);
+			name = SendMailView;
+			sourceTree = "<group>";
+		};
 		B36C405E17CF563300AD58B9 /* Basket */ = {
 			isa = PBXGroup;
 			children = (
@@ -819,6 +834,7 @@
 		D5A92E4717AB992800DF504D /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				939CA81717F5B1A5001CC0C9 /* SendMailView */,
 				932675D417BB772F00053B84 /* NSDate+VDExtensions.h */,
 				932675D517BB772F00053B84 /* NSDate+VDExtensions.m */,
 			);
@@ -1361,6 +1377,7 @@
 				93AA36B517F31B13008F270A /* changeCamera@2x.png in Resources */,
 				93AA36B817F341FE008F270A /* delete-button.png in Resources */,
 				93AA36B917F341FE008F270A /* delete-button@2x.png in Resources */,
+				939CA81C17F5B213001CC0C9 /* VDSendMailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1403,6 +1420,7 @@
 				930D9A0317F06D50009DE6AD /* PhotoThumb.m in Sources */,
 				930D9A1017F07D37009DE6AD /* PhotoTest.m in Sources */,
 				B39CBB0517F0897200954F18 /* OverlayCameraView.m in Sources */,
+				939CA81B17F5B213001CC0C9 /* VDSendMailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

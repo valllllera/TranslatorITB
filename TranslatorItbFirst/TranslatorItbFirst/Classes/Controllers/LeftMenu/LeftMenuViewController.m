@@ -29,7 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-     UIColor *background=[UIColor colorWithPatternImage: [UIImage imageNamed:@"background"]];
+    UIColor *background=[UIColor colorWithPatternImage: [UIImage imageNamed:@"background"]];
     [self.view setBackgroundColor:background];
     [_table setBackgroundColor:background];
     [[self.navigationController navigationBar] setHidden:YES];
