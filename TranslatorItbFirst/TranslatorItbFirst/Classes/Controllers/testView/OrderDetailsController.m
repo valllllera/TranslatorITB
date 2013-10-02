@@ -420,7 +420,6 @@ bool textViewIsVeginEditin;
     
     [UIView animateWithDuration:0.25f animations:^{
         CGRect pickerFrame = self.languagePicker.frame;
-        NSLog(@"%f %f %f %f", _languagePicker.frame.origin.x, _languagePicker.frame.origin.y, _languagePicker.frame.size.width, _languagePicker.frame.size.height);
         
         //CGRect buttonFrame = _doneButton.frame;
         if(position < 0) {
@@ -493,11 +492,6 @@ bool textViewIsVeginEditin;
 - (void) closePhoto {
     [_fullScreenPhoto removeFromSuperview];
     [_fullScreenPhotoButton removeFromSuperview];
-}
-
-- (IBAction)sendMail:(id)sender {
-    VDSendMailViewController * mail = [[VDSendMailViewController alloc] init];
-    [mail EmailAction];
 }
 
 @end

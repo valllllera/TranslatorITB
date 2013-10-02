@@ -26,21 +26,18 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    [
-  
-    [NSNotificationCenter defaultCenter] addObserver:self
-                                         selector:@selector(reachabilityChanged:)
-                                         name:kReachabilityChangedNotification
-                                         object:nil];
-    
-    
+{   
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor clearColor];
     
-    _hostReach = [Reachability reachabilityWithHostName:@"www.apple.com"];
-    [_hostReach startNotifier];
+    Reachability *reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+    reachability.reachableBlock = ^(Reachability*reach)
+    {
+        NSParameterAssert([reach isKindOfClass: [Reachability class]]);
+        [self updateInterfaceWithReachability: reach];
+    };
     
     [self updateInterfaceWithReachability: _hostReach];
     
@@ -91,12 +88,6 @@
 }
 - (void) updateInterfaceWithReachability: (Reachability*) curReach {
     self.netStatus = [curReach currentReachabilityStatus];
-}
-
-- (void) reachabilityChanged: (NSNotification* )note {
-    Reachability* curReach = [note object];
-    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
-    [self updateInterfaceWithReachability: curReach];
 }
 
 @end

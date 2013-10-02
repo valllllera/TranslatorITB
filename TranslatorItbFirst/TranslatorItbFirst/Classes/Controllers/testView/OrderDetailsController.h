@@ -13,7 +13,6 @@
 #import "OrderDataBase.h"
 #import "DataManager.h"
 #import "PhotoThumb.h"
-#import "VDSendMailViewController.h"
 
 @interface OrderDetailsController : UIViewController<UIImagePickerControllerDelegate,UITextFieldDelegate,UITextViewDelegate, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate> {
     

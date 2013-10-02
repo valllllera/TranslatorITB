@@ -37,31 +37,11 @@
     
 }
 
--(void)initSelfFromOrder:(int)orderIndex{
-    
-    DataManager *dataMngr = [[DataManager alloc] init];
-    NSManagedObjectContext *context = [dataMngr managedObjectContext];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"OrderDataBase" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    NSError *error;
-    NSArray *orders;
-    orders = [context executeFetchRequest:fetchRequest error:&error];
-    Order *order = [orders objectAtIndex:orderIndex];
+-(void)initSelfFromOrder:(Order *)order{
    
     [_costLbl setText:[NSString stringWithFormat:@"%.2f",[order.cost floatValue]]];
     [_orderIdLbl setText:[NSString stringWithFormat:@"%d",[order.order_id intValue]]];
     [_dateLbl setText:[NSString stringWithFormat:@"%d мин.", [order.duration intValue]]];
-    
-    if([order.status intValue] == 2) {
-        //NSLog(@"%@", [order.finishDate compare:[NSDate date]]);
-        if([order.finishDate compare:[NSDate date]] == NSOrderedAscending) {
-            order.status = [NSNumber numberWithInt:1];
-        }
-    }
-    [context save:&error];
     
     if([order.status intValue]==1)
         [_statusImg setImage:[UIImage imageNamed:@"check"]];

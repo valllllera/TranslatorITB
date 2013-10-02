@@ -19,6 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLbl;
 
 -(IBAction)openOrder:(id)sender;
--(void)initSelfFromOrder:(int)orderIndex;
+-(void)initSelfFromOrder:(Order *)order;
 
 @end

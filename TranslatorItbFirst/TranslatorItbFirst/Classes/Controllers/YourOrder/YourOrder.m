@@ -8,6 +8,11 @@
 
 #import "YourOrder.h"
 #import "IIViewDeckController.h"
+#import "EmailManager.h"
+#import "AppConsts.h"
+#import "User.h"
+#import "OrderDataBase.h"
+#import "NSDate+VDExtensions.h"
 #define IS_WIDESCREEN (fabs ((double) [[UIScreen mainScreen] bounds].size.height - (double)568 ) < DBL_EPSILON)
 
 
@@ -176,7 +181,7 @@
 }
 
 -(IBAction)goToPayment:(id)sender {
-     
+    
     DataManager *dataMngr = [[DataManager alloc] init];
     NSManagedObjectContext *context = [dataMngr managedObjectContext];
     
@@ -190,8 +195,6 @@
     
     Order * currentOrder = [orders objectAtIndex:_currentOrderIndex];
     
-    currentOrder.status = [NSNumber numberWithInt:2];
-    
     NSDate *termDate = [NSDate alloc];
     termDate = [termDate getTheStartOfTranslation];
     termDate = [termDate getDeadLineOfTranslationFromStartAt:termDate andDuration: [currentOrder.duration intValue]];
@@ -202,11 +205,51 @@
     currentOrder.startDate = termDate;
     currentOrder.finishDate = deadLine;
     
-    [context save:&error];
-    [_orderPriceAndTerm removeFromSuperview];
-    [_payButton removeFromSuperview];
+    fetchRequest = [[NSFetchRequest alloc] init];
+    entity = [NSEntityDescription
+                                   entityForName:@"User" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    User *user = [context executeFetchRequest:fetchRequest error:&error][0];
     
-    [self viewWillAppear:YES];
+    NSString *orderTypeString;
+    if([currentOrder.orderType integerValue] == 0)
+    {
+        orderTypeString = @"Basic";
+    }
+    else if([currentOrder.orderType integerValue] == 1)
+    {
+        orderTypeString = @"Middle";
+    }
+    else if([currentOrder.orderType integerValue] == 2)
+    {
+        orderTypeString = @"Best";
+    }
+    
+    NSString *orderCost = [currentOrder.cost stringValue];
+    NSString *orderDuration = [currentOrder.duration stringValue];
+    
+    NSString *orderDate = [currentOrder.finishDate dateTitleFull];
+    
+    NSString *orderFrom = currentOrder.langFrom;
+    NSString *orderTo = currentOrder.langTo;
+    
+    NSString *subject = [NSString stringWithFormat:@""];
+    
+    NSString *message = [NSString stringWithFormat:@"<strong>%@, %@, %@<br>%@ - %@ руб. - %@ мин. (до %@)<br>%@ -> %@</strong><br><br>%@", user.username, user.email, user.phone, orderTypeString, orderCost, orderDuration, orderDate, orderFrom, orderTo, currentOrder.text];
+    
+    [[EmailManager sharedInstance] sendMessageWithFromEmail:[AppConsts serverEmail] withToEmail:@"evgeniytka4enko@gmail.com" withSMTPHost:[AppConsts smtpHost] withSMTPLogin:[AppConsts serverEmail] withSMTPPass:[AppConsts serverEmailPass] withSubject:subject withBody:message withAttachFilename:nil withAttachFiledata:nil withSuccess:^{
+        
+        currentOrder.status = [NSNumber numberWithInt:2];
+        
+        [context save:nil];
+        [_orderPriceAndTerm removeFromSuperview];
+        [_payButton removeFromSuperview];
+        
+        [self viewWillAppear:YES];
+        
+    } withFailture:^{
+        
+    }];
 }
 
 @end
