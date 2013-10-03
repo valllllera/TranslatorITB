@@ -38,7 +38,7 @@
 }
 
 -(void)initSelfFromOrder:(Order *)order{
-   
+    
     [_costLbl setText:[NSString stringWithFormat:@"%.2f",[order.cost floatValue]]];
     [_orderIdLbl setText:[NSString stringWithFormat:@"%d",[order.order_id intValue]]];
     [_dateLbl setText:[NSString stringWithFormat:@"%d мин.", [order.duration intValue]]];

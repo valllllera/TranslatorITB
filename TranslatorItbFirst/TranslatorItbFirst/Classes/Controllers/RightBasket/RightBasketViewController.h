@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *propertiesBtn;
 @property (weak, nonatomic) IBOutlet UIButton *exitBtn;
 @property (nonatomic, strong) NSArray *orders;
+@property (strong, nonatomic) NSManagedObjectContext *context;
 
 - (IBAction)exit:(id)sender;
 - (IBAction)opernProperties:(id)sender;

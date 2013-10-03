@@ -125,7 +125,6 @@ NSString *kSKPSMTPPartContentTransferEncodingKey = @"kSKPSMTPPartContentTransfer
 {
     NSLog(@"*** stopping watchdog ***");
     [self.watchdogTimer invalidate];
-    self.watchdogTimer = nil;
 }
 
 - (BOOL)send

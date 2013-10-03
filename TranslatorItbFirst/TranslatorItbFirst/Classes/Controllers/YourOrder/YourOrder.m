@@ -13,6 +13,7 @@
 #import "User.h"
 #import "OrderDataBase.h"
 #import "NSDate+VDExtensions.h"
+#import "MBProgressHUD.h"
 #define IS_WIDESCREEN (fabs ((double) [[UIScreen mainScreen] bounds].size.height - (double)568 ) < DBL_EPSILON)
 
 
@@ -182,6 +183,8 @@
 
 -(IBAction)goToPayment:(id)sender {
     
+    MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     DataManager *dataMngr = [[DataManager alloc] init];
     NSManagedObjectContext *context = [dataMngr managedObjectContext];
     
@@ -206,8 +209,7 @@
     currentOrder.finishDate = deadLine;
     
     fetchRequest = [[NSFetchRequest alloc] init];
-    entity = [NSEntityDescription
-                                   entityForName:@"User" inManagedObjectContext:context];
+    entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     User *user = [context executeFetchRequest:fetchRequest error:&error][0];
     
@@ -225,6 +227,8 @@
         orderTypeString = @"Best";
     }
     
+    NSArray *photos = [NSKeyedUnarchiver unarchiveObjectWithData:currentOrder.images];
+    
     NSString *orderCost = [currentOrder.cost stringValue];
     NSString *orderDuration = [currentOrder.duration stringValue];
     
@@ -235,9 +239,15 @@
     
     NSString *subject = [NSString stringWithFormat:@""];
     
-    NSString *message = [NSString stringWithFormat:@"<strong>%@, %@, %@<br>%@ - %@ руб. - %@ мин. (до %@)<br>%@ -> %@</strong><br><br>%@", user.username, user.email, user.phone, orderTypeString, orderCost, orderDuration, orderDate, orderFrom, orderTo, currentOrder.text];
+    NSMutableArray *filedatas = [NSMutableArray array];
+    for(UIImage *photo in photos)
+    {
+        [filedatas addObject:UIImageJPEGRepresentation(photo, 5.0f)];
+    }
     
-    [[EmailManager sharedInstance] sendMessageWithFromEmail:[AppConsts serverEmail] withToEmail:@"evgeniytka4enko@gmail.com" withSMTPHost:[AppConsts smtpHost] withSMTPLogin:[AppConsts serverEmail] withSMTPPass:[AppConsts serverEmailPass] withSubject:subject withBody:message withAttachFilename:nil withAttachFiledata:nil withSuccess:^{
+    NSString *message = [NSString stringWithFormat:@"<strong>%@, %@, %@<br>%@ - %@ руб. - %@ мин. (до %@)<br>%@ -> %@</strong><br><br>%@", user.username, user.email, user.phone, orderTypeString, orderCost, orderDuration, orderDate, orderFrom, orderTo, [photos count] > 0 ? @"" : currentOrder.text];
+    
+    [[EmailManager sharedInstance] sendMessageWithFromEmail:[AppConsts serverEmail] withToEmail:@"evgeniytka4enko@gmail.com" withSMTPHost:[AppConsts smtpHost] withSMTPLogin:[AppConsts serverEmail] withSMTPPass:[AppConsts serverEmailPass] withSubject:subject withBody:message withAttachFiledatas:filedatas withFileType:@"jpg" withSuccess:^{
         
         currentOrder.status = [NSNumber numberWithInt:2];
         
@@ -247,7 +257,11 @@
         
         [self viewWillAppear:YES];
         
+        [progressHud hide:YES];
+        
     } withFailture:^{
+        
+        [progressHud hide:YES];
         
     }];
 }

@@ -196,10 +196,6 @@
         
         Order *order = [orders objectAtIndex:_orderIndex];
         
-        NSLog(@"%.2f %d", [order.cost floatValue], [order.duration intValue]);
-        
-        
-        
         [[_priceLabels objectAtIndex:i] setText : [NSString stringWithFormat:@"%.2f руб. / %d мин", ([order.cost floatValue]*[[_priceMultiplier objectAtIndex:i] floatValue]),
             (int)roundf([order.duration intValue]*[[_termMultiplier objectAtIndex:i] floatValue] )]];
         _orderId = [order.order_id intValue];
@@ -243,7 +239,6 @@
     order.orderType = [NSNumber numberWithInteger:_pageController.currentPage];
     float price = (int)roundf([order.cost floatValue]*[[_priceMultiplier objectAtIndex:_pageController.currentPage] floatValue]);
     float duration = [order.duration floatValue]*[[_termMultiplier objectAtIndex:_pageController.currentPage] floatValue];
-    NSLog(@"%f", [order.duration floatValue]);
                    
     order.cost = [NSNumber numberWithFloat: price];
     order.duration = [NSNumber numberWithFloat: duration];

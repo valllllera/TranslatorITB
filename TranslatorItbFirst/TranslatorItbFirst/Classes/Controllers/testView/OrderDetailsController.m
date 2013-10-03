@@ -10,6 +10,8 @@
 #import "DataManager.h"
 #import "IIViewDeckController.h"
 #import "CustomCameraController.h"
+#import "MBProgressHUD.h"
+#import "AppConsts.h"
 #define IS_WIDESCREEN (fabs ((double) [[UIScreen mainScreen] bounds].size.height - (double)568 ) < DBL_EPSILON)
 
 
@@ -33,6 +35,7 @@ bool textViewIsVeginEditin;
         _pickFromBtn= [UIButton buttonWithType:UIButtonTypeCustom];
         _pickToBtn= [UIButton buttonWithType:UIButtonTypeCustom];
         textViewIsVeginEditin = NO;
+        self.photos = [NSMutableArray array];
     }
     return self;
 }
@@ -49,7 +52,7 @@ bool textViewIsVeginEditin;
     UIFont *titleFont=[UIFont fontWithName:@"Lobster 1.4" size:25];
     UIFont *light=[UIFont fontWithName:@"HelveticaNeueCyr-Light" size:14];
     UIFont *bold=[UIFont fontWithName:@"HelveticaNeueCyr-Bold" size:18];
-
+    
     
     UILabel *title=[[UILabel alloc]init];
     [title setFont:titleFont];
@@ -60,7 +63,7 @@ bool textViewIsVeginEditin;
     title.text=@"Сделать заказ";
     title.frame=CGRectMake(10, 10, 20, 50);
     [self.navigationItem setTitleView:title];
-
+    
     _text.inputAccessoryView = _toolBar;
     [_text setFont:light];
     [_to setFont:light];
@@ -94,15 +97,15 @@ bool textViewIsVeginEditin;
     [_text setDelegate:self];
     [_to setDelegate:self];
     [_from setDelegate:self];
-
     
-    _languages = [DataManager sharedData].languages; 
+    
+    _languages = [DataManager sharedData].languages;
     UIImage *image = [UIImage imageNamed:@"triangle"];
     
     [_pickFromBtn setImage:image forState:UIControlStateNormal];
     _pickFromBtn.frame = CGRectMake(0, 0,30, 30);
     [_pickFromBtn addTarget:self action:@selector(ShowListFrom:) forControlEvents:UIControlEventTouchUpInside];
-  
+    
     [_pickToBtn setImage:image forState:UIControlStateNormal];
     _pickToBtn.frame = CGRectMake(0, 0,30, 30);
     [_pickToBtn addTarget:self action:@selector(ShowListTo:) forControlEvents:UIControlEventTouchUpInside];
@@ -112,8 +115,8 @@ bool textViewIsVeginEditin;
     _from.rightViewMode = UITextFieldViewModeAlways;
     _to.rightView = _pickToBtn;
     _to.rightViewMode = UITextFieldViewModeAlways;
-
-
+    
+    
     
     //Set background to view
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
@@ -135,11 +138,11 @@ bool textViewIsVeginEditin;
     //end of initialization of tab bar
     
     /*_doneButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 416, 290, 41)];
-    [_doneButton setTitle:@"Выбрать" forState:UIControlStateNormal];
-    UIImage *doneBtnBg=[[UIImage imageNamed:@"blackBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,5,0,5)];
-    [_doneButton setBackgroundImage:doneBtnBg forState:UIControlStateNormal];
-    [_doneButton addTarget:self action:@selector(chooseLanguage:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_doneButton];*/
+     [_doneButton setTitle:@"Выбрать" forState:UIControlStateNormal];
+     UIImage *doneBtnBg=[[UIImage imageNamed:@"blackBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0,5,0,5)];
+     [_doneButton setBackgroundImage:doneBtnBg forState:UIControlStateNormal];
+     [_doneButton addTarget:self action:@selector(chooseLanguage:) forControlEvents:UIControlEventTouchUpInside];
+     [self.view addSubview:_doneButton];*/
     
     _languages = [_languages sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
@@ -163,9 +166,9 @@ bool textViewIsVeginEditin;
 
 -(IBAction)changeLanguage:(id)sender{
     if([_to.text isEqualToString:@""]!=YES &&  [_from.text isEqualToString:@""]!=YES){
-    NSString * temp=[NSString stringWithString:_from.text];
-    _from.text=_to.text;
-    _to.text=temp;
+        NSString * temp=[NSString stringWithString:_from.text];
+        _from.text=_to.text;
+        _to.text=temp;
     }
 }
 
@@ -197,7 +200,15 @@ bool textViewIsVeginEditin;
         [alert show];
         return;
     }
-    //new order addition
+    MBProgressHUD *progressHud;
+    if(_photoCount != 0)
+    {
+        progressHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        progressHud.labelText = @"Обработка изображений...";
+    }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
         DataManager *dataMngr = [[DataManager alloc] init];
         NSManagedObjectContext *context = [dataMngr managedObjectContext];
         
@@ -225,7 +236,7 @@ bool textViewIsVeginEditin;
         
         order.order_id = [NSNumber numberWithInt: lastItem+1];
         order.orderType = [NSNumber numberWithInt:1];
-    
+        
         if(_photoCount == 0)
             order.infoType = [NSNumber numberWithInt:1];
         else
@@ -236,27 +247,27 @@ bool textViewIsVeginEditin;
         order.langTo = _to.text;
         order.langFrom = _from.text;
         order.duration = [NSNumber numberWithFloat:(((int)roundf([_text.text length]*0.025) + _photoCount*45) + 1)];
-    
+        
         if([order.infoType intValue] == 1)
             order.text = _text.text;
         else {
-            NSData *arrayData = [NSKeyedArchiver archivedDataWithRootObject:_photoIcons];
+            NSData *arrayData = [NSKeyedArchiver archivedDataWithRootObject:_photos];
             order.images = arrayData;
-            [context save:&error]; //Self if we are in the model class
+            [context save:nil]; //Self if we are in the model class
         }
-    
-        //To retrieve data
-        _photoIcons = [NSKeyedUnarchiver unarchiveObjectWithData:order.images];
-    
         
-        if (![context save:&error]) {
-            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        if (![context save:nil]) {
+            NSLog(@"Whoops, couldn't save");
         }
+        
+        [progressHud hide:YES];
         
         payDetailController.orderIndex = _orderIndex;
         
         [self.navigationController pushViewController:payDetailController animated:YES];
-    }
+        
+    });
+}
 - (IBAction)touchGetPhoto:(id)sender {
     
     CustomCameraController *picker=[[CustomCameraController alloc]init];
@@ -265,7 +276,7 @@ bool textViewIsVeginEditin;
     picker.showsCameraControls = NO;
     
     [picker setDissmisBlock:^{
-       
+        
         [self dismissViewControllerAnimated:YES completion:nil];
         
     }];
@@ -297,6 +308,7 @@ bool textViewIsVeginEditin;
     
     photoThumb.photoView = self;
     photoThumb.image = info[UIImagePickerControllerOriginalImage];
+    [_photos addObject:info[UIImagePickerControllerOriginalImage]];
     [photoThumb.thumbButton setBackgroundImage:photoThumb.image forState:UIControlStateNormal];
     
     [_photoIcons addObject: photoThumb];
@@ -337,19 +349,19 @@ bool textViewIsVeginEditin;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [[event allTouches] anyObject];
     if([_from isFirstResponder] && [touch view] != _from){
-          [_from resignFirstResponder];
+        [_from resignFirstResponder];
     }
     else if([_text isFirstResponder] && [touch view] != _text){
-         [_text resignFirstResponder];
+        [_text resignFirstResponder];
     }
     else if ([_to isFirstResponder] && [touch view]!=_to){
-         [_to   resignFirstResponder];
+        [_to   resignFirstResponder];
     }
     [super touchesBegan:touches withEvent:event];
 }
 - (IBAction)done:(id)sender {
     if([_text.text length] != 0)
-       [_getPhoto setEnabled:NO];
+        [_getPhoto setEnabled:NO];
     else
         [_getPhoto setEnabled:YES];
     [_text resignFirstResponder];
@@ -471,7 +483,7 @@ bool textViewIsVeginEditin;
     if(_fromToFlag == 2) {
         _to.text = [_languages objectAtIndex:row];
     }
-
+    
 }
 
 - (int) getPricePerPage {

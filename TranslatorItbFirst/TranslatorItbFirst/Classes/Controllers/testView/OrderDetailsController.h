@@ -52,6 +52,7 @@
 @property (assign, nonatomic) int photoCount;
 
 @property (strong, nonatomic) NSMutableArray * photoIcons;
+@property (strong, nonatomic) NSMutableArray * photos;
 
 @property (strong, nonatomic) UIScrollView * photoScrollView;
 

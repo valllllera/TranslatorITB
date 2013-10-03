@@ -60,15 +60,15 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     DataManager *dataMngr = [[DataManager alloc] init];
-    NSManagedObjectContext *context = [dataMngr managedObjectContext];
+    self.context = [dataMngr managedObjectContext];
     
     NSError *error;
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"OrderDataBase" inManagedObjectContext:context];
+                                   entityForName:@"OrderDataBase" inManagedObjectContext:_context];
     [fetchRequest setEntity:entity];
-    self.orders = [context executeFetchRequest:fetchRequest error:&error];
+    self.orders = [_context executeFetchRequest:fetchRequest error:&error];
     
     for(Order *order in _orders)
     {
@@ -78,7 +78,7 @@
             }
         }
     }
-    [context save:&error];
+    [_context save:&error];
     [_table reloadData];
 }
 

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define RootViewController [[[[UIApplication sharedApplication] delegate] window] rootViewController]
+
 @interface AppConsts : NSObject
 
 + (NSString *)serverEmail;

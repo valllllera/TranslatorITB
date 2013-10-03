@@ -143,6 +143,7 @@
 		D56794E417FC73E300B10D52 /* SKPSMTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D56794DF17FC73E200B10D52 /* SKPSMTPMessage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D56794F417FC75BD00B10D52 /* AppConsts.m in Sources */ = {isa = PBXBuildFile; fileRef = D56794F317FC75BC00B10D52 /* AppConsts.m */; };
 		D56794FC17FC789C00B10D52 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D56794FB17FC789C00B10D52 /* Reachability.m */; };
+		D567950317FDCEDC00B10D52 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D567950217FDCEDC00B10D52 /* MBProgressHUD.m */; };
 		D5A92E2A17AB987800DF504D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A92E2917AB987800DF504D /* UIKit.framework */; };
 		D5A92E2C17AB987800DF504D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A92E2B17AB987800DF504D /* Foundation.framework */; };
 		D5A92E2E17AB987800DF504D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A92E2D17AB987800DF504D /* CoreGraphics.framework */; };
@@ -381,6 +382,8 @@
 		D56794F317FC75BC00B10D52 /* AppConsts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConsts.m; sourceTree = "<group>"; };
 		D56794FA17FC789C00B10D52 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		D56794FB17FC789C00B10D52 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		D567950117FDCEDB00B10D52 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		D567950217FDCEDC00B10D52 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		D5A92E2617AB987800DF504D /* TranslatorItbFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslatorItbFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A92E2917AB987800DF504D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D5A92E2B17AB987800DF504D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -807,6 +810,15 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
+		D567950017FDCEDB00B10D52 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				D567950117FDCEDB00B10D52 /* MBProgressHUD.h */,
+				D567950217FDCEDC00B10D52 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		D5A92E1D17AB987800DF504D = {
 			isa = PBXGroup;
 			children = (
@@ -877,6 +889,7 @@
 		D5A92E4A17AB992B00DF504D /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				D567950017FDCEDB00B10D52 /* MBProgressHUD */,
 				D56794F917FC789C00B10D52 /* Reachability */,
 				D56794D517FC73E200B10D52 /* SMTPSend */,
 				F6A5F88C17D750FF007F5B76 /* IXPickerOverlayView */,
@@ -1453,6 +1466,7 @@
 				D56794E417FC73E300B10D52 /* SKPSMTPMessage.m in Sources */,
 				D56794F417FC75BD00B10D52 /* AppConsts.m in Sources */,
 				D56794FC17FC789C00B10D52 /* Reachability.m in Sources */,
+				D567950317FDCEDC00B10D52 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

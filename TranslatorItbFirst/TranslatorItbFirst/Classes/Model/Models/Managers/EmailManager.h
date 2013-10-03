@@ -20,8 +20,8 @@
                     withSMTPPass:(NSString *)smtpPass
                      withSubject:(NSString *)subject
                         withBody:(NSString *)body
-              withAttachFilename:(NSString *)filename
-              withAttachFiledata:(NSData *)filedata
+             withAttachFiledatas:(NSArray *)filedatas
+                    withFileType:(NSString *)type
                      withSuccess:(void (^)())success
                     withFailture:(void (^)())failture;
 

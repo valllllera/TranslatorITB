@@ -12,17 +12,17 @@
 
 + (NSString *)serverEmail
 {
-    return @"rugbycup2013@yandex.ua";
+    return @"noreply@itbfirst.ru";
 }
 
 + (NSString *)serverEmailPass
 {
-    return @"rugby2013";
+    return @"gjkbvth001";
 }
 
 + (NSString *)smtpHost
 {
-    return @"smtp.yandex.ua";
+    return @"smtp.gmail.com";
 }
 
 @end

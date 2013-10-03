@@ -11,6 +11,7 @@
 #import "LeftMenuViewController.h"
 #import "RightBasketViewController.h"
 #import "IIViewDeckController.h"
+#import "MBProgressHUD.h"
 
 @interface AppDelegate()
 

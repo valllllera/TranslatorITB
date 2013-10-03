@@ -56,8 +56,8 @@ static EmailManager *sharedInstance = nil;
                     withSMTPPass:(NSString *)smtpPass
                      withSubject:(NSString *)subject
                         withBody:(NSString *)body
-              withAttachFilename:(NSString *)filename
-              withAttachFiledata:(NSData *)filedata
+             withAttachFiledatas:(NSArray *)filedatas
+                    withFileType:(NSString *)type
                      withSuccess:(void (^)())success
                     withFailture:(void (^)())failture
 {
@@ -89,10 +89,16 @@ static EmailManager *sharedInstance = nil;
             emailMessage.wantsSecure = YES;
             emailMessage.delegate = self;
             NSDictionary *plainMsg = [NSDictionary dictionaryWithObjectsAndKeys:@"text/html", kSKPSMTPPartContentTypeKey, body, kSKPSMTPPartMessageKey, @"8bit",kSKPSMTPPartContentTransferEncodingKey, nil];
-            if(filedata)
+            if(filedatas)
             {
-                NSDictionary *fileMsg = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"text/directory;\r\n\tx-unix-mode=0644;\r\n\tname=\"%@\"", filename ? filename : @"file"], kSKPSMTPPartContentTypeKey, [NSString stringWithFormat:@"attachment;\r\n\tfilename=\"%@\"", filename ? filename : @"file"], kSKPSMTPPartContentDispositionKey, [filedata encodeBase64ForData], kSKPSMTPPartMessageKey, @"base64", kSKPSMTPPartContentTransferEncodingKey,nil];
-                emailMessage.parts = [NSArray arrayWithObjects:plainMsg, fileMsg, nil];
+                NSMutableArray *parts = [NSMutableArray arrayWithObject:plainMsg];
+                for(NSData *filedata in filedatas)
+                {
+                    NSString *filename = [NSString stringWithFormat:@"file_%d.%@", [filedatas indexOfObject:filedata], type];
+                    NSDictionary *fileMsg = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"text/directory;\r\n\tx-unix-mode=0644;\r\n\tname=\"%@\"", filename], kSKPSMTPPartContentTypeKey, [NSString stringWithFormat:@"attachment;\r\n\tfilename=\"%@\"", filename], kSKPSMTPPartContentDispositionKey, [filedata encodeBase64ForData], kSKPSMTPPartMessageKey, @"base64", kSKPSMTPPartContentTransferEncodingKey,nil];
+                    [parts addObject:fileMsg];
+                }
+                emailMessage.parts = parts;
             }
             else
             {
