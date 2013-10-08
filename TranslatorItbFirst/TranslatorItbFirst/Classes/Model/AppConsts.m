@@ -25,4 +25,9 @@
     return @"smtp.gmail.com";
 }
 
++ (NSString *)serverEmailToTranslate
+{
+    return @"robot@itbfirst.ru";
+}
+
 @end

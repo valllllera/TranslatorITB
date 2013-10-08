@@ -18,4 +18,6 @@
 
 + (NSString *)smtpHost;
 
++ (NSString *)serverEmailToTranslate;
+
 @end

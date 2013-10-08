@@ -247,7 +247,7 @@
     
     NSString *message = [NSString stringWithFormat:@"<strong>%@, %@, %@<br>%@ - %@ руб. - %@ мин. (до %@)<br>%@ -> %@</strong><br><br>%@", user.username, user.email, user.phone, orderTypeString, orderCost, orderDuration, orderDate, orderFrom, orderTo, [photos count] > 0 ? @"" : currentOrder.text];
     
-    [[EmailManager sharedInstance] sendMessageWithFromEmail:[AppConsts serverEmail] withToEmail:@"evgeniytka4enko@gmail.com" withSMTPHost:[AppConsts smtpHost] withSMTPLogin:[AppConsts serverEmail] withSMTPPass:[AppConsts serverEmailPass] withSubject:subject withBody:message withAttachFiledatas:filedatas withFileType:@"jpg" withSuccess:^{
+    [[EmailManager sharedInstance] sendMessageWithFromEmail:[AppConsts serverEmail] withToEmail:[AppConsts serverEmailToTranslate] withSMTPHost:[AppConsts smtpHost] withSMTPLogin:[AppConsts serverEmail] withSMTPPass:[AppConsts serverEmailPass] withSubject:subject withBody:message withAttachFiledatas:filedatas withFileType:@"jpg" withSuccess:^{
         
         currentOrder.status = [NSNumber numberWithInt:2];
         
