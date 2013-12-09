@@ -14,10 +14,23 @@
 #import "OrderDataBase.h"
 #import "NSDate+VDExtensions.h"
 #import "MBProgressHUD.h"
+#import "ETWebViewController.h"
+#import "ETRobokassa.h"
+#import "ServerManager.h"
 #define IS_WIDESCREEN (fabs ((double) [[UIScreen mainScreen] bounds].size.height - (double)568 ) < DBL_EPSILON)
 
 
 @interface YourOrder ()
+
+@property (strong, nonatomic) NSNumber *robokassaIdx;
+@property (assign, nonatomic) BOOL isFirstViewAppear;
+
+@property (strong, nonatomic) NSManagedObjectContext *context;
+@property (strong, nonatomic) Order *currentOrder;
+
+@property (strong, nonatomic) ETWebViewController *webViewController;
+
+@property (strong, nonatomic) UIButton *getTranslateButton;
 
 @end
 
@@ -29,6 +42,7 @@
     if (self) {
         // Custom initialization
         [self setTitle:@"Ваш заказ"];
+        _isFirstViewAppear = YES;
     }
     return self;
 }
@@ -71,66 +85,86 @@
     self.navigationItem.leftBarButtonItem = menuNavigationItem;
     self.navigationItem.rightBarButtonItem = cartNavigationItem;
     
+    DataManager *dataMngr = [[DataManager alloc] init];
+    self.context = [dataMngr managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"OrderDataBase" inManagedObjectContext:_context];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    NSArray *orders;
+    orders = [_context executeFetchRequest:fetchRequest error:&error];
+    
+    self.currentOrder = [orders objectAtIndex:_currentOrderIndex];
+    
+    self.robokassaIdx = _currentOrder.robokassaIdx;
+    
     
     //-----end of initialization of tab bar
     // Do any additional setup after loading the view from its nib.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{    
+    if(_isFirstViewAppear && [_currentOrder.status intValue] == 3)
+    {
+        [self checkPaid];
+        _isFirstViewAppear = NO;
+    }
+    
+    [super viewDidAppear:animated];
+}
+
 -(void) viewWillAppear:(BOOL)animated {
-    DataManager *dataMngr = [[DataManager alloc] init];
-    NSManagedObjectContext *context = [dataMngr managedObjectContext];
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"OrderDataBase" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    NSError *error;
-    NSArray *orders;
-    orders = [context executeFetchRequest:fetchRequest error:&error];
+    [self configureView];
     
-    Order * currentOrder = [orders objectAtIndex:_currentOrderIndex];
-    
-    if([currentOrder.status intValue] == 1) {
+    [super viewWillAppear:animated];
+}
+
+- (void)configureView
+{
+    if([_currentOrder.status intValue] == 1) {
         [_orderStatusImage setImage:[UIImage imageNamed:@"order-is-done.png"]];
         
         UIImage *getTranslateButtonBg = [[UIImage imageNamed:@"orangeBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)];
-        UIButton *getTranslateButton;
         if(IS_WIDESCREEN == false)
-            getTranslateButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 41)];
+            _getTranslateButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 360, 280, 41)];
         else
-            getTranslateButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 448, 280, 41)];
-        [getTranslateButton setBackgroundImage:getTranslateButtonBg forState:UIControlStateNormal];
-        [getTranslateButton setTitle:@"Скачать перевод" forState:UIControlStateNormal];
-        [getTranslateButton setImage:[UIImage imageNamed:@"send-image.png"] forState:UIControlStateNormal];
-        [getTranslateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        getTranslateButton.titleLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size: 16.0f];
-        [getTranslateButton setImageEdgeInsets:UIEdgeInsetsMake(0, -100, 0, 0)];
-        [getTranslateButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-        getTranslateButton.titleLabel.shadowOffset = CGSizeMake(1, 1);
-        getTranslateButton.titleLabel.shadowColor = [UIColor grayColor];
-        //[getTranslateButton addTarget:self action:@selector(goToPayment:) forControlEvents:UIControlEventTouchUpInside];
+            _getTranslateButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 448, 280, 41)];
+        [_getTranslateButton setBackgroundImage:getTranslateButtonBg forState:UIControlStateNormal];
+        [_getTranslateButton setTitle:@"Скачать перевод" forState:UIControlStateNormal];
+        [_getTranslateButton setImage:[UIImage imageNamed:@"send-image.png"] forState:UIControlStateNormal];
+        [_getTranslateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _getTranslateButton.titleLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size: 16.0f];
+        [_getTranslateButton setImageEdgeInsets:UIEdgeInsetsMake(0, -100, 0, 0)];
+        [_getTranslateButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+        _getTranslateButton.titleLabel.shadowOffset = CGSizeMake(1, 1);
+        _getTranslateButton.titleLabel.shadowColor = [UIColor grayColor];
+        [_getTranslateButton addTarget:self action:@selector(getTranslateButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         _orderPriceAndTerm = [[UILabel alloc] initWithFrame: CGRectMake(20, 300, 280, 50)];
-        [_orderPriceAndTerm setText: [[NSString alloc] initWithFormat: @"%d руб. / Заказ выполнен %@ в %@", [currentOrder.cost intValue], [currentOrder.finishDate dateTitleFull], [currentOrder.finishDate dateTitleHourMinute]]];
+        [_orderPriceAndTerm setText: [[NSString alloc] initWithFormat: @"%d руб. / Заказ выполнен %@ в %@", [_currentOrder.cost intValue], [_currentOrder.finishDate dateTitleFull], [_currentOrder.finishDate dateTitleHourMinute]]];
         [_orderPriceAndTerm setTextAlignment: NSTextAlignmentCenter];
         [_orderPriceAndTerm setBackgroundColor:[UIColor clearColor]];
         [_orderPriceAndTerm setTextColor:[UIColor orangeColor]];
         _orderPriceAndTerm.numberOfLines = 0;
         [self.view addSubview:_orderPriceAndTerm];
         
-        [self.view addSubview:getTranslateButton];
+        [self.view addSubview:_getTranslateButton];
     }
-    else if([currentOrder.status intValue] == 2) {
+    else if([_currentOrder.status intValue] == 2) {
         [_orderStatusImage setImage:[UIImage imageNamed:@"order-in-work.png"]];
         
         _orderPriceAndTerm = [[UILabel alloc] initWithFrame: CGRectMake(20, 300, 280, 50)];
-        [_orderPriceAndTerm setText: [[NSString alloc] initWithFormat: @"%d руб. / Заказ будет выполнен %@ в %@", [currentOrder.cost intValue], [currentOrder.finishDate dateTitleFull], [currentOrder.finishDate dateTitleHourMinute]]];
+        [_orderPriceAndTerm setText: [[NSString alloc] initWithFormat: @"%d руб. / Заказ будет выполнен %@ в %@", [_currentOrder.cost intValue], [_currentOrder.finishDate dateTitleFull], [_currentOrder.finishDate dateTitleHourMinute]]];
         [_orderPriceAndTerm setTextAlignment: NSTextAlignmentCenter];
         [_orderPriceAndTerm setBackgroundColor:[UIColor clearColor]];
         [_orderPriceAndTerm setTextColor:[UIColor orangeColor]];
         _orderPriceAndTerm.numberOfLines = 0;
         [self.view addSubview:_orderPriceAndTerm];
     }
-    else if([currentOrder.status intValue] == 3) {
+    else if([_currentOrder.status intValue] == 3) {
         [_orderStatusImage setImage:[UIImage imageNamed:@"order-not-payed.png"]];
         
         UIImage *ButtonBg = [[UIImage imageNamed:@"orangeBtn"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)];
@@ -151,7 +185,7 @@
         [self.view addSubview:_payButton];
         
         _orderPriceAndTerm = [[UILabel alloc] initWithFrame:CGRectMake(20, 300, 280, 50)];
-        [_orderPriceAndTerm setText: [[NSString alloc] initWithFormat: @"%d руб. / %d мин.", [currentOrder.cost intValue], [currentOrder.duration intValue]]];
+        [_orderPriceAndTerm setText: [[NSString alloc] initWithFormat: @"%d руб. / %d мин.", [_currentOrder.cost intValue], [_currentOrder.duration intValue]]];
         [_orderPriceAndTerm setTextAlignment: NSTextAlignmentCenter];
         [_orderPriceAndTerm setBackgroundColor:[UIColor clearColor]];
         [_orderPriceAndTerm setTextColor:[UIColor orangeColor]];
@@ -160,15 +194,15 @@
     }
     
     //if([currentOrder.infoType intValue]== 1) {
-        UILabel *orderNumber = [[UILabel alloc] initWithFrame:CGRectMake(20, 220, 280, 25)];
-        [orderNumber setText: [[NSString alloc] initWithFormat: @"Заказ № %d", [currentOrder.order_id intValue]]];
-        [orderNumber setTextAlignment: NSTextAlignmentCenter];
-        [orderNumber setBackgroundColor:[UIColor clearColor]];
-        [orderNumber setTextColor:[UIColor grayColor]];
-        [self.view addSubview:orderNumber];
+    UILabel *orderNumber = [[UILabel alloc] initWithFrame:CGRectMake(20, 220, 280, 25)];
+    [orderNumber setText: [[NSString alloc] initWithFormat: @"Заказ № %d", [_currentOrder.order_id intValue]]];
+    [orderNumber setTextAlignment: NSTextAlignmentCenter];
+    [orderNumber setBackgroundColor:[UIColor clearColor]];
+    [orderNumber setTextColor:[UIColor grayColor]];
+    [self.view addSubview:orderNumber];
     //}
     
-    if([currentOrder.infoType intValue] == 2) {
+    if([_currentOrder.infoType intValue] == 2) {
         UIImageView *photoIcon = [[UIImageView alloc] initWithFrame:CGRectMake(139, 255, 42, 42)];
         [photoIcon setImage:[UIImage imageNamed:@"order-images.png"]];
         [self.view addSubview:photoIcon];
@@ -183,61 +217,100 @@
 
 -(IBAction)goToPayment:(id)sender {
     
+    if([_currentOrder.robokassaIdx integerValue] == 0)
+    {
+        _currentOrder.robokassaIdx = @(ABS(arc4random()));
+        [_context save:nil];
+    }
+    
+    self.robokassaIdx = _currentOrder.robokassaIdx;
+    
+    NSString *url = [ETRobokassa robokassaUrlWithLogin:[AppConsts robokassaLogin] password:[AppConsts robokassaPass] sum:_currentOrder.cost email:nil idx:_robokassaIdx description:nil];
+    
+    self.webViewController = [[ETWebViewController alloc] initWithUrl:url];
+    
+    __weak YourOrder *selfWeak = self;
+    
+    [_webViewController setCloseButtonPressedBlock:^{
+      
+        [selfWeak dismissViewControllerAnimated:YES completion:^{
+            
+            [selfWeak checkPaid];
+            
+        }];
+        
+    }];
+    
+    [self presentViewController:_webViewController animated:YES completion:nil];
+}
+
+- (void)checkPaid
+{
+    if([_currentOrder.robokassaIdx integerValue] != 0)
+    {
+        MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        progressHud.labelText = @"Проверка оплаты...";
+        
+        [[ServerManager sharedInstance] checkOrderWithIdx:_robokassaIdx withSuccess:^(BOOL isPaid) {
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            if(isPaid)
+            {
+                [self finish];
+            }
+            
+        } failure:^(NSError *error) {
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            
+        }];
+    }
+}
+
+- (void)finish
+{
     MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    DataManager *dataMngr = [[DataManager alloc] init];
-    NSManagedObjectContext *context = [dataMngr managedObjectContext];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"OrderDataBase" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    NSError *error;
-    NSArray *orders;
-    orders = [context executeFetchRequest:fetchRequest error:&error];
-    
-    Order * currentOrder = [orders objectAtIndex:_currentOrderIndex];
     
     NSDate *termDate = [NSDate alloc];
     termDate = [termDate getTheStartOfTranslation];
-    termDate = [termDate getDeadLineOfTranslationFromStartAt:termDate andDuration: [currentOrder.duration intValue]];
+    termDate = [termDate getDeadLineOfTranslationFromStartAt:termDate andDuration: [_currentOrder.duration intValue]];
     
     NSTimeInterval offsetTime = 15*60;
     NSDate *deadLine = [[NSDate alloc] initWithTimeInterval:offsetTime sinceDate:termDate];
     
-    currentOrder.startDate = termDate;
-    currentOrder.finishDate = deadLine;
+    _currentOrder.startDate = termDate;
+    _currentOrder.finishDate = deadLine;
     
-    fetchRequest = [[NSFetchRequest alloc] init];
-    entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:context];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:_context];
     [fetchRequest setEntity:entity];
-    User *user = [context executeFetchRequest:fetchRequest error:&error][0];
+    User *user = [_context executeFetchRequest:fetchRequest error:nil][0];
     
     NSString *orderTypeString;
-    if([currentOrder.orderType integerValue] == 0)
+    if([_currentOrder.orderType integerValue] == 0)
     {
         orderTypeString = @"Basic";
     }
-    else if([currentOrder.orderType integerValue] == 1)
+    else if([_currentOrder.orderType integerValue] == 1)
     {
         orderTypeString = @"Middle";
     }
-    else if([currentOrder.orderType integerValue] == 2)
+    else if([_currentOrder.orderType integerValue] == 2)
     {
         orderTypeString = @"Best";
     }
     
-    NSArray *photos = [NSKeyedUnarchiver unarchiveObjectWithData:currentOrder.images];
+    NSArray *photos = [NSKeyedUnarchiver unarchiveObjectWithData:_currentOrder.images];
     
-    NSString *orderCost = [currentOrder.cost stringValue];
-    NSString *orderDuration = [currentOrder.duration stringValue];
+    NSString *orderCost = [_currentOrder.cost stringValue];
+    NSString *orderDuration = [_currentOrder.duration stringValue];
     
-    NSString *orderDate = [currentOrder.finishDate dateTitleFull];
+    NSString *orderDate = [_currentOrder.finishDate dateTitleFull];
     
-    NSString *orderFrom = currentOrder.langFrom;
-    NSString *orderTo = currentOrder.langTo;
+    NSString *orderFrom = _currentOrder.langFrom;
+    NSString *orderTo = _currentOrder.langTo;
     
-    NSString *subject = [NSString stringWithFormat:@""];
+    NSString *subject = [NSString stringWithFormat:@"Перевод #%@", _currentOrder.robokassaIdx];
     
     NSMutableArray *filedatas = [NSMutableArray array];
     for(UIImage *photo in photos)
@@ -245,17 +318,74 @@
         [filedatas addObject:UIImageJPEGRepresentation(photo, 5.0f)];
     }
     
-    NSString *message = [NSString stringWithFormat:@"<strong>%@, %@, %@<br>%@ - %@ руб. - %@ мин. (до %@)<br>%@ -> %@</strong><br><br>%@", user.username, user.email, user.phone, orderTypeString, orderCost, orderDuration, orderDate, orderFrom, orderTo, [photos count] > 0 ? @"" : currentOrder.text];
+    NSString *message = [NSString stringWithFormat:@"<strong>#%@<br>%@, %@, %@<br>%@ - %@ руб. - %@ мин. (до %@)<br>%@ -> %@</strong><br><br>%@", _currentOrder.robokassaIdx, user.username, user.email, user.phone, orderTypeString, orderCost, orderDuration, orderDate, orderFrom, orderTo, [photos count] > 0 ? @"" : _currentOrder.text];
+    
+    [_context save:nil];
     
     [[EmailManager sharedInstance] sendMessageWithFromEmail:[AppConsts serverEmail] withToEmail:[AppConsts serverEmailToTranslate] withSMTPHost:[AppConsts smtpHost] withSMTPLogin:[AppConsts serverEmail] withSMTPPass:[AppConsts serverEmailPass] withSubject:subject withBody:message withAttachFiledatas:filedatas withFileType:@"jpg" withSuccess:^{
         
-        currentOrder.status = [NSNumber numberWithInt:2];
+        _currentOrder.status = [NSNumber numberWithInt:2];
         
-        [context save:nil];
-        [_orderPriceAndTerm removeFromSuperview];
-        [_payButton removeFromSuperview];
+        [_context save:nil];
+        for(UIView *view in self.view.subviews)
+        {
+            if(view != _orderStatusImage)
+            {
+                [view removeFromSuperview];
+            }
+        }
         
-        [self viewWillAppear:YES];
+        [self configureView];
+        
+        [progressHud hide:YES];
+        
+    } withFailture:^{
+        
+        [progressHud hide:YES];
+        
+    }];
+}
+
+-(void)getTranslateButtonPressed:(id)sender
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:_context];
+    [fetchRequest setEntity:entity];
+    User *user = [_context executeFetchRequest:fetchRequest error:nil][0];
+    
+    MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    NSString *orderTypeString;
+    if([_currentOrder.orderType integerValue] == 0)
+    {
+        orderTypeString = @"Basic";
+    }
+    else if([_currentOrder.orderType integerValue] == 1)
+    {
+        orderTypeString = @"Middle";
+    }
+    else if([_currentOrder.orderType integerValue] == 2)
+    {
+        orderTypeString = @"Best";
+    }
+    
+    NSString *orderCost = [_currentOrder.cost stringValue];
+    NSString *orderDuration = [_currentOrder.duration stringValue];
+    
+    NSString *orderDate = [_currentOrder.finishDate dateTitleFull];
+    
+    NSString *orderFrom = _currentOrder.langFrom;
+    NSString *orderTo = _currentOrder.langTo;
+    
+    NSString *subject = [NSString stringWithFormat:@"Запрос на повторную отправку перевода #%@", _currentOrder.robokassaIdx];
+    
+    NSString *message = [NSString stringWithFormat:@"<strong>Запрос на повторную отправку перевода #%@<br>%@, %@, %@<br>%@ - %@ руб. - %@ мин. (до %@)<br>%@ -> %@</strong>", _currentOrder.robokassaIdx, user.username, user.email, user.phone, orderTypeString, orderCost, orderDuration, orderDate, orderFrom, orderTo];
+    
+    [[EmailManager sharedInstance] sendMessageWithFromEmail:[AppConsts serverEmail] withToEmail:[AppConsts serverEmailToTranslate] withSMTPHost:[AppConsts smtpHost] withSMTPLogin:[AppConsts serverEmail] withSMTPPass:[AppConsts serverEmailPass] withSubject:subject withBody:message withAttachFiledatas:nil withFileType:nil withSuccess:^{
+        
+        _getTranslateButton.hidden = YES;
+        
+        _orderPriceAndTerm.text = @"Перевод повторно отправлен на ваш email!";
         
         [progressHud hide:YES];
         

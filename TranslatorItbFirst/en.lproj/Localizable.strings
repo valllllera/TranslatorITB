@@ -80,3 +80,7 @@
 "Est"="Estonian";
 "Jpn"="Japanese";
 "Etc"="Etc";
+
+//Other
+"Close"="Закрыть";
+"Loading"="Загрузка";

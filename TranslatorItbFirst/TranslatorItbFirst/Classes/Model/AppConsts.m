@@ -30,4 +30,29 @@
     return @"robot@itbfirst.ru";
 }
 
++ (NSString *)robokassaLogin
+{
+    return @"vitalych";
+}
+
++ (NSString *)robokassaPass
+{
+    return @"Omen10Mustdie";
+}
+
++ (NSString *)chatUrl
+{
+    return @"https://siteheart.com/webconsultation/636954";
+}
+
++ (NSString *)serverApiBaseUrl
+{
+    return @"http://www.itbfirst.ru/";
+}
+
++ (NSString *)checkPaidPath
+{
+    return @"/appitb/check_order.php";
+}
+
 @end

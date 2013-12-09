@@ -50,9 +50,7 @@
     PhotoThumb * photoThumb = [[NSBundle mainBundle] loadNibNamed:@"PhotoThumb" owner:nil options:nil][0];
     photoThumb.frame = CGRectMake(20 + 70*([_photoIcons count]%4), 60*([_photoIcons count]/4), 70, 60);
     [photoThumb setIndex:[_photoIcons count]];
-    NSLog(@"%d", photoThumb.index);
     photoThumb.photoView = self;
-    NSLog(@"%@", self);
     [_photoIcons addObject: photoThumb];
     [self.scrollViewOutlet addSubview:[_photoIcons objectAtIndex:[_photoIcons count]-1]];
 }

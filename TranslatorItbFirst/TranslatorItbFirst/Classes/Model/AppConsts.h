@@ -20,4 +20,14 @@
 
 + (NSString *)serverEmailToTranslate;
 
++ (NSString *)robokassaLogin;
+
++ (NSString *)robokassaPass;
+
++ (NSString *)chatUrl;
+
++ (NSString *)serverApiBaseUrl;
+
++ (NSString *)checkPaidPath;
+
 @end

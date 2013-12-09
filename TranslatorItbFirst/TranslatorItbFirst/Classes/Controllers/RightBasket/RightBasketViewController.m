@@ -59,6 +59,16 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
+    
+    [self reloadOrders];
+    
+    [_table reloadData];
+    
+    [super viewWillAppear:animated];
+}
+
+- (void)reloadOrders
+{
     DataManager *dataMngr = [[DataManager alloc] init];
     self.context = [dataMngr managedObjectContext];
     
@@ -79,7 +89,6 @@
         }
     }
     [_context save:&error];
-    [_table reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -145,12 +154,9 @@
     NSError *error;
     self.orders = [context executeFetchRequest:fetchRequest error:&error];
     
-    
     NSInteger row = indexPath.row;
     YourOrder *orderView = [[YourOrder alloc] init];
-    Order *order = [_orders objectAtIndex:row];
     orderView.currentOrderIndex = row;
-    NSLog(@"%d %d",[order.cost intValue], row);
     
     UINavigationController * menuNavigation = [[UINavigationController alloc] initWithRootViewController:orderView];
     [self.viewDeckController setCenterController:menuNavigation];
@@ -174,6 +180,8 @@
         self.orders = [context executeFetchRequest:fetchRequest error:&error];
         [context deleteObject:[_orders objectAtIndex:indexPath.row]];
         [context save:&error];
+        
+        [self reloadOrders];
         
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
         [tableView reloadData];

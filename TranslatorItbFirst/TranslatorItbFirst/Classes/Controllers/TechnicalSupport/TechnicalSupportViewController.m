@@ -8,8 +8,8 @@
 
 #import "TechnicalSupportViewController.h"
 #import "IIViewDeckController.h"
-#import "TechFromCell.h"
-#import "TechToCell.h"
+#import "ETWebViewController.h"
+#import "AppConsts.h"
 
 @interface TechnicalSupportViewController ()
 
@@ -21,7 +21,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _tableView = [[UITableView alloc] init];
+        
     }
     return self;
 }
@@ -29,9 +29,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
     
     //Navigation bar custom title font
     UIFont *titleFont=[UIFont fontWithName:@"Lobster 1.4" size:25];
@@ -69,21 +66,6 @@
     
     self.navigationItem.leftBarButtonItem = menuButtonItem;
     self.navigationItem.rightBarButtonItem = cartNavigationItem;
-    
-    //customizing tableview
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
-    
-    
-    //keyboard
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
 
 }
 
@@ -93,93 +75,39 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)pressedMenuBtn{
-    [_messageTextView resignFirstResponder];
+-(void)pressedMenuBtn
+{
     [self.viewDeckController toggleLeftView];
 }
--(void)pressedBasketBtn{
-    [_messageTextView resignFirstResponder];
+
+-(void)pressedBasketBtn
+{
     [self.viewDeckController toggleRightView];
 }
 
-- (void)keyboardWillShow:(NSNotification *)notification
+
+- (IBAction)startChatButtonPressed:(id)sender
 {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.25f];
-    CGRect frame = self.view.frame;
-    frame.origin.y = -200;
-    [self.view setFrame:frame];
-    [UIView commitAnimations];
+    ETWebViewController *webViewController = [[ETWebViewController alloc] initWithUrl:[AppConsts chatUrl]];
+    
+    webViewController.delegate = self;
+    
+    [webViewController setCloseButtonPressedBlock:^{
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+    }];
+    
+    [self presentViewController:webViewController animated:YES completion:nil];
 }
 
-- (void) keyboardWillHide: (NSNotification *) notification
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.25f];
-    CGRect frame = self.view.frame;
-    frame.origin.y = 0;
-    [self.view setFrame:frame];
-    [UIView commitAnimations];
-}
-- (IBAction)sendButtonPressed:(id)sender {
-    if([_messageTextView isFirstResponder]){
-        [_messageTextView resignFirstResponder];
+    if([request.URL.host rangeOfString:@"siteheart.com"].location != NSNotFound)
+    {
+        return YES;
     }
-}
-
-- (IBAction)resignFirst:(id)sender {
-    [_messageTextView resignFirstResponder];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 70.0f;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-   
-    UITableViewCell* returnCell = [[UITableViewCell alloc] init];
-    
-    switch (indexPath.row) {
-        case 0:
-        {
-            static NSString* CellIdentifier = @"TechFromCell";
-            TechFromCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-            if (cell == nil) {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-                cell = [nib objectAtIndex:0];
-            }
-            
-            returnCell = cell;
-            break;
-        }
-        case 1:
-        {
-            static NSString* CellIdentifier = @"TechToCell";
-            TechToCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            
-            if (cell == nil) {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-                cell = [nib objectAtIndex:0];
-            }
-            
-            returnCell = cell;
-
-            break;
-        }
-        default:
-            break;
-    }
-    
-    return returnCell;
+    return NO;
 }
 
 @end

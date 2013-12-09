@@ -8,11 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TechnicalSupportViewController : UIViewController <UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UITextView *messageTextView;
-@property (retain, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIImageView *textViewBackgroundImage;
-- (IBAction)sendButtonPressed:(id)sender;
-- (IBAction)resignFirst:(id)sender;
+@interface TechnicalSupportViewController : UIViewController <UIWebViewDelegate>
+
+- (IBAction)startChatButtonPressed:(id)sender;
 
 @end

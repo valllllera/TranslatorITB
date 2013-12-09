@@ -23,5 +23,6 @@
 @dynamic status;
 @dynamic text;
 @dynamic images;
+@dynamic robokassaIdx;
 
 @end

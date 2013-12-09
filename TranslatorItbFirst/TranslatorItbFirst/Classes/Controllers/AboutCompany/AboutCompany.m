@@ -44,7 +44,7 @@
     title.frame=CGRectMake(10, 10, 20, 50);
     [self.navigationItem setTitleView:title];
     
-    [_scroll setContentSize:CGSizeMake(320,707)];
+    [_scroll setContentSize:CGSizeMake(320,830)];
     
     //Creating of cart button
     UIButton *cartButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 38, 28)];

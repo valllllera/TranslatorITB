@@ -19,6 +19,7 @@
     BOOL textViewFlag;
 }
 
+@property (strong, nonatomic) UIButton *okLangButton;
 
 @end
 
@@ -249,7 +250,9 @@ bool textViewIsVeginEditin;
         order.duration = [NSNumber numberWithFloat:(((int)roundf([_text.text length]*0.025) + _photoCount*45) + 1)];
         
         if([order.infoType intValue] == 1)
+        {
             order.text = _text.text;
+        }
         else {
             NSData *arrayData = [NSKeyedArchiver archivedDataWithRootObject:_photos];
             order.images = arrayData;
@@ -264,7 +267,11 @@ bool textViewIsVeginEditin;
         
         payDetailController.orderIndex = _orderIndex;
         
-        [self.navigationController pushViewController:payDetailController animated:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.navigationController pushViewController:payDetailController animated:YES];
+            
+        });
         
     });
 }
@@ -393,10 +400,22 @@ bool textViewIsVeginEditin;
 
 -(IBAction)ShowListFrom:(id)sender{
     if(_fromToFlag != 2) {
+        
         if(_languagePicker.frame.origin.y >400){
+            
+            CGRect senderFrame = ((UIView *)sender).frame;
+            self.okLangButton = [[UIButton alloc] initWithFrame:senderFrame];
+            [_okLangButton setBackgroundImage:[UIImage imageNamed:@"ok_button"] forState:UIControlStateNormal];
+            [_okLangButton addTarget:self action:@selector(ShowListFrom:) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:_okLangButton];
+            
             [self scrollViewToPosition:-30];
         }
         else{
+            
+            [_okLangButton removeFromSuperview];
+            _okLangButton = nil;
+            
             [self scrollViewToPosition:0];
         }
         if(_fromToFlag == 0)
@@ -408,9 +427,20 @@ bool textViewIsVeginEditin;
 -(IBAction)ShowListTo:(id)sender{
     if(_fromToFlag != 1) {
         if(_languagePicker.frame.origin.y >400){
+            
+            CGRect senderFrame = ((UIView *)sender).frame;
+            self.okLangButton = [[UIButton alloc] initWithFrame:senderFrame];
+            [_okLangButton setBackgroundImage:[UIImage imageNamed:@"ok_button"] forState:UIControlStateNormal];
+            [_okLangButton addTarget:self action:@selector(ShowListTo:) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:_okLangButton];
+            
             [self scrollViewToPosition:-30];
         }
         else{
+            
+            [_okLangButton removeFromSuperview];
+            _okLangButton = nil;
+            
             [self scrollViewToPosition:0];
         }
         if(_fromToFlag == 0)
@@ -490,10 +520,10 @@ bool textViewIsVeginEditin;
     //calculating priecePerPage
     int _pricePerPage;
     if([_to.text isEqualToString:@"Русский"] || [_to.text isEqualToString:@"Russian"]) {
-        _pricePerPage = [[[DataManager languages] valueForKey:_to.text] intValue];
+        _pricePerPage = [[[DataManager languages] valueForKey:_from.text] intValue];
     }
     else if([_from.text isEqualToString:@"Русский"] || [_from.text isEqualToString:@"Russian"]) {
-        _pricePerPage = [[[DataManager languages] valueForKey:_from.text] intValue];
+        _pricePerPage = [[[DataManager languages] valueForKey:_to.text] intValue];
     }
     else {
         _pricePerPage = [DataManager getEtc];
